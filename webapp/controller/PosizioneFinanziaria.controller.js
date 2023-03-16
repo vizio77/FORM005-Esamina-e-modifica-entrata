@@ -32,7 +32,7 @@ sap.ui.define([
 		_onRouteMatched: async function() {
 			this._resetCheckbox("ZSS4_COBI_PREN_ESAMOD_SRV", this);
 			await this._gestTipologiche();
-			this.getView().byId("TextAnno").setText(sap.ui.getCore().getModel("gestTipologicheModel").getData().ANNO);
+			//this.getView().byId("TextAnno").setText(sap.ui.getCore().getModel("gestTipologicheModel").getData().ANNO);
 			this.createModeButtonTable();
 			var sModel = this.getView().getModel("modelAdattaFiltri");
 			var aDataFilter = sModel.getData();
@@ -42,9 +42,13 @@ sap.ui.define([
 
 		},
 
+		onHelp: function(oEvent, inputRef) {
+			this.MatchCode.onValueHelpRequest(oEvent, inputRef, this);
+		},
+
 		onSearch: async function(isAvvioButton, pointer) {
 
-			this._openBusyDialog();
+			//this._openBusyDialog();
 
 			var aDataFilter = this.getView().getModel("modelAdattaFiltri").getData();
 			var aFilters = new Filter({
@@ -86,7 +90,7 @@ sap.ui.define([
 				}
 			}
 			this.getView().getModel("modelIsAfterAvvio").refresh();
-			this._closeDialog();
+			//this._closeDialog();
 		},
 
 		_getAllFilter: function(aFilter) {

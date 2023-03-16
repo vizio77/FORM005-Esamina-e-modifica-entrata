@@ -13,11 +13,11 @@
 						</layout:HorizontalLayout>
 						<layout:HorizontalLayout>
 							<Label text="{i18n>Esercizio}:" design="Bold" class="sapUiTinyMarginEnd"/>
-							<Text id="TextAnno" class="sapUiSmallMarginEnd"/>
+							<Text text="{modelFaseAttuale>/Anno}" class="sapUiSmallMarginEnd"/>
 							<Label text="{i18n>Processo}:" design="Bold" class="sapUiTinyMarginEnd"/>
-							<Text text="{i18n>processoDesc}" class="sapUiSmallMarginEnd"/>
+							<Text text="{modelFaseAttuale>/ProcessoDesc}" class="sapUiSmallMarginEnd"/>
 							<Label text="{i18n>MacroFase}:" design="Bold" class="sapUiTinyMarginEnd"/>
-							<Text text="{i18n>macroFaseDesc}" class="sapUiSmallMarginEnd"/>
+							<Text text="{modelFaseAttuale>/MacroFaseDesc}" class="sapUiSmallMarginEnd"/>
 						</layout:HorizontalLayout>
 					</layout:VerticalLayout>
 				</f:heading>
@@ -43,8 +43,13 @@
 							</fb:FilterGroupItem>
 							<fb:FilterGroupItem visibleInFilterBar="true" groupName="G1" groupTitle="{i18n>FiltriBase}" name="A" label="{i18n>posFin}" labelTooltip="">
 								<fb:control>
-									<zcontrol:InputPosizioneFinanziaria id="filterBarPosFin" fase="{modelPosFin>/FASE}" reale="{modelPosFin>/REALE_RIF}"
-										anno="{modelPosFin>/ANNO}" entrata="X" maxSuggestionWidth="60%" versione="D" change="onChangeT($event, 'posFin')"
+									<zcontrol:InputPosizioneFinanziaria id="filterBarPosFin" 
+										fase="{modelPosFin>/FASE}" 
+										reale="{modelPosFin>/REALE_RIF}"
+										anno="{modelPosFin>/ANNO}" 
+										entrata="X" 
+										versione="D" change="onChangeT($event, 'posFin')"
+										maxSuggestionWidth="60%" 
 										liveChange="onSelectPosFin"/>
 									<!--<Input id="filterBarPosFin"  valueHelpOnly="true" maxSuggestionWidth="60%"/>-->
 								</fb:control>

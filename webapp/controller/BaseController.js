@@ -233,6 +233,10 @@ sap.ui.define([
 				.getText(testoDaRecuperare);
 		},
 
+		_refreshModel: function(oModel) {
+			oModel.setData([]);
+		},
+
 		_resetCheckbox: function(sModel) {
 			var aObject = Object.keys(this.getView().getModel(sModel).oData);
 			var aData = this.getView().getModel(sModel).oData;

@@ -253,7 +253,9 @@ sap.ui.define([
 			// 	}
 			// }
 
-			if (aPosFinSel) {
+			var rowSelected = this._getSelectedItems();
+
+			if (rowSelected) {
 				//this._resetCheckbox("modelTreeTable", this);
 				//this.getOwnerComponent().setModel(aPosFinSel,"selPosModel");
 				this.oRouter.navTo("AssociaProposta");
