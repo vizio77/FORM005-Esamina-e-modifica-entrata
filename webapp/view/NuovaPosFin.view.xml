@@ -84,172 +84,149 @@
 				<subSections>
 					<ObjectPageSubSection title="{i18n>PosFin}">
 						<blocks>
-							<layout:VerticalLayout >
-								<f:Form width="92%" class="sapUiSmallMarginBegin">
-									<f:layout>
-										<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="4" emptySpanL="3"
-											emptySpanM="3" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"></f:ResponsiveGridLayout>
-									</f:layout>
-									<f:formContainers>
-										<f:FormContainer id="idFormContainer">
-											<f:formElements>
-												<f:FormElement label="{i18n>Amministrazione}">
-													<!--<f:FormElement label="{i18n>Amministrazione}">-->
-													<f:fields>
-														<m:Input id="idAmm" editable="true" placeholder="Scegli {i18n>Amministrazione}" maxSuggestionWidth="60%" showSuggestion="true"
+							<f:SimpleForm id="SimpleFormDisplay480_Trial"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								
+								labelSpanXL="12"
+								labelSpanL="12"
+								labelSpanM="12"
+								labelSpanS="12"
+								adjustLabelSpan="false"
+								emptySpanXL="0"
+								emptySpanL="0"
+								emptySpanM="0"
+								emptySpanS="0"
+								columnsXL="3"
+								columnsL="3"
+								columnsM="3"
+								singleContainerFullSize="false" >
+								<f:content>
+									<core:Title  />
+									<m:Label text="{i18n>Amministrazione}" required="true"/>
+										<m:Input id="idAmm" editable="false" placeholder="Scegli {i18n>Amministrazione}" maxSuggestionWidth="60%" showSuggestion="true"
 															value="A020"></m:Input>
-														<!--<m:Input id="idAmminNPF" editable="true" placeholder="Scegli {i18n>Titolo}" maxSuggestionWidth="60%" showSuggestion="true"-->
-														<!--value="A020"></m:Input>-->
-													</f:fields>
-												</f:FormElement>
-												<f:FormElement label="{i18n>CDR}">
-													<!--<f:FormElement label="{i18n>Natura}">-->
-													<f:fields>
-														<m:Input id="idCdr" editable="true" showValueHelp = "true" placeholder="Scegli {i18n>CDR}" liveChange=".onChangeMC($event, 'CentroResp')" valueHelpRequest=".onHelp($event, 'CentroResp')"  ></m:Input>
-														<!--<m:Input id="idCdRNPF" editable="true" placeholder="Scegli {i18n>Natura}" value="0001"></m:Input>-->
-													</f:fields>
-												</f:FormElement>
-												<f:FormElement label="{i18n>Ragioneria}">
-													<!--<f:FormElement label="{i18n>Tipologia}">-->
-													<f:fields>
-														<m:Input id="idRagioneria" editable="true" placeholder="Scegli {i18n>Ragioneria}" value="0840"></m:Input>
-														<!--<m:Input id="idCdRNPF" editable="true" placeholder="Scegli {i18n>Tipologia}" value="0001"></m:Input>-->
-													</f:fields>
-												</f:FormElement>
-											</f:formElements>
-										</f:FormContainer>
-									</f:formContainers>
-								</f:Form>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout width="100%">
-								<f:Form width="92%" class="sapUiSmallMarginBegin sapUiMediumPaddingBegin">
-									<f:layout>
-										<f:ResponsiveGridLayout labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="4"
-											emptySpanL="3" emptySpanM="3" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"></f:ResponsiveGridLayout>
-									</f:layout>
-									<f:formContainers>
-										<f:FormContainer id="idFormContainer2">
-											<f:formElements>
-												<f:FormElement >
-													<m:Label required="true" text="{i18n>Capitolo}"/>
-													<layout:HorizontalLayout>
-														<m:Input id="idCapitoloNPF" required="true" editable="true" width="215px" placeholder="Scegli {i18n>Capitolo}" maxSuggestionWidth="60%"
-															showSuggestion="true" showValueHelp="false" valueHelpOnly="false" liveChange="onChange($event, 'idCapitoloNPF')"
-															valueHelpRequest=".onValueHelpRequest($event, 'idCapitoloNPF')" suggest=".onSuggest($event, 'idCapitoloNPF')"
-															suggestionItemSelected=".onSuggestionItemSelected($event, 'idCapitoloNPF')"></m:Input>
-														<m:Button id="idBtnPrenotaCAP" text="{i18n>ScegliCap}" width="110px" class="sapUiTinyMarginBegin sapUiNoMarginEnd" type="Emphasized"
-															press="onPressOpenMenu($event,'MenuCapitoloNPF')"></m:Button>
-													</layout:HorizontalLayout>
-												</f:FormElement>
-												<f:FormElement>
-													<m:Label required="true" text="{i18n>Artiolo}"/>
-													<layout:HorizontalLayout>
-														<m:Input id="idPGNPF" width="215px" editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Articolo}"
-															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="false" valueHelpOnly="false" liveChange="onChange($event, 'idPGNPF')"
-															valueHelpRequest=".onValueHelpRequest($event, 'idPGNPF')" suggest=".onSuggest($event, 'idPGNPF')"
-															suggestionItemSelected=".onSuggestionItemSelected($event, 'idPGNPF')"></m:Input>
-														<m:Button id="idBtnPrenotaPG" text="{i18n>ScegliArticolo}" width="110px" type="Emphasized"	press="onPressOpenMenu($event,'MenuArticoloNPF')"/>
-													</layout:HorizontalLayout>
-												</f:FormElement>
-												<f:FormElement>
-													<m:Label required="true" text="{i18n>Titolo}"/>
-													<layout:HorizontalLayout>
-														<m:Input id="idTitolo" width="215px" editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+										<!-- <m:Input id="idAmminNPF" required="true" editable="false" placeholder="Scegli {i18n>Amministrazione}" maxSuggestionWidth="60%" showSuggestion="true"
+											value="A020"></m:Input> -->
+									<m:Label text="{i18n>CdR}" />
+										<!-- <m:Input id="idCdRNPF" required="true" editable="true" placeholder="Scegli {i18n>CdR}" maxSuggestionWidth="60%" showSuggestion="true" showValueHelp="true"
+											valueHelpOnly="true" change="onChange($event, 'idCdRNPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCdRNPF')"
+											suggest=".onSuggest($event, 'idCdRNPF')" 
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCdRNPF')"/> -->
+											<m:Input id="idCdr" editable="true" showValueHelp = "true" placeholder="Scegli {i18n>CDR}" liveChange=".onChangeMC($event, 'CentroResp')" 
+												valueHelpRequest=".onHelp($event, 'CentroResp')"  >
+
+											</m:Input>
+									<m:Label text="{i18n>Ragioneria}" />
+										<m:Input id="idRagioneriaNPF" required="true" editable="true" placeholder="Scegli {i18n>Ragioneria}" maxSuggestionWidth="60%" showSuggestion="true"
+											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idRagioneriaNPF')" 
+											valueHelpRequest=".onValueHelpRequest($event, 'idRagioneriaNPF')" suggest=".onSuggest($event, 'idRagioneriaNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idRagioneriaNPF')"/>
+											<!-- <m:Input id="idRagioneria" editable="true" placeholder="Scegli {i18n>Ragioneria}" value="0840"></m:Input> -->
+									<!-- <m:Label text="{i18n>Missione}" />
+										<m:Input id="idMissioneNPF" required="true" editable="true" placeholder="Scegli {i18n>Missione}" maxSuggestionWidth="60%"
+											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idMissioneNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idMissioneNPF')" suggest=".onSuggest($event, 'idMissioneNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idMissioneNPF')"/>									
+									<m:Label text="{i18n>Programma}" />
+									<m:Input id="idProgrammaNPF" required="true" editable="true" placeholder="Scegli {i18n>Programma}" maxSuggestionWidth="60%"
+											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idProgrammaNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idProgrammaNPF')" suggest=".onSuggest($event, 'idProgrammaNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idProgrammaNPF')"/>
+									<m:Label text="{i18n>Azione}" />
+										<m:Input id="idAzioneNPF" required="true" editable="true" placeholder="Scegli {i18n>Azione}" maxSuggestionWidth="60%" showSuggestion="true"
+											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idAzioneNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idAzioneNPF')" suggest=".onSuggest($event, 'idAzioneNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idAzioneNPF')"/> -->
+									<core:Title />
+									<m:Label text="{i18n>Capitolo}" required="true"/>
+									<m:Input id="idCapitoloNPF"  editable="false" placeholder="Scegli {i18n>Capitolo}" maxSuggestionWidth="60%"
+											showSuggestion="true" showValueHelp="false" valueHelpOnly="false" change="onChange($event, 'idCapitoloNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idCapitoloNPF')" suggest=".onSuggest($event, 'idCapitoloNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCapitoloNPF')"></m:Input>
+										<m:Button id="idBtnPrenotaCAP" text="{i18n>ScegliCap}" width="auto"  type="Emphasized"
+											press="onPressOpenMenu($event,'MenuCapitoloNPF')">
+											<m:layoutData>
+												<layout:GridData span="XL4 L6 M5 S12" />
+											</m:layoutData>
+											
+										</m:Button>
+									<m:Label text="{i18n>PG}" required="true"/>
+										<m:Input id="idPGNPF" width="auto" editable="false"  class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>PG}"
+											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="false" valueHelpOnly="false" change="onChange($event, 'idPGNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idPGNPF')" suggest=".onSuggest($event, 'idPGNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idPGNPF')"></m:Input>
+										<m:Button id="idBtnPrenotaPG" text="{i18n>ScegliPG}" width="auto" type="Emphasized" press="onPressOpenMenu($event,'MenuArticoloNPF')">
+											<m:layoutData>
+												<layout:GridData span="XL4 L6 M5 S12" />
+											</m:layoutData>
+										</m:Button>
+									<m:Label text="{i18n>Titolo}" required="true"/>
+										<!-- <m:Input id="idTitoloNPF" required="true" editable="true" placeholder="Scegli {i18n>Titolo}" maxSuggestionWidth="60%" showSuggestion="true"
+											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idTitoloNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idTitoloNPF')" suggest=".onSuggest($event, 'idTitoloNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idTitoloNPF')"/> -->
+											<m:Input id="idTitolo"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
 															maxSuggestionWidth="60%" showSuggestion="false" valueHelpRequest=".onHelp($event, 'Titolo')"  liveChange=".onChangeMC($event, 'Titolo')"  showValueHelp="true" valueHelpOnly="false"></m:Input>
-													</layout:HorizontalLayout>
-												</f:FormElement>
-												<f:FormElement>
-													<m:Label required="true" text="{i18n>Natura}"/>
-													<layout:HorizontalLayout>
-														<m:Input id="idNatura" width="215px" editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+									<m:Label text="{i18n>Natura}" required="true"/>
+										<m:Input id="idNatura"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
 															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Natura')"   liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="false"></m:Input>
-													</layout:HorizontalLayout>
-												</f:FormElement>
-												<f:FormElement>
-													<m:Label required="true" text="{i18n>Categoria}"/>
-													<layout:HorizontalLayout>
-														<m:Input id="idCategoria" width="215px" editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+									<m:Label text="{i18n>Categoria}" required="true"/>
+										<!-- <m:Input id="idCategoriaNPF" required="true" editable="true" placeholder="Scegli {i18n>Categoria}" maxSuggestionWidth="60%"
+											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCategoriaNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idCategoriaNPF')" suggest=".onSuggest($event, 'idCategoriaNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCategoriaNPF')"/> -->
+											<m:Input id="idCategoria"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Categoria}"
 															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Categoria')"  liveChange=".onChangeMC($event, 'Categoria')"   valueHelpOnly="false"></m:Input>
-													</layout:HorizontalLayout>
-												</f:FormElement>
-												<f:FormElement>
-													<m:Label required="true" text="{i18n>TipologiaNP}"/>
-													<layout:HorizontalLayout>
-														<m:Input id="idTipologia" width="215px" editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
-															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Tipologia')"  liveChange=".onChangeMC($event, 'Tipologia')"  valueHelpOnly="false"></m:Input>
-													</layout:HorizontalLayout>
-												</f:FormElement>
-												<f:FormElement>
-													<m:Label required="true" text="{i18n>Provento}"/>
-													<layout:HorizontalLayout>
-														<m:Input id="idProvento" width="215px" editable="true" required="true" class="sapUiTinyMarginEnd"  valueHelpRequest=".onHelp($event, 'Provento')"  liveChange=".onChangeMC($event, 'Provento')" placeholder="Scegli {i18n>Titolo}"
+									<!-- <m:Label text="{i18n>CE2}" required="true"/>
+										<m:Input id="idCE2NPF" editable="true" required="true" placeholder="Scegli {i18n>CE2}" maxSuggestionWidth="60%" showSuggestion="true"
+											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCE2NPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCE2NPF')"
+											suggest=".onSuggest($event, 'idCE2NPF')" suggestionItemSelected=".onSuggestionItemSelected($event, 'idCE2NPF')"/>
+									<m:Label text="{i18n>CE3}" required="true"/>
+										<m:Input id="idCE3NPF" editable="true" required="true" placeholder="Scegli {i18n>CE3}" maxSuggestionWidth="60%" showSuggestion="true"
+											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCE3NPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCE3NPF')"
+											suggest=".onSuggest($event, 'idCE3NPF')" suggestionItemSelected=".onSuggestionItemSelected($event, 'idCE3NPF')"/> -->
+									<m:Label required="true" text="{i18n>TipologiaNP}"/>
+										<m:Input id="idTipologia"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Tipologia')"  liveChange=".onChangeMC($event, 'Tipologia')"  valueHelpOnly="false"></m:Input>
+									<m:Label required="true" text="{i18n>Provento}"/>
+										<m:Input id="idProvento"  editable="true" required="true" class="sapUiTinyMarginEnd"  valueHelpRequest=".onHelp($event, 'Provento')"  liveChange=".onChangeMC($event, 'Provento')" placeholder="Scegli {i18n>Titolo}"
 															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpOnly="false"></m:Input>
-													</layout:HorizontalLayout>
-												</f:FormElement>
-											</f:formElements>
-										</f:FormContainer>
-									</f:formContainers>
-								</f:Form>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout width="100%">
-								<f:Form width="92%" class="sapUiSmallMarginBeginEnd">
-									<f:layout>
-										<f:ResponsiveGridLayout labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="4"
-											emptySpanL="3" emptySpanM="3" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"></f:ResponsiveGridLayout>
-									</f:layout>
-									<f:formContainers>
-										<f:FormContainer id="idFormContainer3">
-											<f:formElements>
-												<!--<f:FormElement label="{i18n>TcrC}">
-													<f:fields>
-														<m:Input id="idTCRCNPF" editable="true" placeholder="Scegli {i18n>TcrC}" maxSuggestionWidth="60%" showSuggestion="true" showValueHelp="true"
-															change=".onChange($event, 'idTCRCNPF')" valueHelpRequest=".onValueHelpRequest($event, 'idTCRCNPF')"
-															suggest=".onSuggest($event, 'idTCRCNPF')" suggestionItemSelected=".onSuggestionItemSelected($event, 'idTCRCNPF')"/>
-													</f:fields>
-												</f:FormElement>-->
-												<!--<f:FormElement label="{i18n>TcrF}">
-													<f:fields>
-														<m:Input id="idTCRFNPF" editable="true" placeholder="Scegli {i18n>TcrF}" maxSuggestionWidth="60%" showSuggestion="true" showValueHelp="true"
-															change=".onChange($event, 'idTCRFNPF')" valueHelpRequest=".onValueHelpRequest($event, 'idTCRFNPF')"
-															suggest=".onSuggest($event, 'idTCRFNPF')" suggestionItemSelected=".onSuggestionItemSelected($event, 'idTCRFNPF')"/>
-													</f:fields>
-												</f:FormElement>-->
-												<f:FormElement label="{i18n>DenominazioneCapitolo} {i18n>integrale}">
-													<f:fields>
-														<m:Input id="idDenominazioneCapitoloIntNPF" required="true" editable="true"/>
-													</f:fields>
-												</f:FormElement>
-												<f:FormElement label="{i18n>DenominazioneCapitolo} {i18n>ridotta}">
-													<f:fields>
-														<m:Input id="idDenominazioneCapitoloRidNPF" required="true" editable="true"/>
-													</f:fields>
-												</f:FormElement>
-												<f:FormElement label="{i18n>TipoSpesaPG}">
-													<f:fields>
-														<m:ComboBox id="idTipoSpesaPGNPF" enabled="true" change="onChange" placeholder="Scegli {i18n>TipoSpesaCapitolo}" showSecondaryValues="true"
-															items="{ path: '/ZCA_AF_TIPOSPPGSet', sorter: { path: 'Codicetiposppspe' }, templateShareable:false }">
-															<m:items>
-																<core:ListItem text="{Codicetiposppspe}" additionalText="{Desctipopg}"/>
-															</m:items>
-														</m:ComboBox>
-													</f:fields>
-												</f:FormElement>
-												<f:FormElement label="{i18n>DenominazionePG} {i18n>integrale}">
-													<f:fields>
-														<m:Input id="idDenominazionePGIntNPF" editable="true"/>
-													</f:fields>
-												</f:FormElement>
-												<f:FormElement label="{i18n>DenominazionePG} {i18n>ridotta}">
-													<f:fields>
-														<m:Input id="idDenominazionePGRidNPF" editable="true"/>
-													</f:fields>
-												</f:FormElement>
-											</f:formElements>
-										</f:FormContainer>
-									</f:formContainers>
-								</f:Form>
-							</layout:VerticalLayout>
+									<core:Title  />
+									<m:Label text="{i18n>MacroAgg}" required="true"/>
+										<m:Input id="idMacroAggregatoNPF" required="true" editable="true" placeholder="Scegli {i18n>MacroAgg}" maxSuggestionWidth="60%"
+											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idMacroAggregatoNPF')"
+											valueHelpRequest=".onValueHelpRequest($event, 'idMacroAggregatoNPF')" suggest=".onSuggest($event, 'idMacroAggregatoNPF')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idMacroAggregatoNPF')" suggestionItems=""/>
+									<m:Label text="{i18n>TipoSpesaCapitolo}" />
+										<m:ComboBox id="idTipoSpesaCapNPF" enabled="true" selectedKey="{modelNuovaPosFin>/Codicetipospcapspe}" change="onChange" placeholder="Scegli {i18n>TipoSpesaCapitolo}" showSecondaryValues="true"
+											items="{ path: '/ZCA_AF_TIPOSPCAPSet', sorter: { path: 'Codicetipospcapspe' }, templateShareable:false }">
+											<m:items>
+												<core:ListItem key="{Codicetipospcapspe}" text="{Codicetipospcapspe}" additionalText="{Desctipocap}"/>
+											</m:items>
+										</m:ComboBox>
+									<m:Label text="{i18n>DenominazioneCapitolo} {i18n>integrale}" />
+										<m:Input id="idDenominazioneCapitoloIntNPF" required="true" editable="true"/>
+									<m:Label text="{i18n>DenominazioneCapitolo} {i18n>ridotta}" />
+										<m:Input id="idDenominazioneCapitoloRidNPF" required="true" editable="true"/>
+									<m:Label text="{i18n>TipoSpesaPG}" />
+										<m:ComboBox id="idTipoSpesaPGNPF" enabled="true" selectedKey="{modelNuovaPosFin>/Codicetiposppspe}" change="onChange" placeholder="Scegli {i18n>TipoSpesPG}" showSecondaryValues="true"
+											items="{ path: '/ZCA_AF_TIPOSPPGSet', sorter: { path: 'Codicetiposppspe' }, templateShareable:false }">
+											<m:items>
+												<core:ListItem key="{Codicetiposppspe}" text="{Codicetiposppspe}" additionalText="{Desctipopg}"/>
+											</m:items>
+										</m:ComboBox>
+									<m:Label text="{i18n>DenominazionePG} {i18n>integrale}" />
+										<m:Input required="true" id="idDenominazionePGIntNPF" editable="true"/>
+									<m:Label text="{i18n>DenominazionePG} {i18n>ridotta}" />
+										<m:Input required="true" id="idDenominazionePGRidNPF" editable="true"/>
+									
+								</f:content>
+							</f:SimpleForm>
 						</blocks>
+
+
+							
 					</ObjectPageSubSection>
 				</subSections>
 			</ObjectPageSection>
@@ -257,102 +234,61 @@
 				<subSections>
 					<ObjectPageSubSection >
 						<blocks>
-							<layout:VerticalLayout class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop">
-								<layout:HorizontalLayout>
-									<m:Label text="{i18n>Proposta}:" class="sapUiTinyMarginEnd sapUiTinyMarginTop" design="Bold"/>
-									<m:Input id="idIDPropostaNPF" width="10em" editable="true" placeholder="Scegli {i18n>Proposta}"/>
-									<m:Button id="idBtnPrenotaID" width="10em" text="{i18n>Scegli} {i18n>Proposta}" class="sapUiTinyMarginBegin sapUiMediumMarginEnd"
-										type="Emphasized" press="onPressOpenMenu($event,'MenuPropostaNPF')"/>
-								</layout:HorizontalLayout>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop">
-								<layout:HorizontalLayout>
-									<m:Label id="labelTipo" text="{i18n>Tipologia}:" class="sapUiTinyMarginEnd sapUiTinyMarginTop" design="Bold"/>
-									<!--<m:Input id="idTipologiaNPF" editable="true"/>-->
-									<m:ComboBox id="idTipologiaNPF" change="onChange" placeholder="Inserisci Tipologia Proposta" editable="true">
-										<m:items>
-											<core:Item key="1" text="{i18n>Comp}"/>
-											<core:Item key="0" text="{i18n>NoComp}"/>
-										</m:items>
-									</m:ComboBox>
-								</layout:HorizontalLayout>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop">
-								<layout:HorizontalLayout>
-									<m:Label id="labelIter" text="{i18n>Iter}:" class="sapUiTinyMarginTop sapUiTinyMarginEnd" design="Bold"/>
-									<m:ComboBox id="idIterNPF" change="onChange" placeholder="Inserisci Iter" editable="true">
-										<m:items>
-											<!--<core:Item text="{DescIter}" key="{Iter}"/>-->
-										</m:items>
-									</m:ComboBox>
-								</layout:HorizontalLayout>
-							</layout:VerticalLayout>
-							<m:VBox class="sapUiMediumMarginBeginEnd">
-								<m:Label text="{i18n>Nickname}:" class="sapUiTinyMarginEnd" design="Bold"/>
-								<m:Input id="idNickNameNPF" width="100%" editable="true"/>
-							</m:VBox>
+							
+								<f:Form editable="true" id="formNuovaPosFin">
+									<!--<f:title>
+									<core:Title text="{i18n>formTitle}" />
+								</f:title>-->
+									<f:layout>
+										<f:ResponsiveGridLayout labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="4" emptySpanL="4"
+											emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"></f:ResponsiveGridLayout>
+									</f:layout>
+									<f:formContainers>
+										<f:FormContainer>
+											<f:formElements>
+												<f:FormElement label="{i18n>Proposta}">
+													<m:Input id="idIDPropostaNPF" class="sapUiTinyMarginEnd" type="Number" placeholder="Scegli {i18n>Proposta}" value="" editable="false">
+														<m:layoutData>
+															<layout:GridData id="idGridInputID" span="XL4 L4 M4 S12"/>
+														</m:layoutData>
+													</m:Input>
+													<m:Button id="openMenu" type="Emphasized" text="{i18n>Proposta}" press="handlePressOpenMenu"/>
+												</f:FormElement>
+												<f:FormElement label="{i18n>NickName}">
+													<m:Input id="idNickNameNPF" editable="{modelChangeControlsStatus>/Editable}" placeholder="Inserisci {i18n>NickName}"/>
+												</f:FormElement>
+												<!--<f:FormElement label="{i18n>Tipologia}">
+												<Input id="idTipologia" editable="false"/>
+											</f:FormElement>-->
+												<f:FormElement label="{i18n>Iter}">
+													<m:ComboBox id="idIterNPF" editable="{modelChangeControlsStatus>/Iter}" value="" placeholder="Inserisci {i18n>Iter}"
+														items="{ path: 'ZSS4_COBI_PRSP_ESAMOD_SRV>/ZS_VALORI_ITERSet', sorter: { path: 'Ddtext' }, templateShareable:false }">
+														<m:items>
+															<core:Item key="{ZSS4_COBI_PRSP_ESAMOD_SRV>DomvalueL}" text="{ZSS4_COBI_PRSP_ESAMOD_SRV>Ddtext}"/>
+														</m:items>
+													</m:ComboBox>
+												</f:FormElement>
+												<!-- <f:FormElement label="{i18n>ScegliNota}" visible="true">
+															<m:Input id="idInputScegliNoteIDProposta" class="sapUiTinyMarginEnd" enabled="true" 
+																placeholder="{i18n>ScegliNota} {i18n>Standard}" showSuggestion="true" showValueHelp="true" 
+																submit="onSubmitIdNota" valueHelpRequest="handleValueHelpScegliNota"/>
+															<m:Button id="btnCreaNota" type="Emphasized" text="{i18n>Resetta}" press="handlePressResettaNota"/>
+												</f:FormElement>
+												<f:FormElement label="Testo" visible="true">
+													<m:TextArea id="idNota"  placeholder="Crea {i18n>Nota}" maxLength="2000"
+														showExceededText="true" liveChange="onLiveWriteNota"/>
+												</f:FormElement> -->
+											</f:formElements>
+										</f:FormContainer>
+									</f:formContainers>
+								</f:Form>
+						
+							
 						</blocks>
 					</ObjectPageSubSection>
 				</subSections>
 			</ObjectPageSection>
-			<!--<ObjectPageSection titleUppercase="false" title="{i18n>FOFP}">
-				<subSections>
-					<ObjectPageSubSection >
-						<blocks>
-							<m:VBox class="sapUiMediumMarginBeginEnd sapUiMediumMarginBottom" width="95%">
-								<m:Table id="idTableFOFPNPF" inset="false" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" growing="true" growingThreshold="10"
-									visible="true" items="{modelTableCofogNPF>/}"> 
-									<m:headerToolbar>
-										<m:OverflowToolbar>
-											<m:content>
-												<m:Title text="{i18n>FOFP}" level="H2"/>
-												<m:ToolbarSpacer/>
-												<m:Button type="Emphasized" id="idAggiungiRigaFOFP" text="{i18n>AggiungiRiga}" press="onPressAddRowFOFP"/>
-											</m:content>
-										</m:OverflowToolbar>
-									</m:headerToolbar>
-									<m:columns>
-										<m:Column id="colAutNPF" width="8em" demandPopin="true" vAlign="Middle" hAlign="Center">
-											<m:Text text="{i18n>Autorizzazione}"/>
-										</m:Column>
-										<m:Column id="colFONPF" visible="true" width="8em" demandPopin="true" vAlign="Middle" hAlign="Center">
-											<m:Text text="{i18n>FO}"/>
-										</m:Column>
-										<m:Column id="colFPNPF" visible="true" width="8em" demandPopin="true" vAlign="Middle" hAlign="Center">
-											<m:Text text="{i18n>FP}"/>
-										</m:Column>
-										<m:Column id="colEliminaFOFPNPF" width="auto" demandPopin="true" vAlign="Middle" hAlign="Center">
-											<m:Text text="" tooltip=""/>
-										</m:Column>
-									</m:columns>
-									<m:items>
-										<m:ColumnListItem vAlign="Middle">
-											<m:cells>
-												<m:Text text="" textAlign="Begin"/>
-												<m:CheckBox />
-												<m:CheckBox selected="true"/>
-												<m:Button type="Transparent" tooltip="{i18n>Elimina}" icon="{modelTableCofogNPF>Icon}" press=".onPressDeleteRow"/>
-											</m:cells>
-										</m:ColumnListItem>
-									</m:items>
-								</m:Table>
-							</m:VBox>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>-->
-			<!--<ObjectPageSection titleUppercase="false" title="{i18n>Nota}">
-				<subSections>
-					<ObjectPageSubSection>
-						<blocks>
-							<m:VBox class="sapUiMediumMargin">
-								<m:Label text="{i18n>NotaAnagrafica}"/>
-								<m:TextArea id="idNotaAnagrafica" width="100%" maxLength="255" showExceededText="true" editable="true"/>
-							</m:VBox>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>-->
+			
 		</sections>
 		<footer>
 			<m:OverflowToolbar>

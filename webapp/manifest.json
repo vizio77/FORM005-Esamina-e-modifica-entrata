@@ -77,7 +77,7 @@
             "type": "XML"
         },
         "dependencies": {
-            "minUI5Version": "1.30.0",
+            "minUI5Version": "1.71.47",
             "libs": {
                 "sap.collaboration": {},
                 "sap.m": {},
@@ -87,8 +87,11 @@
                 "sap.ushell": {},
                 "sap.uxap": {},
                 "zsap.com.r3.cobi.s4.custadattafiltri.spese.adattafiltrispese": {},
+                "zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink": {},
                 "zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin": {},
-                "zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke": {}
+                "zsap.com.r3.cobi.s4.z_s4_auth_tooltip": {},
+                "custlinksar.custlinksar": {},
+                "zsap.com.r3.cobi.s4.z_s4_auth": {}
             }
         },
         "contentDensities": {
