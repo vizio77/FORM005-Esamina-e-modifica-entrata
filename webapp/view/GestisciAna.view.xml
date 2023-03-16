@@ -1,0 +1,303 @@
+<mvc:View controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.GestisciAna" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls" xmlns:f="sap.f" xmlns:layout="sap.ui.layout"
+	xmlns:commons="sap.suite.ui.commons" xmlns:card="sap.f.cards" xmlns:form="sap.ui.layout.form"
+	xmlns:zcontrollinkSar="custlinksar.custlinksar.controls">
+	<f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Header  -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<f:content>
+					<Panel class="noMarginTest">
+						<FlexBox alignItems="Center" justifyContent="SpaceBetween">
+							<layout:VerticalLayout class="sapUiTinyMargin">
+								<VBox direction='Row' visible="true">
+									<layout:VerticalLayout class="sapUiTinyMarginBeginEnd sapUiSmallMarginTop">
+										<layout:HorizontalLayout>
+											<ObjectStatus id="idTextPosFinTabID" active="true" title="{i18n>PosFin}" text="" class="textBold " press="onObjectStatusPosFinPress"/>
+											<zcontrolPosFin:LinkPosFinEntrate id="idLinkPosfinTab" text="{modelHeader>/Fipex}" anno="{modelHeader>/AnnoFipex}"
+												fikrs="{modelHeader>/Fikrs}" fase="{modelHeader>/Fase}" reale="{modelHeader>/Reale}" versione="{modelHeader>/Versione}"
+												fipex="{modelHeader>/Fipex}" datbis="99991231"/>
+										</layout:HorizontalLayout>
+										<layout:HorizontalLayout>
+											<ObjectStatus id="idTextPosStrutturaTabID" active="true" title="{i18n>StrAmm}" class=" textBold"/>
+											<zcontrollinkSar:LinkSar id="linkSarBilancio" anno="{modelHeader>/AnnoFipex}" eos="S" fikrs="{modelHeader>/Fikrs}"
+												fase="{modelHeader>/Fase}" reale="{modelHeader>/Reale}" versione="{modelHeader>/Versione}" bilancio="" fictr="{modelHeader>/Fictr}"
+												datbis='99991231' text="{modelHeader>/Fictr}"/>
+										</layout:HorizontalLayout>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiTinyMarginBeginEnd">
+										<ObjectStatus title="{i18n>esercizio}" id="TextAnno" class="textBold"/>
+										<ObjectStatus title="{i18n>proposta}" text="{modelHeader>/IdProposta}" class="textBold"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiTinyMarginBeginEnd">
+										<ObjectStatus title="{i18n>processo}" text="{i18n>processoDesc}" class="textBold"/>
+										<ObjectStatus title="{i18n>nickname}" text="{modelHeader>/Nickname}" class="textBold"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiTinyMarginBeginEnd">
+										<ObjectStatus title="{i18n>macroFase}" text="{i18n>macroFaseDesc}" class="textBold"/>
+										<ObjectStatus title="{i18n>iter}" text="{modelHeader>/Iter}" class="textBold"/>
+									</layout:VerticalLayout>
+								</VBox>
+							</layout:VerticalLayout>
+							<HBox width="">
+								<OverflowToolbar style="Clear">
+									<ToolbarSpacer/>
+									<Button id="btnInfoCassaTabID" type="Emphasized" icon="sap-icon://hint" tooltip="{i18n>info}" class="sapUiNoMarginEnd sapUiNoPaddingTop"
+										visible="false" press=".onPressInformations($event, 'cassa')"/>
+									<Button id="btnInfoCompetenzaTabID" type="Emphasized" icon="sap-icon://hint" tooltip="{i18n>info}" visible="false"
+										press=".onPressInformations($event, 'competenza')"/>
+								</OverflowToolbar>
+							</HBox>
+						</FlexBox>
+					</Panel>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<IconTabBar id="idIconTabBar" class="sapUiResponsiveContentPadding showTextAll" expandable="false" select="onPressIconTabBar">
+				<items>
+					<IconTabFilter key="Anagrafica" id="Anagrafica" icon="sap-icon://course-book" text="{i18n>Anagrafica}" enabled="true"
+						class="sapUiTinyMarginEnd">
+						<Panel id="idPanel" visible="true" class="sapUiSmallMargin">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title text="{i18n>Anagrafica}"/>
+									<ToolbarSpacer/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<layout:VerticalLayout width="100%">
+								<layout:HorizontalLayout>
+									<ObjectStatus id="idSwitchLabelSnap" title="{i18n>attivaDisattiva}" class="sapUiTinyMarginTop textBold"/>
+									<Switch id="idSwitchSnapID" type="AcceptReject" state="{= ${modelAnagraficaPf>/Statstatus} === '3' ? false : true}"/>
+								</layout:HorizontalLayout>
+								<VBox width="100%"></VBox>
+							</layout:VerticalLayout>
+							<form:SimpleForm id="SimpleFormAnagraficaPosfin" editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout"
+								columnsM="1" columnsL="1" columnsXL="1">
+								<form:content>
+									<core:Title text=""/>
+									<Label required="true" text="Amm."/>
+									<Input value="{modelAnagraficaPf>/Prctr}" width="80%" editable="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="4" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{modelAnagraficaPf>/Descrestamministr}" width="90%" editable="false"/>
+									<Label text="{i18n>capitolo}"/>
+									<Input value="{modelAnagraficaPf>/Codicecapitolo}" width="80%" tooltip="{modelAnagraficaPf>/Codicecapitolo}" editable="false"
+										valueHelpRequest="onHVFormPosFin">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()} " width="90%"
+										tooltip="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}" editable="false"/>
+									<Label text="{i18n>articolo}"/>
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicepg}" width="80%" tooltip="{modelAnagraficaPf>/Codicepg}" editable="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}" editable="false" width="90%"
+										tooltip="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}"/>
+									<Label text="{i18n>CdR}" required="true"/>
+									<Input editable="false" value="{modelAnagraficaPf>/Codicecdr}" width="80%" showValueHelp="false" valueHelpOnly="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="4" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Descrestcdr}" width="90%" editable="false"/>
+									<Label text="{i18n>Ragioneria}" required="true"/>
+									<Input editable="false" value="{modelAnagraficaPf>/Codiceragioneria}" width="80%" showValueHelp="falsefalse" valueHelpOnly="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="4" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{modelAnagraficaPf>/Descrestragioneria}" width="90%" editable="false"/>
+									<Label text="{i18n>titolo}"/>
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicetitolo}" width="80%" tooltip="{modelAnagraficaPf>/Codicetitolo}"
+										editable="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{= ${modelAnagraficaPf>/}.toUpperCase()}" editable="false" width="90%" tooltip="{= ${modelAnagraficaPf>/}.toUpperCase()}"/>
+									<Label text="{i18n>natura}"/>
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicenatura}" width="80%" tooltip="{modelAnagraficaPf>/Codicenatura}"
+										editable="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{= ${modelAnagraficaPf>/}.toUpperCase()}" editable="false" width="90%" tooltip="{= ${modelAnagraficaPf>/}.toUpperCase()}"/>
+									<Label text="{i18n>tipologia}"/>
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicetipologia}" width="80%" tooltip="{modelAnagraficaPf>/Codicetipologia}"
+										editable="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{= ${modelAnagraficaPf>/}.toUpperCase()}" editable="false" width="90%" tooltip="{= ${modelAnagraficaPf>/}.toUpperCase()}"/>
+									<Label text="{i18n>provento}"/>
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codiceprovento}" width="80%" tooltip="{modelAnagraficaPf>/Codiceprovento}"
+										editable="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{= ${modelAnagraficaPf>/Descrestcdr}.toUpperCase()}" editable="false" width="90%"
+										tooltip="{= ${modelAnagraficaPf>/Descrestcdr}.toUpperCase()}"/>
+								</form:content>
+							</form:SimpleForm>
+							<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+								<form:content>
+									<core:Title text="{i18n>DenominazioneCapitolo}"/>
+									<Label text="{i18n>CodStandard}"/>
+									<Input value="{modelAnagraficaPf>/Coddenomstdcap}" width="5.3%" tooltip="{modelAnagraficaPf>/Codicecapitolo}" editable="false"/>
+									<Label text="{i18n>DenInt}" labelFor="idInputDenIntCap" required="true"/>
+									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}" width="85%"
+										editable="{= ${modelAnagraficaPf>Coddenomstdcap} === '' ? true : false }"
+										tooltip="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}"/>
+									<Label text="{i18n>DenRid}" labelFor="idInputDenRidCap" required="true"/>
+									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrbrevecap}.toUpperCase()}" width="85%"
+										tooltip="{= ${modelAnagraficaPf>/Descrbrevecap}.toUpperCase()}" editable="{= ${modelAnagraficaPf>Coddenomstdcap} === '' ? true : false }"/>
+								</form:content>
+							</form:SimpleForm>
+							<!--<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsM="2" columnsL="3" columnsXL="3">-->
+							<!--	<form:content></form:content>-->
+							<!--</form:SimpleForm>-->
+							<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+								<form:content>
+									<core:Title text="{i18n>DenominazionePG}"/>
+									<Label text="{i18n>CodStandard}" labelFor="idInputCodStaPg"/>
+									<Input id="idInputCodStaPg" editable="false" width="5.3%" tooltip="{modelAnagraficaPf>/Coddenomstdpg}"
+										value="{modelAnagraficaPf>/Coddenomstdpg}"/>
+									<Label text="{i18n>DenInt}" labelFor="idInputDenIntPg" required="true"/>
+									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}" width="85%"
+										editable="{= ${modelAnagraficaPf>Coddenomstdpg} === '' ? true : false }" tooltip="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}"/>
+									<Label text="{i18n>DenRid}" labelFor="idInputDenRidPg" required="true"/>
+									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrbrevepg}.toUpperCase()}" width="85%"
+										tooltip="{= ${modelAnagraficaPf>/Descrbrevepg}.toUpperCase()}" editable="{= ${modelAnagraficaPf>Coddenomstdcap} === '' ? true : false }"/>
+								</form:content>
+							</form:SimpleForm>
+							<!--<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">-->
+							<!--	<form:content>-->
+							<!--		<core:Title text=""/>-->
+							<!--		<Label text="{i18n>Noipa}"/>-->
+							<!--		<Select width="25%" selectedKey="{modelAnagraficaPf>/Descrnoipa}" enabled="false">-->
+							<!--			<core:Item key="{modelAnagraficaPf>/Descrnoipa}" text="{modelAnagraficaPf>/Descrnoipa}"/>-->
+							<!--		</Select>-->
+							<!--		<Label text="{i18n>Irap}"/>-->
+							<!--		<Input width="25%" value="{modelAnagraficaPf>/FipexIrapSpe}" editable="false"/>-->
+							<!--	</form:content>-->
+							<!--</form:SimpleForm>-->
+						</Panel>
+					</IconTabFilter>
+					<IconTabFilter key="Competenza" id="Competenza" icon="sap-icon://process" text="{i18n>Competenza}" enabled="true" design="Vertical"
+						class="sapUiSmallMarginEnd">
+						<ScrollContainer horizontal="false" vertical="true" height="100%" width="100%">
+							<VBox>
+								<layout:VerticalLayout id="idBoxAut" class="sapUiTinyMarginTop" visible="true">
+									<HBox class="sapUiMediumMarginBegin">
+										<Label design="Bold" text="Autorizzazione:" labelFor="idAutorizz" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTop"/>
+										<!--<zcontrolAuth:InputAutorizzazioni id="AutorizzazioniMC" Eos="S"/>-->
+										<Select width="auto" items="{modelAnagraficaAuto>/}" editable="true">
+											<core:Item key="{modelAnagraficaAuto>Fincode}" text="{modelAnagraficaAuto>Beschr}"/>
+										</Select>
+										<OverflowToolbar style="Clear" width="44em" class="sapUiTinyMarginBegin">
+											<HBox id="idBoxReiscrizioni" visible="true"></HBox>
+											<Button id="BtnAssociaAutTabID" type="Emphasized" text="{i18n>AssociaAutorizzazione}" class="sapUiTinyMarginBegin textBold"
+												press="onPressAssociaAut"/>
+											<ToolbarSpacer/>
+											<Button id="idBtnAvvio" type="Emphasized" text="{i18n>Avvio}" class="sapUiTinyMarginBegin textBold" press="onPressAvvioComp"/>
+										</OverflowToolbar>
+									</HBox>
+								</layout:VerticalLayout>
+								<html:iframe id="linkSacCompetenza" frameBorder="0" target="_top" width="100%" height="1000rem"></html:iframe>
+							</VBox>
+						</ScrollContainer>
+					</IconTabFilter>
+					<IconTabFilter key="Cassa" id="Cassa" icon="sap-icon://accounting-document-verification" text="{i18n>cassaCro}" enabled="true"
+						class="sapUiTinyMarginEnd">
+						<Panel id="idPanelsdsd" visible="true" class="sapUiSmallMargin">
+							<headerToolbar>
+								<OverflowToolbar>
+									<ToolbarSpacer/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<ScrollContainer horizontal="false" vertical="true" height="100%" width="100%">
+								<VBox>
+									<layout:VerticalLayout id="idBoxcassa" class="sapUiTinyMarginTop sapUiMediumMarginBegin" visible="true">
+										<HBox></HBox>
+									</layout:VerticalLayout>
+									<ToolbarSpacer/>
+									<html:iframe id="linkSacCassa" frameBorder="0" target="_top" width="100%" height="1000rem"></html:iframe>
+								</VBox>
+							</ScrollContainer>
+						</Panel>
+					</IconTabFilter>
+					<IconTabFilter key="WorkFlow" id="WorkFlow" icon="sap-icon://history" text="{i18n>WorkFlow}" enabled="true" design="Vertical"
+						class="sapUiSmallMarginEnd">
+						<ScrollContainer horizontal="false" vertical="true" height="100%" width="100%">
+							<VBox>
+								<!--<html:iframe id="linkSacCompetenza" frameBorder="0" target="_top" width="100%" height="1000rem"></html:iframe>-->
+								<FlexBox alignItems="Center" justifyContent="Center" class="sapUiSmallMarginTop">
+									<Panel height="550px">
+										<commons:Timeline id="idTimeline" enableDoubleSided="false" growingThreshold="0" enableScroll="true" showHeaderBar="false"
+											enableSocial="false" alignment="Right" axisOrientation="Vertical" sortOldestFirst="true" sort="false" content="{modelTimeLineWorkFlow>/}">
+											<commons:content>
+												<commons:TimelineItem text="{modelTimeLineWorkFlow>DescrizioneEstesa}"
+													dateTime="{= ${modelTimeLineWorkFlow>DataCreazione}.toLocaleDateString().replaceAll('/', '.') } {path: 'modelTimeLineWorkFlow>OraCreazione', formatter: '.formatter.dataCreazione'}"
+													status="{= ${modelTimeLineWorkFlow>LastItem}.toUpperCase() === 'X' ? 'Warning' : 'Neutral'}"
+													icon="{= ${modelTimeLineWorkFlow>LastItem}.toUpperCase() === 'X' ? 'sap-icon://favorite' : 'sap-icon://employee'}"
+													userName="{modelTimeLineWorkFlow>User}" userNameClickable="false" title="{modelTimeLineWorkFlow>IterDescr}" class=""/>
+											</commons:content>
+										</commons:Timeline>
+									</Panel>
+								</FlexBox>
+							</VBox>
+						</ScrollContainer>
+					</IconTabFilter>
+					<IconTabFilter key="Note" id="Note" icon="sap-icon://calendar" text="{i18n>Nota}" enabled="true" design="Vertical"
+						class="sapUiSmallMarginEnd">
+						<ScrollContainer horizontal="false" vertical="true" height="100%" width="100%">
+							<VBox>
+								<FlexBox alignItems="Center" justifyContent="Center" class="sapUiSmallMarginTop">
+									<Panel height="550px" headerText="{i18n>Nota} {i18n>Proposta}">
+										<VBox class="sapUiTinyMarginTop">
+											<Label text="{i18n>ScegliNota}"/>
+											<Input id="idInputScegliNoteIDProposta" class="sapUiTinyMarginEnd" editable="{= ${modelHeader>/CodIter} === '01' ? true : false}"
+												placeholder="{i18n>ScegliNota} {i18n>Standard}" showSuggestion="true" showValueHelp="true" submit="onSubmitIdNota"
+												valueHelpRequest="handleValueHelp('Note')"/>
+											<Label text="Testo" class="sapUiTinyMarginTop"/>
+											<TextArea id="idNota" height="15rem" showExceededText="true" width="30em" value="{modelNote>/Testonota}" liveChange="onLiveWriteNota"
+												maxLength="2000" editable="{= ${modelHeader>/CodIter} === '01' ? true : false}"/>
+											<layout:HorizontalLayout >
+												<Button id="idBtnSalvaNota" type="Emphasized" text="{i18n>Salva} {i18n>Nota}" press="onSaveNota"
+													enabled="{= ${modelHeader>/CodIter} === '01' ? true : false}"/>
+												<Button type="Emphasized" text="{i18n>Resetta}" visible="{= ${modelHeader>/CodIter} === '01' ? true : false}" press="onPressResettaNote"/>
+											</layout:HorizontalLayout>
+										</VBox>
+									</Panel>
+								</FlexBox>
+							</VBox>
+						</ScrollContainer>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="{i18n>salva}" press="onSave" enabled="{= ${modelHeader>/CodIter} === '01' ? true : false"/>
+				<Button enabled="true" type="Emphasized" text="{i18n>Invio}" visible="{= ${modelHeader>/CodIter} === '01' ? true : false}"
+					press="onPressNavToInvioAllaValidazione"/>
+				<Button enabled="true" type="Emphasized" text="{i18n>RevocaValid}" visible="{= ${modelHeader>/CodIter} === '02' ? true : false}"
+					press="onPressNavToInvioAllaValidazione"/>
+				<Button icon="" press="onPressNavToHome" type="Emphasized" text="{i18n>indietro}"/>
+				<Button icon="sap-icon://documents" type="Emphasized" text="{i18n>FascicoloDocumentale}"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

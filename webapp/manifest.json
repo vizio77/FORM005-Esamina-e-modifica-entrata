@@ -1,0 +1,268 @@
+{
+    "_version": "1.7.0",
+    "sap.app": {
+        "id": "zsap.com.r3.cobi.s4.esamodModEntrPosFin",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "dataSources": {
+            "ZSS4_COBI_PREN_ESAMOD_SRV": {
+                "uri": "/sap/opu/odata/sap/ZSS4_COBI_PREN_ESAMOD_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZSS4_CO_GEST_TIPOLOGICHE_SRV": {
+                "uri": "/sap/opu/odata/sap/ZSS4_CO_GEST_TIPOLOGICHE_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/ZSS4_CO_GEST_TIPOLOGICHE_SRV/metadata.xml"
+                }
+            },
+            "modelOperazionEsaMod": {
+                "uri": "/sap/opu/odata/sap/ZSS4_COBI_PREN_ESAMOD_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "FiltriEntrate": {
+                "uri": "/sap/opu/odata/sap/ZSS4_COBI_ENT_ADFIL_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+            "version": "1.40.12",
+            "toolsId": "b67d0649-4e2b-475f-a772-7c17a48bf5be"
+        }
+    },
+    "sap.ui": {
+        "fullWidth": true,
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view.App",
+            "type": "XML"
+        },
+        "dependencies": {
+            "minUI5Version": "1.30.0",
+            "libs": {
+                "sap.collaboration": {},
+                "sap.m": {},
+                "sap.ui.comp": {},
+                "sap.ui.core": {},
+                "sap.ui.layout": {},
+                "sap.ushell": {},
+                "sap.uxap": {},
+                "zsap.com.r3.cobi.s4.custadattafiltri.spese.adattafiltrispese": {},
+                "zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin": {},
+                "zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "zsap.com.r3.cobi.s4.esamodModEntrPosFin.i18n.i18n"
+                }
+            },
+            "ZSS4_COBI_PREN_ESAMOD_SRV": {
+                "dataSource": "ZSS4_COBI_PREN_ESAMOD_SRV"
+            },
+            "ZSS4_CO_GEST_TIPOLOGICHE_SRV": {
+                "dataSource": "ZSS4_CO_GEST_TIPOLOGICHE_SRV"
+            },
+            "modelOperazionEsaMod": {
+                "dataSource": "modelOperazionEsaMod"
+            },
+            "FiltriEntrate": {
+                "dataSource": "FiltriEntrate"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "transition": "slide",
+                "bypassed": {
+                    "target": "notFound"
+                }
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "PosizioneFinanziaria",
+                    "target": "PosizioneFinanziaria"
+                },
+                {
+                    "pattern": "GestisciPosizioneFinanziaria",
+                    "name": "GestisciPosizioneFinanziaria",
+                    "target": "GestisciPosizioneFinanziaria"
+                },
+                {
+                    "pattern": "IdProposta",
+                    "name": "IdProposta",
+                    "target": "IdProposta"
+                },
+                {
+                    "pattern": "PosFin-IdProposta",
+                    "name": "PosFin-IdProposta",
+                    "target": "PosFin-IdProposta"
+                },
+                {
+                    "pattern": "NuovaPosizioneFinanziaria",
+                    "name": "NuovaPosizioneFinanziaria",
+                    "target": "NuovaPosizioneFinanziaria"
+                },
+                {
+                    "pattern": "GestisciAna",
+                    "name": "GestisciAna",
+                    "target": "GestisciAna"
+                },
+                {
+                    "pattern": "Tab-ID/{ID}",
+                    "name": "Tab-ID",
+                    "target": "Tab-ID"
+                },
+                {
+                    "pattern": "Tab-IDPF",
+                    "name": "Tab-IDPF",
+                    "target": "Tab-IDPF"
+                },
+                {
+                    "pattern": "GestisciID/{ID}",
+                    "name": "GestisciID",
+                    "target": "GestisciID"
+                },
+                {
+                    "pattern": "DettaglioContabile",
+                    "name": "DettaglioContabile",
+                    "target": "DettaglioContabile"
+                },
+                {
+                    "pattern": "DettaglioAnagraficoID",
+                    "name": "DettaglioAnagraficoID",
+                    "target": "DettaglioAnagraficoID"
+                },
+                {
+                    "name": "AssociaProposta",
+                    "pattern": "AssociaProposta",
+                    "target": "AssociaProposta"
+                },
+                {
+                    "pattern": "NuovaPosFin",
+                    "name": "NuovaPosFin",
+                    "target": "NuovaPosFin"
+                }
+            ],
+            "targets": {
+                "PosizioneFinanziaria": {
+                    "viewName": "PosizioneFinanziaria",
+                    "viewLevel": 1
+                },
+                "GestisciPosizioneFinanziaria": {
+                    "viewName": "GestisciPosizioneFinanziaria",
+                    "viewLevel": 2
+                },
+                "IdProposta": {
+                    "viewName": "IdProposta",
+                    "viewLevel": 2
+                },
+                "MessagePage": {
+                    "viewName": "MessagePage",
+                    "viewLevel": 3
+                },
+                "PosFin-IdProposta": {
+                    "viewName": "PosFin-IdProposta",
+                    "viewLevel": 3
+                },
+                "NuovaPosizioneFinanziaria": {
+                    "viewName": "NuovaPosizioneFinanziaria",
+                    "viewLevel": 3
+                },
+                "GestisciAna": {
+                    "viewName": "GestisciAna",
+                    "viewLevel": 4
+                },
+                "Tab-ID": {
+                    "viewName": "Tab-ID",
+                    "viewLevel": 3
+                },
+                "Tab-IDPF": {
+                    "viewName": "Tab-IDPF",
+                    "viewLevel": 3
+                },
+                "GestisciID": {
+                    "viewName": "GestisciID",
+                    "viewLevel": 3
+                },
+                "DettaglioContabile": {
+                    "viewName": "DettaglioContabile",
+                    "viewLevel": 3
+                },
+                "DettaglioAnagraficoID": {
+                    "viewName": "DettaglioAnagraficoID",
+                    "viewLevel": 3
+                },
+                "AssociaProposta": {
+                    "viewName": "AssociaProposta",
+                    "viewLevel": 4
+                },
+                "NuovaPosFin": {
+                    "viewName": "NuovaPosFin",
+                    "viewLevel": 5
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/z_s4_esamodepf",
+        "_version": "1.1.0"
+    }
+}

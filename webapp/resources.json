@@ -1,0 +1,102 @@
+{
+    "resources": [
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "controller/PosizioneFinanziaria.controller.js"
+        },
+        {
+            "name": "controller/NuovaPosFin.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/GestisciAna.controller.js"
+        },
+        {
+            "name": "controller/DettaglioContabile.controller.js"
+        },
+        {
+            "name": "controller/GestisciPosizioneFinanziaria.controller.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/MatchCode.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "view/DettaglioContabile.view.xml"
+        },
+        {
+            "name": "view/GestisciAna.view.xml"
+        },
+        {
+            "name": "view/PosizioneFinanziaria.view.xml"
+        },
+        {
+            "name": "view/fragment/MenuCapitoloNPF.fragment.xml"
+        },
+        {
+            "name": "view/fragment/PopupSceltaValidatore.fragment.xml"
+        },
+        {
+            "name": "view/fragment/BusyDialog.fragment.xml"
+        },
+        {
+            "name": "view/fragment/Information.fragment.xml"
+        },
+        {
+            "name": "view/fragment/PopUpScegliCapitoloNPF.fragment.xml"
+        },
+        {
+            "name": "view/NuovaPosFin.view.xml"
+        },
+        {
+            "name": "view/GestisciPosizioneFinanziaria.view.xml"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "data/infoDettaglioContPF.json"
+        },
+        {
+            "name": "data/infoCompentenza.json"
+        },
+        {
+            "name": "data/infoCassa.json"
+        },
+        {
+            "name": "data/infoDettaglioContID.json"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "neo-app.json"
+        }
+    ]
+}

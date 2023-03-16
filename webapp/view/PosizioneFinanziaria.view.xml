@@ -1,0 +1,291 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.f" xmlns:t="sap.ui.table"
+	xmlns:fb="sap.ui.comp.filterbar" controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.PosizioneFinanziaria"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls"
+	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls" xmlns:layout="sap.ui.layout"
+	xmlns:zcontrolAdatta="zsap.com.r3.cobi.s4.custadattafiltri.spese.adattafiltrispese.controls">
+	<f:DynamicPage id="dynamicPageIdPosFin" headerExpanded="true" showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<layout:VerticalLayout>
+						<layout:HorizontalLayout>
+							<Title text="{i18n>title} > {i18n>PosFin}"/>
+						</layout:HorizontalLayout>
+						<layout:HorizontalLayout>
+							<Label text="{i18n>Esercizio}:" design="Bold" class="sapUiTinyMarginEnd"/>
+							<Text id="TextAnno" class="sapUiSmallMarginEnd"/>
+							<Label text="{i18n>Processo}:" design="Bold" class="sapUiTinyMarginEnd"/>
+							<Text text="{i18n>processoDesc}" class="sapUiSmallMarginEnd"/>
+							<Label text="{i18n>MacroFase}:" design="Bold" class="sapUiTinyMarginEnd"/>
+							<Text text="{i18n>macroFaseDesc}" class="sapUiSmallMarginEnd"/>
+						</layout:HorizontalLayout>
+					</layout:VerticalLayout>
+				</f:heading>
+				<!--<f:expandedContent >
+					<Label text=""/>
+				</f:expandedContent>-->
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<f:content>
+					<zcontrolAdatta:InputAdattaFiltriSpese eos="E" id="idBar" showClearOnFB="false" clear="onClear" search="onSearch" showGoOnFB="true"
+						showFilterConfiguration="true" useToolbar="false">
+						<zcontrolAdatta:filterGroupItems >
+							<!--<fb:FilterBar id="filterBar" showClearOnFB="true" clear="onClear" reset="onReset" search="onSearch" showGoOnFB="true"-->
+							<!--	showFilterConfiguration="true" useToolbar="false">-->
+							<!--	<fb:filterGroupItems>-->
+							<fb:FilterGroupItem groupName="A" name="y" label="{i18n>Amministrazione}" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Input value="{modelAdattaFiltri>/CodiceAmmin}" showValueHelp="true" required="true" editable="false"
+										valueHelpRequest="handleValueHelp($event, 'Amm')"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem visibleInFilterBar="true" groupName="G1" groupTitle="{i18n>FiltriBase}" name="A" label="{i18n>posFin}" labelTooltip="">
+								<fb:control>
+									<zcontrol:InputPosizioneFinanziaria id="filterBarPosFin" fase="{modelPosFin>/FASE}" reale="{modelPosFin>/REALE_RIF}"
+										anno="{modelPosFin>/ANNO}" entrata="X" maxSuggestionWidth="60%" versione="D" change="onChangeT($event, 'posFin')"
+										liveChange="onSelectPosFin"/>
+									<!--<Input id="filterBarPosFin"  valueHelpOnly="true" maxSuggestionWidth="60%"/>-->
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!--	<fb:FilterGroupItem visibleInFilterBar="true"  groupName="G1" groupTitle="{i18n>FiltriBase}" name="B" label="{i18n>statoCrono}"-->
+							<!--	labelTooltip="">-->
+							<!--	<fb:control>-->
+							<!--		<ComboBox id="filterBarIdCronoprogramma" enabled="true" change="onChangeCrono" placeholder="Inserisci {i18n>statoCrono}">-->
+							<!--			<items>-->
+							<!--				<core:Item key="Completo" text="Completo"/>-->
+							<!--				<core:Item key="Incompleto" text="Incompleto"/>-->
+							<!--			</items>-->
+							<!--		</ComboBox>-->
+							<!--	</fb:control>-->
+							<!--</fb:FilterGroupItem>-->
+							<!--</fb:filterGroupItems>-->
+							<!--	</fb:FilterBar>-->
+						</zcontrolAdatta:filterGroupItems>
+					</zcontrolAdatta:InputAdattaFiltriSpese>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<t:TreeTable id="treeTablePF" visibleRowCountMode="Fixed" visibleRowCount="10" selectionMode="Single" enableSelectAll="false"
+				enableColumnReordering="false" enableBusyIndicator="true">
+				<t:extension>
+					<OverflowToolbar class="sapUiSmallMarginTop">
+						<Text id="prev-column" text="{modelIsAfterAvvio>/intialValue} - {modelIsAfterAvvio>/beginValueM1}"
+							visible="{modelIsAfterAvvio>/enabledButtonPrev}"/>
+						<Button id="idPrev" icon="sap-icon://navigation-left-arrow" type="Emphasized" press="onPressPrevTreeTable"
+							enabled="{modelIsAfterAvvio>/enabledButtonPrev}"/>
+						<ToolbarSpacer/>
+						<!--<Button icon="sap-icon://sort" press="onPressSort" type="Emphasized"/>-->
+						<Button type="Emphasized" id="idBtnDettaglioContabile" text="{i18n>DettaglioContabile}" icon="sap-icon://detail-view"
+							press="onPressNavToDettaglioContabile"/>
+						<Button type="Emphasized" icon="sap-icon://list" visible="{checkModel>/listaEstesa}" text="{i18n>ListaEstesa}" press="listaEstesa"/>
+						<Button type="Emphasized" icon="sap-icon://list" visible="{checkModel>/listaRidotta}" text="{i18n>ListaRidotta}" press="listaRidotta"/>
+						<Button text="{i18n>EsitoControlli}" press="onEsitoControlli" type="Emphasized"/>
+						<Button type="Emphasized" text="{i18n>Gestisci}" press="onPressGestisciPosizione"/>
+						<Button id="idBtnDocumentale" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>
+						<Button type="Emphasized" text="{i18n>Export}" icon="sap-icon://excel-attachment" press="onPressExport"/>
+						<Button id="idNext" icon="sap-icon://navigation-right-arrow" type="Emphasized" press="onPressNextTreeTable"
+							enabled="{modelIsAfterAvvio>/enabledButtonNext}"/>
+						<Text id="next-column" text="{modelIsAfterAvvio>/beginValueP1} - {modelIsAfterAvvio>/finalValue}"
+							visible="{modelIsAfterAvvio>/enabledButtonNext}"/>
+					</OverflowToolbar>
+				</t:extension>
+				<!--COLONNE TABELLA-->
+				<t:columns>
+					<t:Column width="5rem">
+						<t:template>
+							<CheckBox id="idTableSelect" select="onSelect" selected="{ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}"
+								visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '0' ? true : false}"></CheckBox>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>Titolo}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceTitolo}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescTitolo}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrtitolo}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>Natura}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceNatura}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescNatura}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrnatura}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>Tipologia}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceTipologia}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescTipologia}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrtipologia}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>Provento}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceProvento}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescProvento}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrprovento}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>Categoria}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCategoria}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescCategoria}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrcategoria}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="4rem">
+						<Label text="{i18n>CDR}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCdr}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescCdr}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrestesacdr}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>Capitolo}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCapitolo}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescCapitolo}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrestesacap}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>Articolo}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceArticoloIntEnt}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="{checkModel>/visibleColonna}" width="6rem">
+						<Label text="{i18n>DescArticolo}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrarticolo}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="13rem">
+						<Label text="{i18n>PosizioneFinanziaria}" class="boldCss"/>
+						<t:template>
+							<zcontrolPosFin:LinkPosFinEntrate anno="{ZSS4_COBI_PREN_ESAMOD_SRV>Anno}" fikrs="{ZSS4_COBI_PREN_ESAMOD_SRV>Fikrs}"
+								fase="{ZSS4_COBI_PREN_ESAMOD_SRV>Fase}" reale="{ZSS4_COBI_PREN_ESAMOD_SRV>Reale}" versione="{modelPosFinFragment>Versione}"
+								fipex="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" datbis="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Datbis', formatter: '.formatter.formatterDatbis'}"
+								text="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" semanticObject="ESAMINAMODIFICA"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="13rem">
+						<Label text="{i18n>Autorizzazione}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Autorizzazioni}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label text="{i18n>piuProposte}" wrapping="true" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>StatoProp}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label text="{i18n>stanzCompAnno1} &#xA; {i18n>2023}" wrapping="true" class="boldCss"/>
+						<t:template>
+							<HBox justifyContent="End">
+								<Text
+									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Competenza23', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									wrapping="true"/>
+							</HBox>
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label wrapping="true" text="{i18n>stanzCompAnno2} &#xA; {i18n>2024}" class="boldCss"/>
+						<t:template>
+							<HBox justifyContent="End">
+								<Text
+									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Competenza24', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									wrapping="true"/>
+							</HBox>
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label wrapping="true" text="{i18n>stanzCompAnno3} &#xA; {i18n>2025}" class="boldCss"/>
+						<t:template>
+							<HBox justifyContent="End">
+								<Text
+									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Competenza25', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									wrapping="true"/>
+							</HBox>
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label wrapping="true" text="{i18n>stanzCassaAnno1}&#xA; {i18n>2023}" class="boldCss"/>
+						<t:template>
+							<HBox justifyContent="End">
+								<Text
+									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Cassa23', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									wrapping="true"/>
+							</HBox>
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label wrapping="true" text="{i18n>stanzCassaAnno2} &#xA; {i18n>2024}" class="boldCss"/>
+						<t:template>
+							<HBox justifyContent="End">
+								<Text
+									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Cassa24', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									wrapping="true"/>
+							</HBox>
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label wrapping="true" text="{i18n>stanzCassaAnno3}&#xA; {i18n>2025}" class="boldCss"/>
+						<t:template>
+							<HBox justifyContent="End">
+								<Text
+									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Cassa25', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									wrapping="true"/>
+							</HBox>
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:TreeTable>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="{i18n>NuovaPosFin}" press="onNavNuovaPosFin"/>
+				<Button type="Emphasized" text="{i18n>Home}" press="navToAppLaunchpad('Z_S4_ESAMODEPRP')"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

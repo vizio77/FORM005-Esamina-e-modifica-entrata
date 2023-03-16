@@ -1,0 +1,172 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:t="sap.ui.table"
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls"
+	controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.GestisciPosizioneFinanziaria"
+	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls" xmlns:html="http://www.w3.org/1999/xhtml">
+	<f:DynamicPage id="dynamicPageIdPosFin" headerExpanded="true" showFooter="true" xmlns:layout="sap.ui.layout">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<layout:VerticalLayout>
+						<layout:HorizontalLayout>
+							<Title text="{i18n>title} > {i18n>PosFin} - {i18n>Proposta}"/>
+						</layout:HorizontalLayout>
+						<layout:HorizontalLayout>
+							<Label text="{i18n>Esercizio}:" design="Bold" class="sapUiTinyMarginEnd"/>
+							<Text id="TextAnno" class="sapUiSmallMarginEnd"/>
+							<Label text="{i18n>Processo}:" design="Bold" class="sapUiTinyMarginEnd"/>
+							<Text text="{i18n>processoDesc}" class="sapUiSmallMarginEnd"/>
+							<Label text="{i18n>MacroFase}:" design="Bold" class="sapUiTinyMarginEnd"/>
+							<Text text="{i18n>macroFaseDesc}" class="sapUiSmallMarginEnd"/>
+						</layout:HorizontalLayout>
+					</layout:VerticalLayout>
+				</f:heading>
+				<f:expandedContent></f:expandedContent>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<f:content></f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<t:TreeTable id="treeTablePFID" visibleRowCountMode="Fixed" rowHeight="40" expandFirstLevel="false" showColumnVisibilityMenu="true"
+				selectionMode="None" enableSelectAll="False" enableColumnReordering="false">
+				<t:extension>
+					<OverflowToolbar class="sapUiSmallMarginTop">
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://display" type="Emphasized" text="{i18n>Gestisci}" press="onPressNavToTabGestisci"/>
+						<Button type="Emphasized" text="{i18n>AssociaProposta}" press="onPressNavToAssociaID"/>
+						<Button id="idBtnDocumentale" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>
+						<Button visible="true" type="Emphasized" text="{i18n>Export}" icon="sap-icon://excel-attachment" press="onTableExport"/>
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns>
+					<t:Column width="8rem">
+						<t:template>
+							<CheckBox select="onSelect" id="checkBoxGestPosFin" visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '0' ? true : false}"
+								selected="{=${modelOneRow>/one} || ${ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}}" enabled="{modelOneRow>/enabled}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="10rem">
+						<Label text="{i18n>Amministrazione}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceAmmin}" wrapping="false" textAlign="Begin"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="4rem">
+						<Label text="{i18n>CDR}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCdr}" wrapping="false" textAlign="Begin"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="13rem">
+						<Label text="{i18n>PosizioneFinanziaria}" class="boldCss"/>
+						<t:template>
+							<zcontrolPosFin:LinkPosFinEntrate anno="{ZSS4_COBI_PREN_ESAMOD_SRV>Anno}" fikrs="{ZSS4_COBI_PREN_ESAMOD_SRV>Fikrs}"
+								fase="{ZSS4_COBI_PREN_ESAMOD_SRV>Fase}" reale="{ZSS4_COBI_PREN_ESAMOD_SRV>Reale}" versione="{modelPosFinFragment>Versione}"
+								fipex="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" datbis="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Datbis', formatter: '.formatter.formatterDatbis'}"
+								text="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" semanticObject="ESAMINAMODIFICA"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="13rem">
+						<Label text="{i18n>Autorizzazione}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Autorizzazioni}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>Proposta}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta}" wrapping="false" textAlign="Begin"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>Nickname}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Nickname}" wrapping="false" textAlign="Begin"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>Iter}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Iter}" wrapping="true" textAlign="Begin"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>EsitoControllo}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>EsitoControlli}" wrapping="true" textAlign="Begin"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>TipoVariazione}" class="boldCss"/>
+						<t:template>
+							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>TipoVariazioniId}" textAlign="Begin"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>variazionCompAnno1} &#xA; {i18n>2023}" wrapping="true" class="boldCss"/>
+						<t:template>
+							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCompetenza2023}" textAlign="Begin" />-->
+							<Text
+								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcomp2023', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>variazionCompAnno2} &#xA; {i18n>2024}" wrapping="true" class="boldCss"/>
+						<t:template>
+							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCompetenza2024}" textAlign="Begin" />-->
+							<Text
+								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcomp2024', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>variazionCompAnno3} &#xA; {i18n>2025}" wrapping="true" class="boldCss"/>
+						<t:template>
+							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCompetenza2025}" textAlign="Begin" />-->
+							<Text
+								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcomp2025', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>variazionCassaAnno1} &#xA; {i18n>2023}" class="boldCss" wrapping="true"/>
+						<t:template>
+							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCassaTot2023}" textAlign="Begin" />-->
+							<Text
+								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcassa2023', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>variazionCassaAnno2} &#xA; {i18n>2024}" wrapping="true" class="boldCss"/>
+						<t:template>
+							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCassaTot2024}" textAlign="Begin" />-->
+							<Text
+								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcassa2024', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>variazionCassaAnno3}&#xA;  {i18n>2025}" wrapping="true" class="boldCss"/>
+						<t:template>
+							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCassaTot2025}" textAlign="Begin" />-->
+							<Text
+								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcassa2025', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								wrapping="false"/>
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:TreeTable>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="{i18n>Indietro}" press="onNavBack"/>
+				<Button type="Emphasized" text="{i18n>Home}" press="onPressNavToHome"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

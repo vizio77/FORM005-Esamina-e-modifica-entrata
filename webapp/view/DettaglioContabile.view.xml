@@ -1,0 +1,92 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:l="sap.ui.layout"
+	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls"
+	controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.DettaglioContabile" xmlns:html="http://www.w3.org/1999/xhtml">
+	<ObjectPageLayout id="idObjectPageDettaglioContabile" upperCaseAnchorBar="false" useIconTabBar="true" headerContentPinnable="false"
+		showFooter="true">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<l:VerticalLayout class="sapUiSmallMarginEnd">
+						<l:VerticalLayout>
+							<l:HorizontalLayout>
+								<m:Title text="{i18n>title} > {i18n>Dettaglio Contabile} {i18n>PosizioneFinanziaria}"/>
+							</l:HorizontalLayout>
+							<l:HorizontalLayout>
+								<m:Label text="{i18n>Esercizio}:" design="Bold" class="sapUiTinyMarginEnd"/>
+								<m:Text id="TextAnno2" class="sapUiSmallMarginEnd"/>
+								<m:Label text="{i18n>Processo}:" design="Bold" class="sapUiTinyMarginEnd"/>
+								<m:Text text="{i18n>processoDesc}" class="sapUiSmallMarginEnd"/>
+								<m:Label text="{i18n>MacroFase}:" design="Bold" class="sapUiTinyMarginEnd"/>
+								<m:Text text="{i18n>macroFaseDesc}" class="sapUiSmallMarginEnd"/>
+							</l:HorizontalLayout>
+						</l:VerticalLayout>
+					</l:VerticalLayout>
+				</expandedHeading>
+				<snappedHeading>
+					<l:VerticalLayout class="sapUiSmallMarginEnd">
+						<l:VerticalLayout>
+							<l:HorizontalLayout>
+								<m:Title id="idSnapTitle" text="{i18n>title} > {i18n>Dettaglio Contabile} {i18n>PosizioneFinanziaria}"/>
+							</l:HorizontalLayout>
+							<l:HorizontalLayout>
+								<m:Label text="{i18n>Esercizio}:" design="Bold" class="sapUiTinyMarginEnd"/>
+								<m:Text id="TextAnno" class="sapUiSmallMarginEnd"/>
+								<m:Label text="{i18n>Processo}:" design="Bold" class="sapUiTinyMarginEnd"/>
+								<m:Text text="{i18n>processoDesc}" class="sapUiSmallMarginEnd"/>
+								<m:Label text="{i18n>MacroFase}:" design="Bold" class="sapUiTinyMarginEnd"/>
+								<m:Text text="{i18n>macroFaseDesc}" class="sapUiSmallMarginEnd"/>
+							</l:HorizontalLayout>
+						</l:VerticalLayout>
+						<m:VBox></m:VBox>
+						<m:HBox>
+							<m:HBox id="hBoxLinkPF">
+								<m:ObjectStatus title="{i18n>PosizioneFinanziaria}" class="textBold" />
+								<zcontrolPosFin:LinkPosFinEntrate anno="{modelDettaglioContabile>/0/Anno}" fikrs="{modelDettaglioContabile>/0/Fikrs}"
+									fase="{modelDettaglioContabile>/0/Fase}" reale="{modelDettaglioContabile>/0/Reale}" versione="{modelDettaglioContabile>/0/Versione}"
+									fipex="{ path:'modelDettaglioContabile>/0/Fipex', formatter: '.formatterPosFin'}"
+									datbis="{ path: 'modelDettaglioContabile>/0/Datbis', formatter: '.formatter.formatterDatbis'}" text="{modelDettaglioContabile>/0/Fipex}"
+									semanticObject="ESAMINAMODIFICA"/>
+							</m:HBox>
+						</m:HBox>
+					</l:VerticalLayout>
+				</snappedHeading>
+				<snappedTitleOnMobile>
+					<m:Title text="{i18n>titolo}"/>
+				</snappedTitleOnMobile>
+				<actions>
+					<m:Button type="Emphasized" icon="sap-icon://hint" tooltip="{i18n>info}" press=".onPressInformationsLocal($event)"/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<headerContent>
+			<l:VerticalLayout class="sapUiSmallMarginEnd">
+				<m:HBox>
+					<m:ObjectStatus title="{i18n>PosizioneFinanziaria}" class="textBold" />
+					<zcontrolPosFin:LinkPosFinEntrate anno="{modelDettaglioContabile>/0/Anno}" fikrs="{modelDettaglioContabile>/0/Fikrs}"
+						fase="{modelDettaglioContabile>/0/Fase}" reale="{modelDettaglioContabile>/0/Reale}" versione="{modelDettaglioContabile>/0/Versione}"
+						fipex="{ path:'modelDettaglioContabile>/0/Fipex', formatter: '.formatterPosFin'}"
+						datbis="{ path: 'modelDettaglioContabile>/0/Datbis', formatter: '.formatter.formatterDatbis'}" text="{modelDettaglioContabile>/0/Fipex}"
+						semanticObject="ESAMINAMODIFICA"/>
+				</m:HBox>
+			</l:VerticalLayout>
+		</headerContent>
+		<sections>
+			<ObjectPageSection titleUppercase="true" title="{i18n>Competenza}" showTitle="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<html:iframe id="linkSac" frameBorder="0" target="_top" width="100%" height="500em"></html:iframe>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+		<footer>
+			<m:OverflowToolbar>
+				<m:ToolbarSpacer/>
+				<m:Button type="Emphasized" text="{i18n>Indietro}" press="onNavBack"/>
+				<m:Button type="Emphasized" text="{i18n>Home}" press="onPressNavToHome"/>
+			</m:OverflowToolbar>
+		</footer>
+	</ObjectPageLayout>
+</mvc:View>
