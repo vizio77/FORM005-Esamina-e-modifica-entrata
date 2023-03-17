@@ -1173,6 +1173,7 @@ sap.ui.define([
 				var sPg = oView.byId("idPGNPF").getValue();
 				var sTitolo = oView.byId("idTitolo").getValue();
 				var sTipologia = oView.byId("idTipologia").getValue();
+				var sCodiceprovento = oView.byId("idProvento").getValue();
 				var sDenominazioneCapitoloInt = oView.byId("idDenominazioneCapitoloIntNPF").getValue();
 				var sDenominazioneCapitoloRid = oView.byId("idDenominazioneCapitoloRidNPF").getValue();
 				var sTipoSpesaPG = oView.byId("idTipoSpesaPGNPF").getSelectedKey();
@@ -1206,7 +1207,7 @@ sap.ui.define([
 					Reale:dataPosFinToPropostaDefault.Reale,
 					Iter: sIter,
 					Nickname: sNickName,
-				}];
+				}];				
 							
 
 				var oDati = {
@@ -1217,7 +1218,7 @@ sap.ui.define([
 					Versione: "P",
 					Fipex: sPosFin,
 					Eos: "E",
-					Natura: sNatura,
+					Codicenatura: sNatura,
 					Prctr: sAmministrazione,
 					Codiceammin: sAmmin,
 					Codicecdr: sCdr,
@@ -1225,10 +1226,9 @@ sap.ui.define([
 					Codicecapitolo: sCapitolo,
 					Codicepg: sPg,
 					Codicetitolo: sTitolo,
-					Codicecategoria: sCategoria,
-					Codiceclaeco2: sCE2,
-					Codiceclaeco3: sCE3,
-					Capo: sCapo,
+					Codicecategoria: sCategoria,					
+					Codiceprovento: sCodiceprovento,
+					Numecoddettcapoent: sCapo,
 					Descrizionecapitolo: sDenominazioneCapitoloInt,
 					Descrbrevecap: sDenominazioneCapitoloRid,
 					Codicetipologia: sTipologia,
@@ -1256,7 +1256,7 @@ sap.ui.define([
 					}
 				});
 			
-		},
+			},
 
 		
 			checkFieldsRequired: function(oDati){
@@ -1265,15 +1265,13 @@ sap.ui.define([
 					{ field : "Prctr"  					,label : "Amministrazione"}, 
 					{ field : "Codicecdr"  				,label : "CdR"}, 
 					{ field : "Codiceragioneria"  		,label : "Ragioneria"},
-					{ field : "Codicemissione"  		,label : "Missione"}, 
-					{ field : "Codiceprogramma"  		,label : "Programma"}, 
-					{ field : "Codiceazione"  			,label : "Azione"},
+					{ field : "Codicenatura"  		    ,label : "Natura"}, 
 					{ field : "Codicecapitolo"  		,label : "Capitolo"},
 					{ field : "Codicepg"  				,label : "Pg"}, 
 					{ field : "Codicetitolo"  			,label : "Titolo"},
 					{ field : "Codicecategoria"  		,label : "Categoria"}, 
-					{ field : "Codiceclaeco2"  			,label : "C.E.2"},
-					{ field : "Codiceclaeco3"   		,label : "C.E.3"}, 
+					{ field : "Codicetipologia"  		,label : "Tipologia"}, 
+					{ field : "Codiceprovento"  	    ,label : "Provento"},
 					// CHIDEDERE A FEDERICA { field : "Numemacspe"  			,label : "Macroaggregato"},
 					{ field : "Descrizionecapitolo"  	,label : "Denominazione Capitolo integrale"},
 					{ field : "Descrbrevecap"  			,label : "Denominazione Capitolo ridotta"},
@@ -1304,6 +1302,7 @@ sap.ui.define([
 			//lt resetto il modello quando torno indietro
 			//this.resetFields();
 			this.onNavBack();
+			
 		},
 	});
 });
