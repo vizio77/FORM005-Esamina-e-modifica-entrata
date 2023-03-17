@@ -21,11 +21,75 @@ sap.ui.define([
 			UIComponent.prototype.init.apply(this, arguments);
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
-			this.setModel(models.getFaseMacrofaseModel(), "modelFaseAttuale");
+			/* this.setModel(models.getFaseMacrofaseModel(), "modelFaseAttuale");
 			this.setModel(models.getModelPFCapEsistente(), "modelPFCapEsistente");
 			this.setModel(models.getHeaderModelNuovaPosFin(), "modelNuovaPosFin");
 			this.setModel(models.getModelChangeControlsStatus(), "modelChangeControlsStatus");
 			this.setModel(models.getGestTipologicheModel(),"gestTipologicheModel");
+			this.setModel(models.getModelPageAut(), "modelPageAut");
+			this.setModel(models.getModelDefaultPosFinToPropostaNav(), "modelDefaultPosFinToPropostaNav"); */
+
+			// set the device model
+			this.setModel(models.createDeviceModel(), "device");
+			
+			this.setModel(models.getTriennioModel(), "modelTriennio");
+			this.setModel(models.getFaseMacrofaseModel(), "modelFaseAttuale");
+			
+			this.setModel(models.getConoVisibilita(), "modelConoVisibilita");
+			
+			this.setModel(models.infoModel(),"infoModel");
+			
+			this.setModel(models.getGestTipologicheModel(),"gestTipologicheModel");
+			
+			this.setModel(models.getModelPageTab(), "modelPageTab");
+			
+			//POSIZIONE FINANZIARIA
+			this.setModel(models.getPosFinSelected(), "modelPosFinSelected");
+			this.setModel(models.getModelListaEstesaRidotta(), "modelListaEstesaRidotta");
+			
+			//DETTAGLIO CONTABILE PF
+			this.setModel(models.getModelLinkPopUpPF(), "modelLinkPopUpPF");
+			
+			//NUOVA POSIZIONE FINANZIARIA
+			this.setModel(models.getHeaderModelNuovaPosFin(), "modelNuovaPosFin");
+			this.setModel(models.getModelTableCofogNPF(), "modelTableCofogNPF");
+			this.setModel(models.getModelPreValConoNPF(), "modelPreValConoNPF");
+			this.setModel(models.getModelNPF(), "modelNPF");
+			this.setModel(models.getModelPFCapEsistente(), "modelPFCapEsistente");
+			this.setModel(models.getModelCOFOGCapEsistente(), "modelCOFOGCapEsistente");
+			this.setModel(models.getModelPropostaNPF(), "modelPropostaNPF");
+			
+			//RIMODULAZIONE VERTICALE
+			this.setModel(models.getModelTableCofogTabID(), "modelTableCofogTab");
+			this.setModel(models.getModelTableRV(), "modelTableRV");
+			
+			//TAB
+			this.setModel(models.getModelTableFOFPTabID(), "modelTableFOFPTab");
+			this.setModel(models.getModelTableFOFPTabID(), "modelPG80");
+			this.setModel(models.getPreAut(), "modelPreAut");
+			this.setModel(models.getModelStrAmm(), "modelStrAmm");
+			this.setModel(models.getPreAutInfoPopUp(), "modelPreAutInfoPopUp");
+			this.setModel(models.getModelPageAut(), "modelPageAut");
+			this.setModel(models.getModelTimeLineWorkFlow(), "modelTimeLineWorkFlow");
+			this.setModel(models.getModelAnagraficaPF(), "modelAnagraficaPf");
+			this.setModel(models.getModelAnagraficaFOP(), "modelAnagraficaFOP");
+			this.setModel(models.getModelAnagraficaCOFOG(), "modelAnagraficaCofog");
+			this.setModel(models.getModelAnagraficaID(), "modelAnagraficaID");
+			this.setModel(models.getModelCofogDeleted(), "modelCofogDeleted");
+			this.setModel(models.getModelUserSearch(), "modelUserSearch");
+			this.setModel(models.getModelTableValidatore(), "modelTableVal");
+			this.setModel(models.getModelPopupReiscrizioni(), "modelTableReiscrizioni");
+			
+			this.setModel(models.getModelPosizioneFinanziaria(), "modelPosizioneFinanziaria");
+			
+			this.setModel(models.getModelDettaglioAnagraficoId(),  "modelDettaglioAnagraficoId" );
+			this.setModel(models.getModelDettaglioContabile(), "modelDettaglioContabile");
+			
+			//GESTISCI ID + CREA PROPOSTA
+			this.setModel(models.getModelChangeControlsStatus(), "modelChangeControlsStatus");
+			this.setModel(models.getModelTableGestisciID(), "modelTableGestisciID");
+			this.setModel(models.getModelGestisciProposta(), "modelGestisciProposta");
+			
 			this.setModel(models.getModelDefaultPosFinToPropostaNav(), "modelDefaultPosFinToPropostaNav");
 			this.getRouter().initialize();
 		},

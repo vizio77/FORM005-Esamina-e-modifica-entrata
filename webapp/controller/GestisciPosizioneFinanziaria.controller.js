@@ -230,8 +230,8 @@ sap.ui.define([
 					aRows.push(oData);
 
 				}
-				// that.getView().getModel("modelPageAut").setData(aRows);
-				// that.getView().getModel("modelPosFinSelected").setProperty("/IdPosfin", aRows);
+				that.getView().getModel("modelPageAut").setData(aRows);
+				that.getView().getModel("modelPosFinSelected").setProperty("/IdPosfin", aRows);;
 				this.getOwnerComponent().setModel(new JSONModel(aRows), "modelNavAna");
 			}
 		},

@@ -54,7 +54,7 @@
 			<Panel headerText="{i18n>ListaProposte}" width="auto" class="sapUiResponsiveMargin">
 				
 			<t:TreeTable id="treeTableID" expandFirstLevel="false" visibleRowCountMode="Fixed" visibleRowCount="4"
-				selectionMode="None" enableSelectAll="False"
+				selectionMode="MultiToggle" enableSelectAll="False"
 				enableColumnReordering="false">
 				<t:extension>
 					<OverflowToolbar class="sapUiSmallMarginTop">
@@ -73,11 +73,11 @@
 					</OverflowToolbar>
 				</t:extension>
 				<t:columns>
-					<t:Column label="{i18n>Seleziona}" width="5rem">
+					<!-- <t:Column label="{i18n>Seleziona}" width="5rem">
 						<t:template>
-							<RadioButton visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '0' ? true : false}" select="onSelectCheckBox" selected="{ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}"></RadioButton>
+							<CheckBox visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '0' ? true : false}" select="onSelectCheckBox" selected="{ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}"></CheckBox>
 						</t:template>
-					</t:Column>
+					</t:Column> -->
 					<t:Column label="{i18n>Proposta}" width="7rem">
 						<t:template>
 							<Text text="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '1' ? '' : ${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} === '0000000000' ? '' : ${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} }" wrapping="false"/>
