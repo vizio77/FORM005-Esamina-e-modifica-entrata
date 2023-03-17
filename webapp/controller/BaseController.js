@@ -184,6 +184,9 @@ sap.ui.define([
 			}
 			return messaggio;
 		},
+		getModel: function() {
+			return this.getOwnerComponent().getModel();
+		},
 
 		_getDbOperationReturn: function() {
 			return {
@@ -205,7 +208,7 @@ sap.ui.define([
 					break;
 				case '3':
 					return this.getOwnerComponent().getModel('FiltriEntrate');
-					break;
+					break;				
 			}
 		},
 

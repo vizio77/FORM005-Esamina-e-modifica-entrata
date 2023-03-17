@@ -1,11 +1,15 @@
 sap.ui.define([
 	'zsap/com/r3/cobi/s4/esamodModEntrPosFin/controller/BaseController',
 	"sap/ui/core/syncStyleClass",
+	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/Fragment",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 	"sap/m/MessageBox",
 	"zsap/com/r3/cobi/s4/esamodModEntrPosFin/model/MatchCode",
+	"zsap/com/r3/cobi/s4/esamodModEntrPosFin/model/models",
 
-], function(BaseController, syncStyleClass, Fragment, MessageBox, MatchCode, ResourceModel) {
+], function(BaseController, syncStyleClass, JSONModel, Fragment, Filter, FilterOperator, MessageBox, MatchCode, models) {
 	"use strict";
 
 	return BaseController.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.NuovaPosFin", {
@@ -13,7 +17,98 @@ sap.ui.define([
 		onInit: function() {
 
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+			this.oRouter = this.getRouter();
+			this.oDataModel = this.getModel();
 			this.oResourceBundle = this.getResourceBundle();
+			this.oRouter.getRoute("NuovaPosFin").attachMatched(this._onRouteMatched, this);
+		},
+		//lt match dell'oggetto e vado a resettare il modello
+		_onRouteMatched: async function() {	
+			this._gestTipologiche();	
+			//lt resetto i campi per sicurezza
+			//this.resetFields();
+		},
+		resetFields: function(oEvent){
+			var oView = this.getView();
+			var arrayNoEdit = [ "idPGNPF",
+								"idCapitoloNPF",
+								"idIDPropostaNPF",
+								"idNickNameNPF",
+								"idIterNPF"
+							];
+
+			var arrayFieldsVis = [
+							 
+							//"idAmminNPF",
+							"idCdRNPF",
+							"idRagioneriaNPF",		
+							  "idMissioneNPF",
+							  "idProgrammaNPF",
+							  "idAzioneNPF",
+							  "idCapitoloNPF",
+							  "idPGNPF",
+							  //"idTidCategoriaNPFitoloNPF",
+							  "idTitoloNPF",
+							  "idCategoriaNPF",
+							  "idCE2NPF",
+							  "idCE3NPF",
+							  "idMissioneNPF",
+							  "idProgrammaNPF",
+							  "idAzioneNPF",
+							  "idMacroAggregatoNPF",
+							  "idTipoSpesaCapNPF",
+							  "idDenominazioneCapitoloIntNPF",
+							  "idDenominazioneCapitoloRidNPF",
+							  "idTipoSpesaPGNPF",
+							  "idDenominazionePGIntNPF",
+							  "idDenominazionePGRidNPF",
+							  "idIDPropostaNPF",
+							  "idNickNameNPF",
+							  "idIterNPF",
+							]
+				//var i = 0
+			arrayFieldsVis.forEach(el => {
+				//i = i+1;
+				//console.log(i)
+				oView.byId(el).setValue("");
+				if(arrayNoEdit.indexOf(el) === -1){
+					oView.byId(el).setEditable(true);
+				}
+			});
+			var oModelNuovaPosFin = this.getOwnerComponent().getModel("modelNuovaPosFin");
+			oModelNuovaPosFin.setProperty("/AMM", "020")
+			oModelNuovaPosFin.setProperty("/DESCAMM", "MINISTERO DELL'ECONOMIA E DELLE FINANZE")
+			
+			//oView.byId("idAmminNPF").setValue("A020");
+			//oView.byId("idCdRNPF").setValue("0001");
+			//oView.byId("idRagioneriaNPF").setValue("0840");
+			//cofog
+			oView.byId("colEliminaNPF").setVisible(true);
+			oView.byId("idAggiungiRiga").setEnabled(true);
+			oView.getModel("modelNuovaPosFin").setProperty("/EDITPERCENT", true);
+
+			oView.getModel("modelTableCofogNPF").setProperty("/", []);
+			oView.getModel("modelNuovaPosFin").setProperty("/MISS", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/PROG", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/AZIO", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/TIT", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/CAT", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/CAP", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/PG", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/CE2", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/CE3", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/CDR", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/DESCCDR", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/RAG", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/DESCRAG", "");
+
+		},
+		//lt torno indietro e prima di farlo resetto lo pseudo modello
+		tornaIndietro: function(oEvent){
+			this.getOwnerComponent().setModel(models.getHeaderModelNuovaPosFin(), "modelNuovaPosFin");
+			//lt resetto il modello quando torno indietro
+			this.resetFields();
+			this.onNavBack();
 		},
 
 		onHelp: function(oEvent, inputRef) {
@@ -858,6 +953,391 @@ sap.ui.define([
 
 		onPressCloseScegliPGNPF: function() {
 			this.getView().byId("NPF_dialogScegliPG").close();
+		},
+
+		/* 
+		PROPOSTA
+		*/
+		handlePressOpenMenu: function(oEvent) {
+			if (this.getView().byId("idIDPropostaNPF").getValue()) {
+				//alert("Cambiare Proposta? Se si la proposta attualmente bloccato viene sbloccata.");
+			}
+			var oButton = oEvent.getSource();
+			var oView = this.getView();
+			var that = this;
+			// create menu only once
+			if (!this._menu) {
+				this._menu = Fragment.load({
+					id: oView.getId(),
+					name: "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view.fragment.GestisciID_idPropostaMenu",
+					controller: this
+				}).then(function(oDialog) {
+					oView.addDependent(oDialog);
+					syncStyleClass(oView.getController().getOwnerComponent().getContentDensityClass(), oView, oDialog);
+					return oDialog;
+				});
+			}
+			// ACTIONS REPEATED EVERY TIME
+			this._menu.then(function(oDialog) {
+				//oDialog.getBinding("items");
+				// Open ValueHelpDialog filtered by the input's value
+				var eDock = sap.ui.core.Popup.Dock;
+				oDialog.open(that._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
+
+				//var sTitle = that.getView().byId("idPanelForm").getHeaderText();
+				var sTitle = "CREA PROPOSTA"; //lt inserisco la creazione perchè in creazione
+				var oItemMenuIdEsistente = oDialog.getAggregation("items")[0];
+				var oItemMenuIdNuovo = oDialog.getAggregation("items")[1];
+				if (sTitle.toUpperCase() === "CREA PROPOSTA") {
+					oItemMenuIdEsistente.setVisible(true);// inserisco anche la gestione a true
+					//oItemMenuIdNuovo.setVisible(true);
+				}
+				/* if (sTitle.toUpperCase() === "ASSOCIA PROPOSTA") {
+					oItemMenuIdEsistente.setVisible(true);
+					oItemMenuIdNuovo.setVisible(true);
+				}
+				if (sTitle.toUpperCase() === "GESTISCI PROPOSTA") {
+					oItemMenuIdEsistente.setVisible(true);
+					oItemMenuIdNuovo.setVisible(false);
+				} */
+				oDialog.open(oButton);
+			});
+		},
+
+		handleMenuItemPress: function(oEvent) {
+			var optionPressed = oEvent.getParameter("item").getText();
+			var oButton = oEvent.getSource();
+			var oView = this.getView();
+			var oDataModel = this.getView().getModel("modelOperazionEsaMod");
+			var sIdProposta = this.getView().byId("idIDPropostaNPF").getValue();
+			var that = this;
+			//CREA IL DIALOG UNA SOLA VOLTA
+			if (!this._optionIdProposta) {
+				this._optionIdProposta = Fragment.load({
+					id: oView.getId(),
+					name: "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view.fragment.GestisciID_inputIDProposta",
+					controller: this
+				}).then(function(oDialog) {
+					oView.addDependent(oDialog);
+					syncStyleClass(oView.getController().getOwnerComponent().getContentDensityClass(), oView, oDialog);
+					return oDialog;
+				});
+			}
+			//IN QUESTA PARTE VANNO TUTTE LE CONDIZIONI CHE DEVONO ESSERE RIPETUTE TUTTE LE VOLTE CHE SI APRE IL DIALOG
+			this._optionIdProposta.then(function(oDialog) {
+				//oDialog.getBinding("items");
+				// Open ValueHelpDialog filtered by the input's value
+
+				if (optionPressed.toUpperCase() === "SCEGLI PROPOSTA ESISTENTE") {
+					if (!sIdProposta) {
+						that.getView().byId("IdProposta").setValue("");
+						that.getView().byId("IdProposta").setShowValueHelp(true);
+						that.getView().byId("IdProposta").setEnabled(true);
+						that.getView().byId("btnlockId").setText("Ok");
+						oDialog.open(oButton);
+					} else {
+						MessageBox.warning(that.oResourceBundle.getText("MBCambioNumProposta"), {
+							icon: MessageBox.Icon.WARNING,
+							title: "Cambio Proposta",
+							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+							emphasizedAction: MessageBox.Action.NO,
+							onClose: function(oAction) {
+								if (oAction === MessageBox.Action.YES) {
+									//INSERIRE LOGICA DI SBLOCCO PROPOSTA GIA' PRENOTATO
+									//____________
+									that.getView().byId("IdProposta").setValue("");
+									that.getView().byId("IdProposta").setShowValueHelp(true);
+									that.getView().byId("IdProposta").setEnabled(true);
+									that.getView().byId("btnlockId").setText("Ok");
+
+									oDialog.open(oButton);
+								}
+							}
+						});
+					}
+				}
+				if (optionPressed.toUpperCase() === "INSERISCI PROPOSTA MANUALMENTE") {
+					if (!sIdProposta) {
+						that.getView().byId("IdProposta").setEnabled(true);
+						that.getView().byId("IdProposta").setValue("");
+						that.getView().byId("IdProposta").setShowValueHelp(false);
+						that.getView().byId("btnlockId").setText("Scegli");
+						oDialog.open(oButton);
+					} else {
+						MessageBox.warning(that.oResourceBundle.getText("MBCambioNumProposta"), {
+							icon: MessageBox.Icon.WARNING,
+							title: "Cambio Proposta",
+							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+							emphasizedAction: MessageBox.Action.NO,
+							onClose: function(oAction) {
+								if (oAction === MessageBox.Action.YES) {
+									//INSERIRE LOGICA DI SBLOCCO PROPOSTA GIA' PRENOTATO
+									//____________
+									that.getView().byId("idIDPropostaNPF").setValue("");
+									that.getView().byId("idNickNameNPF").setValue("");
+									//lt
+									//that.getView().byId("idNota").setValue("");
+									that.getView().byId("idIterNPF").setSelectedItem(null);
+									//that.getView().byId("idTablePosFinGestisciID").unbindAggregation("items");
+									that.getView().byId("btnlockId").setText("Scegli");
+
+									oDialog.open(oButton);
+								}
+							}
+						});
+					}
+				}
+				if (optionPressed.toUpperCase() === "GENERA PROPOSTA AUTOMATICAMENTE") {
+					var oModel = models.getModelDefaultGeneraIdProposta();
+					var oData = oModel.getData();
+					// var listFilters = [];
+					// listFilters.push(new Filter("Fikrs", FilterOperator.EQ, oData.Fikrs));
+					// listFilters.push(new Filter("Anno", FilterOperator.EQ, oData.Anno));
+					// listFilters.push(new Filter("Fase", FilterOperator.EQ, oData.Fase));
+					// listFilters.push(new Filter("Reale", FilterOperator.EQ, oData.Reale));
+					// listFilters.push(new Filter("Versione", FilterOperator.EQ, oData.Versione));
+					// listFilters.push(new Filter("Prctr", FilterOperator.EQ, oData.Prctr));
+					var newPrctr = "'" + oData.Prctr + "'";
+					//LOGICA DI CONTROLLO CAMBIO ID GIA' INSERITO
+					if (!sIdProposta) {
+						//LOGICA PER GENERARE NUOVA ID AUTOMATICAMENTE
+						oDataModel.read("/GeneraIdProposta", { // function import name
+							method: "GET", // http method
+							urlParameters: {
+								"Prctr": newPrctr
+							},
+							success: function(oData, oResponse) {
+								that._Id = oResponse.data.Idproposta;
+								that.Keycode = oResponse.data.Keycodepr;
+								// console.log(that._Id);
+								that.getView().byId("IdProposta").setValue(that._Id); // generato automaticamente dal backend
+								that.getView().byId("IdProposta").setEnabled(false);
+								that.getView().byId("IdProposta").setShowValueHelp(false);
+								that.getView().byId("btnlockId").setText("Prenota");
+
+								oDialog.open(oButton);
+							}, // callback function for success
+							error: function(oError) {
+									MessageBox.error(oError.responseText);
+								} // callback function for error
+						});
+					} else {
+						MessageBox.warning(that.oResourceBundle.getText("MBCambioNumProposta"), {
+							icon: MessageBox.Icon.WARNING,
+							title: "Cambio Proposta",
+							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+							emphasizedAction: MessageBox.Action.NO,
+							onClose: function(oAction) {
+								if (oAction === MessageBox.Action.YES) {
+									//INSERIRE LOGICA DI SBLOCCO PROPOSTA GIA' PRENOTATO
+									//____________
+									that.getView().byId("idIDPropostaNPF").setValue("");
+									that.getView().byId("idNickNameNPF").setValue("");
+									//lt
+									//that.getView().byId("idNota").setValue("");
+									that.getView().byId("idIterNPF").setSelectedItem(null);
+									//that.getView().byId("idTablePosFinGestisciID").unbindAggregation("items");
+
+									var oModel = models.getModelDefaultGeneraIdProposta();
+									var oData = oModel.getData();
+
+									var newPrctr = "'" + oData.Prctr + "'";
+									//LOGICA DI CONTROLLO CAMBIO ID GIA' INSERITO
+
+									oDataModel.callFunction("/GeneraIdProposta", { // function import name
+										method: "GET", // http method
+										urlParameters: {
+											"Prctr": newPrctr
+										},
+										success: function(oData, oResponse) {
+											that._Id = oResponse.data.Idproposta;
+											that.Keycode = oResponse.data.Keycodepr;
+											that.getView().byId("IdProposta").setValue(that._Id); // generato automaticamente dal backend
+											// that.getView().byId("IdProposta").setEditable(false);
+											that.getView().byId("IdProposta").setShowValueHelp(false);
+											that.getView().byId("btnlockId").setText("Prenota");
+											oDialog.open(oButton);
+										}, // callback function for success
+										error: function(oError) {
+												MessageBox.error(oError.responseText);
+											} // callback function for error
+									});
+								}
+							}
+						});
+					}
+				}
+			});
+		},
+
+		lockId: async function(oEvt) {
+			var sBtnText = oEvt.getSource().getText();
+			var sIdPropostaInserito = this.getView().byId("IdProposta").getValue();
+			var oDataModel = this.getView().getModel("modelOperazionEsaMod");
+			var that = this;
+			var aDataTipo = sap.ui.getCore().getModel("gestTipologicheModel").getData();
+			if (sBtnText === "Ok") {
+				this.getView().byId("idIDPropostaNPF").setValue(sIdPropostaInserito);
+				this.getView().byId("idFragment_GestisciID_InputIdProposta").close();
+				this.getView().byId("IdProposta").setValue("");
+
+				var oModelGestisciProposta = this.getView().getModel("modelPathGestisciPropostaView").getData("dataGestisciProposta").dataGestisciProposta;
+				if (!!oModelGestisciProposta) {
+					var oKeyCode = oModelGestisciProposta.Keycode;
+
+					//GET testo Nota
+					var aFilters = [new Filter("Keycodepr", FilterOperator.EQ, oKeyCode)];
+                    aFilters.push(new Filter("Anno", FilterOperator.EQ, aDataTipo.ANNO));
+                    aFilters.push(new Filter("Fase", FilterOperator.EQ, aDataTipo.FASE));
+                    aFilters.push(new Filter("Reale", FilterOperator.EQ, aDataTipo.REALE_RIF));
+                    //aFilters.push(new Filter("Versione", FilterOperator.EQ, aDataTipo.Versione));
+                    //aFilters.push(new Filter("Fikrs", FilterOperator.EQ, aDataTipo.Fikrs));
+                    
+					aFilters.push(new Filter("Eos", FilterOperator.EQ, "E"));
+
+
+					var aRes = await this.readFromDb("2", "/PropostaSet", aFilters, [], "");
+					// var aFilters = [new Filter("Idproposta", FilterOperator.EQ, oKeyCode)];
+					oDataModel.read("/PropostaSet", { // function import name
+						filters: aFilters, // function import parameters        
+						success: function(oData, oResponse) {
+							var oNota = "";
+							var response;
+							if (oData.results.length > 0) {
+								oNota = oData.results[0].Testonota;
+								response = oData.results[0]
+							}
+
+							//Gestione Input
+							var oNickname = oModelGestisciProposta.Nickname;
+							this.getView().byId("idNickNameNPF").setValue(oNickname);
+							this.getView().getModel("modelChangeControlsStatus").setProperty("/Visible", true);
+							this.getView().byId("idNickNameNPF").setEditable(false);
+							var oIter = oModelGestisciProposta.Iter;
+
+							if(response){
+								//lt chiedere se va bene così
+								oIter = response.Desciter
+								this.Keycode = response.Keycodepr
+							}
+							
+							this.getView().byId("idIterNPF").setSelectedKey("01");
+							this.getView().byId("idIterNPF").setValue(oIter);
+							//lt
+							//this.getView().byId("idNota").setValue(oNota);
+
+							this.getView().getModel("modelChangeControlsStatus").setProperty("/Enable", true);
+
+						}.bind(this), // callback function for success
+						error: function(oError) {
+								MessageBox.error(JSON.parse(oError.responseText).error.message.value);
+								this.getView().byId("idIDPropostaNPF").setValue("");
+								this.getView().byId("IdProposta").setValue("");
+								this.getView().getModel("modelChangeControlsStatus").setProperty("/Enable", false);
+								this.getView().getModel("modelChangeControlsStatus").setProperty("/Editable", false);
+							}.bind(this) // callback function for error
+					});
+					//this.getView().byId("idNota").setEditable(true);
+				}
+			}
+
+			if (sBtnText === "Prenota") {
+				//CASO SCELTA PROPOSTA AUTOMATICA
+				//LOGICA DI BLOCCO ID DA INSERIRE
+				this.getView().getModel("modelChangeControlsStatus").setProperty("/Enable", true);
+				this.getView().getModel("modelChangeControlsStatus").setProperty("/Editable", true);
+
+				this.getView().byId("IdProposta").setValue("");
+				this.getView().byId("idIDPropostaNPF").setValue(sIdPropostaInserito);
+
+				//GESTIONE ITER IN LAVORAZIONE (STATO DEFAULT) 
+				this.getView().getModel("modelChangeControlsStatus").setProperty("/Iter", false);
+				this.getView().byId("idIterNPF").setValue("Proposta in lavorazione");
+				this.getView().byId("idIterNPF").setSelectedKey("01");
+
+				this.getView().byId("idFragment_GestisciID_InputIdProposta").close();
+
+			}
+
+			if (sBtnText === "Scegli") {
+				//CASO SCELTA PROPOSTA MANUALE
+				//LOGICA DI CONTROLLO ID SCELTO
+				if (sIdPropostaInserito) {
+					oDataModel.callFunction("/CreaIdPropostaManualmente", { // function import name
+						method: "GET", // http method
+						urlParameters: {
+							"Idproposta": sIdPropostaInserito
+						}, // function import parameters        
+						success: function(oData, oResponse) {
+							// console.log(oResponse.statusText);
+							that._Id = oResponse.data.Idproposta;
+							that.Keycode = oResponse.data.Keycodepr;
+							that.getView().byId("idIDPropostaNPF").setValue(that._Id); // generato automaticamente dal backend
+							// that.getView().byId("IdProposta").setEditable(false);
+
+							that.getView().byId("IdProposta").setShowValueHelp(false);
+							//LOGICA DI BLOCCO ID DA INSERIRE
+							this.getView().byId("idIDPropostaNPF").setValue(sIdPropostaInserito);
+							this.getView().byId("IdProposta").setValue(sIdPropostaInserito);
+							this.getView().getModel("modelChangeControlsStatus").setProperty("/Enable", true);
+							this.getView().getModel("modelChangeControlsStatus").setProperty("/Editable", true);
+
+							//GESTIONE ITER IN LAVORAZIONE (STATO DEFAULT) 
+							this.getView().getModel("modelChangeControlsStatus").setProperty("/Iter", false);
+							this.getView().byId("idIterNPF").setValue("Proposta in lavorazione");
+							this.getView().byId("idIterNPF").setSelectedKey("01");
+						}.bind(this), // callback function for success
+						error: function(oError) {
+								MessageBox.error(JSON.parse(oError.responseText).error.message.value);
+								this.getView().byId("idIDPropostaNPF").setValue("");
+								this.getView().byId("IdProposta").setValue("");
+								this.getView().getModel("modelChangeControlsStatus").setProperty("/Enable", false);
+								this.getView().getModel("modelChangeControlsStatus").setProperty("/Editable", false);
+							}.bind(this) // callback function for error
+					});
+
+					this.getView().byId("idFragment_GestisciID_InputIdProposta").close();
+				}
+
+			}
+			//GESTIRE LOGICA CAMBIO ID SE GIA' INSERITO --> prenderla da gestione capitolo anagrafica
+			/*var oModelChangeControlsStatus = this.getView().getModel("modelChangeControlsStatus");
+			if (sIdProposta) {
+				oModelChangeControlsStatus.setProperty("/Enable", true);
+				oModelChangeControlsStatus.setProperty("/Visible", true);
+				oModelChangeControlsStatus.setProperty("/Editable", true);
+				// this.getView().byId("openMenu").setEnabled(true);
+
+				// this.getView().byId("idIDPropostaNPF").setValue(sIdPropostaInserito);
+				// this.getView().byId("idFragment_GestisciID_InputIdProposta").close();
+				this.getView().byId("IdProposta").setValue("");
+			} else {
+				oModelChangeControlsStatus.setProperty("/Enable", false);
+				oModelChangeControlsStatus.setProperty("/Visible", false);
+				oModelChangeControlsStatus.setProperty("/Editable", false);
+				// this.getView().byId("openMenu").setEnabled(true);
+			}*/
+
+		},
+
+		close: function() {
+			var sIdProposta = this.getView().byId("idIDPropostaNPF").getValue();
+			var oModelChangeControlsStatus = this.getView().getModel("modelChangeControlsStatus");
+			if (sIdProposta) {
+				oModelChangeControlsStatus.setProperty("/Enable", true);
+				oModelChangeControlsStatus.setProperty("/Visible", true);
+				oModelChangeControlsStatus.setProperty("/Editable", true);
+				this.getView().byId("openMenu").setEnabled(true);
+
+			} else {
+				oModelChangeControlsStatus.setProperty("/Enable", false);
+				oModelChangeControlsStatus.setProperty("/Visible", false);
+				oModelChangeControlsStatus.setProperty("/Editable", false);
+				this.getView().byId("openMenu").setEnabled(true);
+			}
+			this.getView().byId("idFragment_GestisciID_InputIdProposta").close();
+			this.getView().byId("IdProposta").setValue("");
+			this.getView().byId("idIDPropostaNPF").setValue("");
 		},
 
 		//lt torno indietro e prima di farlo resetto lo pseudo modello

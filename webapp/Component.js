@@ -25,6 +25,8 @@ sap.ui.define([
 			this.setModel(models.getFaseMacrofaseModel(), "modelFaseAttuale");
 			this.setModel(models.getModelPFCapEsistente(), "modelPFCapEsistente");
 			this.setModel(models.getHeaderModelNuovaPosFin(), "modelNuovaPosFin");
+			this.setModel(models.getModelChangeControlsStatus(), "modelChangeControlsStatus");
+			this.setModel(models.getGestTipologicheModel(),"gestTipologicheModel");
 		},
 		getContentDensityClass: function() {
 			if (!this._sContentDensityClass) {

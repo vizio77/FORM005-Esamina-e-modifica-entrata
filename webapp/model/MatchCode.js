@@ -932,9 +932,10 @@ sap.ui.define([
 				}
 				sPath = oSelectedItem.getBindingContext().getPath();
 				//that.byId("IDProposta").setValue(oSelectedItem.getTitle());
-				var sData = oModel.getData(sPath);
-				sIDProposta = oModel.getData(sPath).Idproposta;
-				this._fillInput("IdProposta", sIDProposta);
+				var sData = oSelectedItem.getBindingContext().getObject();
+				sIDProposta = sData.Idproposta;
+				this.getView().byId("IdProposta").setValue(sIDProposta)
+				//this._fillInput("IdProposta", sIDProposta);
 				var oModel = new JSONModel({
 					dataGestisciProposta: sData
 				});
