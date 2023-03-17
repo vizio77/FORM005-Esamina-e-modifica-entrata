@@ -198,7 +198,7 @@ sap.ui.define([
 					return this.getOwnerComponent().getModel('ZSS4_COBI_PREN_ESAMOD_SRV');
 					break;
 				case '1':
-					return this.getOwnerComponent().getModel('ZSS4_CO_GEST_TIPOLOGICHE_SRV');
+					return this.getOwnerComponent().getModel('modelGestTipologicheSRV');
 					break;
 				case '2':
 					return this.getOwnerComponent().getModel('modelOperazionEsaMod');
@@ -207,6 +207,10 @@ sap.ui.define([
 					return this.getOwnerComponent().getModel('FiltriEntrate');
 					break;
 			}
+		},
+
+		navToProposta: function(){
+			this.navToAppLaunchpad("Z_S4_ESMPROPS")
 		},
 
 		navToAppLaunchpad: function(sSemanticOb) {
@@ -254,13 +258,13 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouterCust().navTo("Home", {}, true /*no history*/ );
+				this.getRouterCust().navTo("PosizioneFinanziaria", {}, true /*no history*/ );
 			}
 		},
 
 		onNavBack: function(oEvent) {
 			this.oRouter.navTo("PosizioneFinanziaria");
-			window.location.reload();
+			//window.location.reload();
 
 		},
 		setLinkSac: function(url, sId) {

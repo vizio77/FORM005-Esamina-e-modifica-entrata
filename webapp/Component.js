@@ -23,6 +23,8 @@ sap.ui.define([
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 			this.setModel(models.getFaseMacrofaseModel(), "modelFaseAttuale");
+			this.setModel(models.getModelPFCapEsistente(), "modelPFCapEsistente");
+			this.setModel(models.getHeaderModelNuovaPosFin(), "modelNuovaPosFin");
 		},
 		getContentDensityClass: function() {
 			if (!this._sContentDensityClass) {

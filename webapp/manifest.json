@@ -108,7 +108,7 @@
             "ZSS4_COBI_PREN_ESAMOD_SRV": {
                 "dataSource": "ZSS4_COBI_PREN_ESAMOD_SRV"
             },
-            "ZSS4_CO_GEST_TIPOLOGICHE_SRV": {
+            "modelGestTipologicheSRV": {
                 "dataSource": "ZSS4_CO_GEST_TIPOLOGICHE_SRV"
             },
             "modelOperazionEsaMod": {

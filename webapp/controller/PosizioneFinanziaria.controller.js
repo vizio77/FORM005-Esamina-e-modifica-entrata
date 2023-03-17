@@ -42,6 +42,15 @@ sap.ui.define([
 
 		},
 
+		onAfterRendering: function() {
+            if (this.bRendering === false) {
+                this.bRendering = true;
+            this.Bar.prototype.removeFilterItem("idAmministrazioneEntr");
+            }
+            this.getView().getModel("modelAdattaFiltri").getData().CodiceAmmin = "A020";
+            this.getView().getModel("modelAdattaFiltri").refresh();
+        },
+
 		onHelp: function(oEvent, inputRef) {
 			this.MatchCode.onValueHelpRequest(oEvent, inputRef, this);
 		},

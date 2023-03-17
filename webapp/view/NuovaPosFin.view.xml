@@ -118,10 +118,15 @@
 
 											</m:Input>
 									<m:Label text="{i18n>Ragioneria}" />
-										<m:Input id="idRagioneriaNPF" required="true" editable="true" placeholder="Scegli {i18n>Ragioneria}" maxSuggestionWidth="60%" showSuggestion="true"
-											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idRagioneriaNPF')" 
-											valueHelpRequest=".onValueHelpRequest($event, 'idRagioneriaNPF')" suggest=".onSuggest($event, 'idRagioneriaNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idRagioneriaNPF')"/>
+										<m:Input id="idRagioneria" required="true" editable="true" placeholder="Scegli {i18n>Ragioneria}" maxSuggestionWidth="60%" showSuggestion="true"
+											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idRagioneria')" 
+											valueHelpRequest=".onHelp($event, 'Ragioneria')" suggest=".onSuggest($event, 'idRagioneria')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idRagioneria')"/>
+
+											<m:Label text="{i18n>Natura}" required="true"/>
+												<m:Input id="idNatura"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+													maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Natura')"
+													liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="false"></m:Input>
 											<!-- <m:Input id="idRagioneria" editable="true" placeholder="Scegli {i18n>Ragioneria}" value="0840"></m:Input> -->
 									<!-- <m:Label text="{i18n>Missione}" />
 										<m:Input id="idMissioneNPF" required="true" editable="true" placeholder="Scegli {i18n>Missione}" maxSuggestionWidth="60%"
@@ -145,7 +150,7 @@
 											valueHelpRequest=".onValueHelpRequest($event, 'idCapitoloNPF')" suggest=".onSuggest($event, 'idCapitoloNPF')"
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCapitoloNPF')"></m:Input>
 										<m:Button id="idBtnPrenotaCAP" text="{i18n>ScegliCap}" width="auto"  type="Emphasized"
-											press="onPressOpenMenu($event,'MenuCapitoloNPF')">
+											press="onPressOpenMenuCapitolo">
 											<m:layoutData>
 												<layout:GridData span="XL4 L6 M5 S12" />
 											</m:layoutData>
@@ -168,9 +173,7 @@
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idTitoloNPF')"/> -->
 											<m:Input id="idTitolo"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
 															maxSuggestionWidth="60%" showSuggestion="false" valueHelpRequest=".onHelp($event, 'Titolo')"  liveChange=".onChangeMC($event, 'Titolo')"  showValueHelp="true" valueHelpOnly="false"></m:Input>
-									<m:Label text="{i18n>Natura}" required="true"/>
-										<m:Input id="idNatura"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
-															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Natura')"   liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="false"></m:Input>
+									
 									<m:Label text="{i18n>Categoria}" required="true"/>
 										<!-- <m:Input id="idCategoriaNPF" required="true" editable="true" placeholder="Scegli {i18n>Categoria}" maxSuggestionWidth="60%"
 											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCategoriaNPF')"
@@ -194,28 +197,21 @@
 															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpOnly="false"></m:Input>
 									<core:Title  />
 									<m:Label text="{i18n>MacroAgg}" required="true"/>
-										<m:Input id="idMacroAggregatoNPF" required="true" editable="true" placeholder="Scegli {i18n>MacroAgg}" maxSuggestionWidth="60%"
+									<!-- 	<m:Input id="idMacroAggregatoNPF" required="true" editable="true" placeholder="Scegli {i18n>MacroAgg}" maxSuggestionWidth="60%"
 											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idMacroAggregatoNPF')"
 											valueHelpRequest=".onValueHelpRequest($event, 'idMacroAggregatoNPF')" suggest=".onSuggest($event, 'idMacroAggregatoNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idMacroAggregatoNPF')" suggestionItems=""/>
-									<m:Label text="{i18n>TipoSpesaCapitolo}" />
-										<m:ComboBox id="idTipoSpesaCapNPF" enabled="true" selectedKey="{modelNuovaPosFin>/Codicetipospcapspe}" change="onChange" placeholder="Scegli {i18n>TipoSpesaCapitolo}" showSecondaryValues="true"
-											items="{ path: '/ZCA_AF_TIPOSPCAPSet', sorter: { path: 'Codicetipospcapspe' }, templateShareable:false }">
-											<m:items>
-												<core:ListItem key="{Codicetipospcapspe}" text="{Codicetipospcapspe}" additionalText="{Desctipocap}"/>
-											</m:items>
-										</m:ComboBox>
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'idMacroAggregatoNPF')" suggestionItems=""/> -->
+									<m:Label text="{i18n>Capo}" required="true"/>
+										<m:Input id="idCapoNPF" required="true" editable="true" placeholder="Scegli {i18n>Capo}" maxSuggestionWidth="60%"
+											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'Capo')"
+											valueHelpRequest=".onHelp($event, 'Capo')" suggest=".onSuggest($event, 'Capo')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'Capo')" suggestionItems=""/>
+									
 									<m:Label text="{i18n>DenominazioneCapitolo} {i18n>integrale}" />
 										<m:Input id="idDenominazioneCapitoloIntNPF" required="true" editable="true"/>
 									<m:Label text="{i18n>DenominazioneCapitolo} {i18n>ridotta}" />
 										<m:Input id="idDenominazioneCapitoloRidNPF" required="true" editable="true"/>
-									<m:Label text="{i18n>TipoSpesaPG}" />
-										<m:ComboBox id="idTipoSpesaPGNPF" enabled="true" selectedKey="{modelNuovaPosFin>/Codicetiposppspe}" change="onChange" placeholder="Scegli {i18n>TipoSpesPG}" showSecondaryValues="true"
-											items="{ path: '/ZCA_AF_TIPOSPPGSet', sorter: { path: 'Codicetiposppspe' }, templateShareable:false }">
-											<m:items>
-												<core:ListItem key="{Codicetiposppspe}" text="{Codicetiposppspe}" additionalText="{Desctipopg}"/>
-											</m:items>
-										</m:ComboBox>
+									
 									<m:Label text="{i18n>DenominazionePG} {i18n>integrale}" />
 										<m:Input required="true" id="idDenominazionePGIntNPF" editable="true"/>
 									<m:Label text="{i18n>DenominazionePG} {i18n>ridotta}" />
@@ -295,7 +291,7 @@
 				<!--<m:Text id="AppVersion" class="sapUiTinyMarginBegin" />-->
 				<m:ToolbarSpacer/>
 				<m:Button id="idBtnSalva" type="Emphasized" text="{i18n>Salva}" press="onPressSalvaNPF" visible="true"/>
-				<m:Button type="Emphasized" text="{i18n>Indietro}" press="onNavBackToPosFin"/>
+				<m:Button type="Emphasized" text="{i18n>Indietro}" press="onNavBack"/>
 				<m:Button type="Emphasized" text="{i18n>Home}" press="onPressNavToHome"/>
 			</m:OverflowToolbar>
 		</footer>

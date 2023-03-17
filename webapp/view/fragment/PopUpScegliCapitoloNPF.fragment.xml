@@ -6,7 +6,7 @@
 			<HBox justifyContent="Center">
 				<Input class="sapUiSmallMargin" maxLength="4" width="auto" id="idCapitoloNPFPoP" maxSuggestionWidth="80%" placeholder="Inserisci Capitolo"
 					showSuggestion="true" showValueHelp="true" change=".onChange($event, 'idCapitoloNPFPoP')"
-					valueHelpRequest=".onValueHelpRequest($event, 'idCapitoloNPFPoP')"/>
+					valueHelpRequest=".onHelp($event, 'idCapitoloNPFPoP')"/>
 		
 			</HBox>
 		</content>

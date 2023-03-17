@@ -32,9 +32,6 @@
 					<zcontrolAdatta:InputAdattaFiltriSpese eos="E" id="idBar" showClearOnFB="false" clear="onClear" search="onSearch" showGoOnFB="true"
 						showFilterConfiguration="true" useToolbar="false">
 						<zcontrolAdatta:filterGroupItems >
-							<!--<fb:FilterBar id="filterBar" showClearOnFB="true" clear="onClear" reset="onReset" search="onSearch" showGoOnFB="true"-->
-							<!--	showFilterConfiguration="true" useToolbar="false">-->
-							<!--	<fb:filterGroupItems>-->
 							<fb:FilterGroupItem groupName="A" name="y" label="{i18n>Amministrazione}" partOfCurrentVariant="true" visibleInFilterBar="true">
 								<fb:control>
 									<Input value="{modelAdattaFiltri>/CodiceAmmin}" showValueHelp="true" required="true" editable="false"
@@ -44,14 +41,13 @@
 							<fb:FilterGroupItem visibleInFilterBar="true" groupName="G1" groupTitle="{i18n>FiltriBase}" name="A" label="{i18n>posFin}" labelTooltip="">
 								<fb:control>
 									<zcontrol:InputPosizioneFinanziaria id="filterBarPosFin" 
-										fase="{modelPosFin>/FASE}" 
-										reale="{modelPosFin>/REALE_RIF}"
-										anno="{modelPosFin>/ANNO}" 
+										fase="{modelAdattaFiltri>/FASE}" 
+										reale="{modelAdattaFiltri>/REALE_RIF}"
+										anno="{modelAdattaFiltri>/ANNO}" 
 										entrata="X" 
 										versione="D" change="onChangeT($event, 'posFin')"
 										maxSuggestionWidth="60%" 
 										liveChange="onSelectPosFin"/>
-									<!--<Input id="filterBarPosFin"  valueHelpOnly="true" maxSuggestionWidth="60%"/>-->
 								</fb:control>
 							</fb:FilterGroupItem>
 							<!--	<fb:FilterGroupItem visibleInFilterBar="true"  groupName="G1" groupTitle="{i18n>FiltriBase}" name="B" label="{i18n>statoCrono}"-->

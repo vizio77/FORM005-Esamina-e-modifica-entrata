@@ -73,6 +73,47 @@ sap.ui.define([
 			sInputValue = oEvent.getSource().getValue();
 			// var oView = that.getView();
 
+			var sAmmi = that.getView().byId("idAmm").getValue()
+
+			if (inputRef === "idCapitoloNPFPoP") {
+				sAmminVal = that.getView().byId("idAmm").getValue();
+
+				if(!sAmminVal || sAmminVal === "") {
+					MessageBox.warning(that.getResourceBundle().getText("selezionarePrimaAmm"))
+					return;
+				}
+
+				if (!that.idCapitoloNPFPoP) {
+					that.idCapitoloNPFPoP = this.createValueHelpDialog(
+						"Capitolo",
+						oModelGlobal,
+						"",
+						"{i18n>Capitolo}",
+						"/AF_CapitoloSet",
+						"Codicecapitolo",
+						"Descrizionecapitolo", that);
+				}
+
+				// Create a filter for the binding
+				aOrFiltersCond =
+					new Filter({
+						filters: [
+							// new Filter("Codicecapitolo", FilterOperator.Contains, sInputValue),
+							new Filter("Descrizionecapitolo", FilterOperator.Contains, sInputValue)
+						],
+						and: false
+					});
+				// non dovrebbe succedere ma evita il dump su BE nel caso fosse null
+				aFilters = this.createAddFilter(aOrFiltersCond);
+				if (sAmminVal !== undefined && sAmminVal !== "") {
+					fAmm = new Filter("Prctr", FilterOperator.EQ, sAmminVal);
+					aFilters.aFilters.push(fAmm);
+				}
+				that.idCapitoloNPFPoP.getBinding("items").filter(aFilters);
+				// Open ValueHelpDialog filtered by the input's value
+				that.idCapitoloNPFPoP.open(sInputValue);
+			}
+
 			if (inputRef === "Amministrazione") {
 
 				if (!that.AmministrazioneHelpDialog) {
@@ -152,7 +193,7 @@ sap.ui.define([
 				if (!that.Ragioneria) {
 					that.Ragioneria = this.createValueHelpDialog(
 						"Ragioneria",
-						oModelConi,
+						oModelGlobal,
 						"modelConoVisibilita",
 						"{i18n>Ragioneria}",
 						"/ZCA_AF_RAGIONERIA",
@@ -221,6 +262,31 @@ sap.ui.define([
 				that.Natura.getBinding("items").filter(aOrFiltersCond);
 				// Open Titolo filtered by the input's value
 				that.Natura.open(sInputValue);
+			}
+
+			if (inputRef === "Capo") { //MANCA
+				if (!that.Capo) {
+					that.Capo = this.createValueHelpDialog(
+						"Capo",
+						oModelGlobal,
+						"modelConoVisibilita",
+						"{i18n>Ragioneria}",
+						"/AF_CapoSet",
+						"Numecoddettcapoent",
+						"Desctipocap", that);
+				}
+
+				aOrFiltersCond =
+					new Filter({
+						filters: [
+							// new Filter("CodiceRagioneria", FilterOperator.Contains, sInputValue),
+							new Filter("Numecoddettcapoent", FilterOperator.Contains, sInputValue)
+						],
+						and: false
+					});
+				that.Capo.getBinding("items").filter(aOrFiltersCond);
+				// Open ValueHelpDialog filtered by the input's value
+				that.Capo.open(sInputValue);
 			}
 
 			if (inputRef === "Categoria") {
@@ -434,6 +500,15 @@ sap.ui.define([
 				// Open ValueHelpDialog filtered by the input's value
 				that.PropostaDialog.open(sInputValue);
 			}
+		},
+
+		createAddFilter: function(aOrFiltersCond){
+			return new Filter({
+				filters: [
+					aOrFiltersCond
+				],
+				and: true
+			});
 		},
 
 		onValueHelpSearch: function(oEvent, inputRef, that) {
@@ -729,6 +804,7 @@ sap.ui.define([
 			var sMissioneVal, sProgrammaVal, sAzioneVal;
 			var sTitoloVal, sCategoriaVal, sCE2Val, sCE3Val, sIDProposta;
 			var oModel = this.oModelGlobal;
+			
 			oSelectedItem = oEvent.getParameter("selectedItem");
 
 			if (!inputRef) {
@@ -738,7 +814,7 @@ sap.ui.define([
 			if (inputRef === "Amministrazione") {
 				// oSelectedItem = oEvent.getParameter("selectedItem");
 				oEvent.getSource().getBinding("items").filter([]);
-				this.Ref.getView().byId("idAmm").setValue(oSelectedItem.getTitle());
+				this.getView().byId("idAmm").setValue(oSelectedItem.getTitle());
 			}
 			if (inputRef === "CentroResp") {
 				// oSelectedItem = oEvent.getParameter("selectedItem");
@@ -759,19 +835,31 @@ sap.ui.define([
 					return;
 				}
 				// that._enableInput("Missione", true);
-				this.Ref.getView().byId("idRagioneria").setValue(oSelectedItem.getTitle());
+				this.getView().byId("idRagioneria").setValue(oSelectedItem.getTitle());
+			}
+
+			if (inputRef === "Capo") {
+				// oSelectedItem = oEvent.getParameter("selectedItem");
+				oEvent.getSource().getBinding("items").filter([]);
+
+				if (!oSelectedItem) {
+					// that._enableInput("Missione", false);
+					return;
+				}
+				// that._enableInput("Missione", true);
+				this.getView().byId("idCapoNPF").setValue(oSelectedItem.getTitle());
 			}
 
 			if (inputRef === "Titolo") {
 				// oSelectedItem = oEvent.getParameter("selectedItem");
 				oEvent.getSource().getBinding("items").filter([]);
-				this.Ref.getView().byId("idTitolo").setValue(oSelectedItem.getTitle());
+				this.getView().byId("idTitolo").setValue(oSelectedItem.getTitle());
 			}
 
 			if (inputRef === "Natura") {
 				// oSelectedItem = oEvent.getParameter("selectedItem");
 				oEvent.getSource().getBinding("items").filter([]);
-				this.Ref.getView().byId("idNatura").setValue(oSelectedItem.getTitle());
+				this.getView().byId("idNatura").setValue(oSelectedItem.getTitle());
 			}
 
 			if (inputRef === "Tipologia") {
@@ -836,9 +924,82 @@ sap.ui.define([
 				var oModel = new JSONModel({
 					dataGestisciProposta: sData
 				});
-				this.Ref.getView().setModel(oModel, "modelPathGestisciPropostaView");
+				this.getView().setModel(oModel, "modelPathGestisciPropostaView");
 
 			}
+
+			/* if (inputRef === "Capitolo") {
+				oSelectedItem = oEvent.getParameter("selectedItem");
+				oEvent.getSource().getBinding("items").filter([]);
+				if (!oSelectedItem) {
+					//this._resetInput("idPGNPF");
+					this.getView().getModel("modelPFCapEsistente").setData("");
+					//this.getView().getModel("modelCOFOGCapEsistente").setData("");
+					return;
+				}
+				
+				sPath = oSelectedItem.getBindingContext().getPath();	
+				
+				
+				this.getView().byId("idCapitoloNPFPoP").setValue(oSelectedItem.getBindingContext().getObject().Codicecapitolo)
+				this.getView().getModel("modelPFCapEsistente").setData(oSelectedItem.getBindingContext().getObject());			
+			} */
+
+			if (inputRef === "Capitolo") {
+                oSelectedItem = oEvent.getParameter("selectedItem");
+                if (!oSelectedItem) {
+                    this._resetInput("idPGNPF");
+                    this.getView().getModel("modelPFCapEsistente").setData("");
+                    this.getView().getModel("modelCOFOGCapEsistente").setData("");
+                    return;
+                }
+                var oModel = this.getView().getModel("modelOperazionEsaMod");
+                // var oLocalModel = this.getView().getModel("modelPFCapEsistente");
+                var sCodCap = oSelectedItem.getTitle();
+                var sCodAmm = this.getView().byId("idAmm").getValue();
+                var aFilters;
+                aFilters = [ // <-- Should be an array, not a Filter instance!
+                    new Filter({ // required from "sap/ui/model/Filter"
+                        path: "Codicecapitolo",
+                        operator: FilterOperator.EQ, // required from "sap/ui/model/FilterOperator"
+                        value1: sCodCap
+                    }),
+                    new Filter({ // required from "sap/ui/model/Filter"
+                        path: "Prctr",
+                        operator: FilterOperator.EQ, // required from "sap/ui/model/FilterOperator"
+                        value1: sCodAmm
+                    })
+                ];
+                var that = this;
+                //lt inserisco un busi per evitare che clicchino senza riportare i dati di missione progr azione del capitolo
+                //sap.ui.getCore().byId("idCapitoloNPFPoP").getParent().getParent().setBusy(true)
+                oModel.read("/PosFinSet", {
+                    filters: aFilters,
+                    urlParameters: {
+                        "$top": 1                       
+                    },
+                    success: function(oData, oResponse) {
+                        //sap.ui.getCore().byId("idCapitoloNPFPoP").getParent().getParent().setBusy(false)
+                        if(oData.results.length === 0){
+                            console.log("recupero capitolo")
+                            MessageBox.error("Non è stato possibile recuperare il dato. ")
+                            return;
+                        }
+                        // console.log(oData);
+                        that.getView().getModel("modelPFCapEsistente").setData(oData.results[0]);
+						that.getView().byId("idCapitoloNPFPoP").setValue(oData.results[0].Codicecapitolo)
+                        
+                    },
+                    error: function(oError) {
+                        //sap.ui.getCore().byId("idCapitoloNPFPoP").getParent().getParent().setBusy(false)
+                        MessageBox.error(oError.responseText);
+                    }
+                }); 
+                //sap.ui.getCore().byId("idCapitoloNPFPoP").setValue(oSelectedItem.getTitle());
+                // this.getView().byId("idCapitoloNPF").setValue(oSelectedItem.getTitle());
+            }
+
+			
 		},
 
 		onValueHelpClose: function(oEvent, inputRef) {},
