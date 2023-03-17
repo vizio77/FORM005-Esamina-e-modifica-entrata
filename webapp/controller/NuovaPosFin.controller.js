@@ -1176,7 +1176,6 @@ sap.ui.define([
 				var sCodiceprovento = oView.byId("idProvento").getValue();
 				var sDenominazioneCapitoloInt = oView.byId("idDenominazioneCapitoloIntNPF").getValue();
 				var sDenominazioneCapitoloRid = oView.byId("idDenominazioneCapitoloRidNPF").getValue();
-				var sTipoSpesaPG = oView.byId("idTipoSpesaPGNPF").getSelectedKey();
 				var sDenominazionePGInt = oView.byId("idDenominazionePGIntNPF").getValue();
 				var sDenominazionePGRid = oView.byId("idDenominazionePGRidNPF").getValue();
 
@@ -1191,20 +1190,21 @@ sap.ui.define([
 				}
 				var sNickName = oView.byId("idNickNameNPF").getValue();
 
-				var modelDefaultPosFinToPropostaNav = this.getOwnerComponent().getModel("modelDefaultPosFinToPropostaNav");
-				var dataPosFinToPropostaDefault = modelDefaultPosFinToPropostaNav.getData();
+				//lt uso il modello gestTipologiche perchè è recyoerato dal servizio.
+				//eliminare il modelDefaultPosFinToPropostaNav perchè creato hardcoded
+				var aDataTipo = sap.ui.getCore().getModel("gestTipologicheModel").getData();
 				
 				var aDatiProp = [{
-					Fikrs: dataPosFinToPropostaDefault.Fikrs,
-					Anno: dataPosFinToPropostaDefault.Anno,
-					Fase: dataPosFinToPropostaDefault.Fase,
-					Versione: dataPosFinToPropostaDefault.Versione,
+					Fikrs: aDataTipo.Fikrs,
+					Anno: aDataTipo.Anno,
+					Fase: aDataTipo.Fase,
+					Versione: aDataTipo.Versione,
 					Fipex: sPosFin,
-					Eos: "S",
+					Eos: "E",
 					Idproposta: sProposta,
 					Keycodepr: sKeycodepr,
-					Prctr: dataPosFinToPropostaDefault.Prctr,
-					Reale:dataPosFinToPropostaDefault.Reale,
+					Prctr: aDataTipo.Prctr,
+					Reale:aDataTipo.Reale,
 					Iter: sIter,
 					Nickname: sNickName,
 				}];				
