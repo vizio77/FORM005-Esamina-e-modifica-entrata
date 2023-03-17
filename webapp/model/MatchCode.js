@@ -146,7 +146,7 @@ sap.ui.define([
 					"property": "Prctr",
 					"label": "{i18n>Amministrazione}"
 				}, {
-					"property": " ",
+					"property": "Descrestesaamm",
 					"label": "{i18n>DescAmm}" //MANCA
 				}, {
 					"property": "Codicecdr",
@@ -189,16 +189,30 @@ sap.ui.define([
 				//Open ValueHelpDialog filtered by the input's value
 				that.CentroResp.open(sInputValue);
 			}
-			if (inputRef === "Ragioneria") { //MANCA
+			if (inputRef === "Ragioneria") { 
+				var sAmmi = that.getView().byId("idAmm").getValue();
+
+				arrayProperties = [{
+					"property": "Amministrazione",
+					"label": "{i18n>Amministrazione}"
+				}, {
+					"property": "DescrEstesaAmm",
+					"label": "{i18n>DescAmm}" //MANCA
+				}, {
+					"property": "CodiceRagioneria",
+					"label": "{i18n>CodCategoria}"
+				}, {
+					"property": "DescrEstesa",
+					"label": "{i18n>DescCdr}"
+				}];
 				if (!that.Ragioneria) {
-					that.Ragioneria = this.createValueHelpDialog(
+						that.Ragioneria = this.createValueHelpTableSelectDialog(
 						"Ragioneria",
 						oModelGlobal,
-						"modelConoVisibilita",
+						"",
 						"{i18n>Ragioneria}",
 						"/ZCA_AF_RAGIONERIA",
-						"CodiceRagioneria",
-						"DescrEstesa", that);
+						arrayProperties, that);
 				}
 
 				aOrFiltersCond =

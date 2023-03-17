@@ -39,6 +39,7 @@
 							</m:VBox>-->
 						</m:HBox>
 					</layout:VerticalLayout>
+					<m:Button text="Resetta" press="resetFields" type="Emphasized"></m:Button>
 				</snappedHeading>
 				<actions>
 					<!--<m:Button id="idBtnContabileCS" icon="sap-icon://detail-view" text="{i18n>ContabileCS}" type="Emphasized" tooltip="{i18n>ContabileCS}"
@@ -50,34 +51,31 @@
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
 		<headerContent>
-			<layout:VerticalLayout>
-				<layout:HorizontalLayout class="sapUiTinyMarginEnd">
-					<m:ObjectStatus id="idTextPosFinSubTitle" title="{i18n>PosFin}" class="sapUiTinyMarginTop textBold"/>
-					<!-- Text formula esatta per composizione dinamica della posfin / al momento scolpito per prototipo
-					text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.{modelNuovaPosFin>/MISS}{modelNuovaPosFin>/PROG}{modelNuovaPosFin>/AZIO}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/CE2}{modelNuovaPosFin>/CE3}"-->
-					<!--<m:Link id="idPopPosFin"
-						text="S020{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.{modelNuovaPosFin>/MISS}{modelNuovaPosFin>/PROG}{modelNuovaPosFin>/AZIO}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/CE2}{modelNuovaPosFin>/CE3}"
-						press="onPressShowPopOverHeaderNuovaPosFin" class="sapUiTinyMarginTop sapUiTinyMarginEnd"/>-->
-					<m:Link id="idPopPosFin"
-						text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.{modelNuovaPosFin>/MISS}{modelNuovaPosFin>/PROG}{modelNuovaPosFin>/AZIO}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/CE2}{modelNuovaPosFin>/CE3}"
-						semanticobject="ESAMINAMODIFICA" class="sapUiTinyMarginTop sapUiMediumMarginEnd"/>
-				</layout:HorizontalLayout>
-			</layout:VerticalLayout>
-			<layout:VerticalLayout>
-				<layout:HorizontalLayout>
-					<m:ObjectStatus id="idTextPosStruttura" active="true" title="{i18n>StrutturaAmmCen}" class="sapUiTinyMarginTop textBold"/>
-					<!-- Text formula esatta per composizione dinamica della struttura amministrativa / al momento scolpito per prototipo
-					text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CDR}{modelNuovaPosFin>/RAG}" -->
-					<m:Link id="idPopStrAmmCen" text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CDR}{modelNuovaPosFin>/RAG}"
-						press="onPressShowPopOverHeaderNuovaPosFin" class="sapUiTinyMarginTop"/>
-				</layout:HorizontalLayout>
-			</layout:VerticalLayout>
-			<!--<m:VBox width="100%">
-				<layout:HorizontalLayout>
-					<m:ObjectStatus id="idSwitchLabel" title="{i18n>Attiva} / {i18n>Disattiva}" class="sapUiTinyMarginTop textBold"/>
-					<m:Switch id="idSwitch" type="AcceptReject" state="true"/>
-				</layout:HorizontalLayout>
-			</m:VBox>-->
+			<m:FlexBox alignItems="Start" justifyContent="SpaceBetween">
+				<m:items>
+					<layout:HorizontalLayout>
+							<layout:HorizontalLayout class="sapUiTinyMarginEnd">
+								<m:ObjectStatus id="idTextPosFinSubTitle" title="{i18n>PosFin}" class="sapUiTinyMarginTop textBold"/>
+								<!-- Text formula esatta per composizione dinamica della posfin / al momento scolpito per prototipo
+								text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.{modelNuovaPosFin>/MISS}{modelNuovaPosFin>/PROG}{modelNuovaPosFin>/AZIO}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/CE2}{modelNuovaPosFin>/CE3}"-->
+								<!--<m:Link id="idPopPosFin"
+									text="S020{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.{modelNuovaPosFin>/MISS}{modelNuovaPosFin>/PROG}{modelNuovaPosFin>/AZIO}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/CE2}{modelNuovaPosFin>/CE3}"
+									press="onPressShowPopOverHeaderNuovaPosFin" class="sapUiTinyMarginTop sapUiTinyMarginEnd"/>-->
+								<zcontrollink:LinkPosizioneFinanziaria id="idPopPosFin"
+									text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.{modelNuovaPosFin>/MISS}{modelNuovaPosFin>/PROG}{modelNuovaPosFin>/AZIO}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/CE2}{modelNuovaPosFin>/CE3}"
+									class="sapUiTinyMarginTop sapUiMediumMarginEnd"/>
+							</layout:HorizontalLayout>
+							<layout:HorizontalLayout>
+									<m:ObjectStatus id="idTextPosStruttura" active="true" title="{i18n>StrutturaAmmCen}" class="sapUiTinyMarginTop textBold"/>
+									<!-- Text formula esatta per composizione dinamica della struttura amministrativa / al momento scolpito per prototipo
+									text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CDR}{modelNuovaPosFin>/RAG}" -->
+									<m:Link id="idPopStrAmmCen" text="S{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CDR}{modelNuovaPosFin>/RAG}"
+										press="onPressShowPopOverHeaderNuovaPosFin" class="sapUiTinyMarginTop"/>
+								</layout:HorizontalLayout>
+					</layout:HorizontalLayout>
+					<m:Button text="Resetta" press="resetFields" type="Emphasized"></m:Button>
+				</m:items>
+		</m:FlexBox>
 		</headerContent>
 		<sections>
 			<ObjectPageSection titleUppercase="false" title="{i18n>PosFin}">
@@ -113,8 +111,8 @@
 											valueHelpOnly="true" change="onChange($event, 'idCdRNPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCdRNPF')"
 											suggest=".onSuggest($event, 'idCdRNPF')" 
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCdRNPF')"/> -->
-											<m:Input id="idCdr" editable="true" showValueHelp = "true" placeholder="Scegli {i18n>CDR}" liveChange=".onChangeMC($event, 'CentroResp')" 
-												valueHelpRequest=".onHelp($event, 'CentroResp')"  >
+											<m:Input id="idCdr" editable="true" showValueHelp="true" placeholder="Scegli {i18n>CDR}" liveChange=".onChangeMC($event, 'CentroResp')" 
+												valueHelpOnly="true" valueHelpRequest=".onHelp($event, 'CentroResp')"  >
 
 											</m:Input>
 									<m:Label text="{i18n>Ragioneria}" />
@@ -126,7 +124,7 @@
 											<m:Label text="{i18n>Natura}" required="true"/>
 												<m:Input id="idNatura"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
 													maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Natura')"
-													liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="false"></m:Input>
+													liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="true"></m:Input>
 											<!-- <m:Input id="idRagioneria" editable="true" placeholder="Scegli {i18n>Ragioneria}" value="0840"></m:Input> -->
 									<!-- <m:Label text="{i18n>Missione}" />
 										<m:Input id="idMissioneNPF" required="true" editable="true" placeholder="Scegli {i18n>Missione}" maxSuggestionWidth="60%"
@@ -146,7 +144,7 @@
 									<core:Title />
 									<m:Label text="{i18n>Capitolo}" required="true"/>
 									<m:Input id="idCapitoloNPF"  editable="false" placeholder="Scegli {i18n>Capitolo}" maxSuggestionWidth="60%"
-											showSuggestion="true" showValueHelp="false" valueHelpOnly="false" change="onChange($event, 'idCapitoloNPF')"
+											showSuggestion="true" showValueHelp="false" valueHelpOnly="true" change="onChange($event, 'idCapitoloNPF')"
 											valueHelpRequest=".onValueHelpRequest($event, 'idCapitoloNPF')" suggest=".onSuggest($event, 'idCapitoloNPF')"
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCapitoloNPF')"></m:Input>
 										<m:Button id="idBtnPrenotaCAP" text="{i18n>ScegliCap}" width="auto"  type="Emphasized"
@@ -156,12 +154,12 @@
 											</m:layoutData>
 											
 										</m:Button>
-									<m:Label text="{i18n>PG}" required="true"/>
+									<m:Label text="{i18n>articolo}" required="true"/>
 										<m:Input id="idPGNPF" width="auto" editable="false"  class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>PG}"
-											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="false" valueHelpOnly="false" change="onChange($event, 'idPGNPF')"
+											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="false" valueHelpOnly="true" change="onChange($event, 'idPGNPF')"
 											valueHelpRequest=".onValueHelpRequest($event, 'idPGNPF')" suggest=".onSuggest($event, 'idPGNPF')"
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idPGNPF')"></m:Input>
-										<m:Button id="idBtnPrenotaPG" text="{i18n>ScegliPG}" width="auto" type="Emphasized" press="onPressOpenMenu($event,'MenuArticoloNPF')">
+										<m:Button id="idBtnPrenotaPG" text="{i18n>ScegliArticolo}" width="auto" type="Emphasized" press="onPressOpenMenuPG">
 											<m:layoutData>
 												<layout:GridData span="XL4 L6 M5 S12" />
 											</m:layoutData>
@@ -172,7 +170,7 @@
 											valueHelpRequest=".onValueHelpRequest($event, 'idTitoloNPF')" suggest=".onSuggest($event, 'idTitoloNPF')"
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idTitoloNPF')"/> -->
 											<m:Input id="idTitolo"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
-															maxSuggestionWidth="60%" showSuggestion="false" valueHelpRequest=".onHelp($event, 'Titolo')"  liveChange=".onChangeMC($event, 'Titolo')"  showValueHelp="true" valueHelpOnly="false"></m:Input>
+															maxSuggestionWidth="60%" showSuggestion="false" valueHelpRequest=".onHelp($event, 'Titolo')"  liveChange=".onChangeMC($event, 'Titolo')"  showValueHelp="true" valueHelpOnly="true"></m:Input>
 									
 									<m:Label text="{i18n>Categoria}" required="true"/>
 										<!-- <m:Input id="idCategoriaNPF" required="true" editable="true" placeholder="Scegli {i18n>Categoria}" maxSuggestionWidth="60%"
@@ -180,7 +178,7 @@
 											valueHelpRequest=".onValueHelpRequest($event, 'idCategoriaNPF')" suggest=".onSuggest($event, 'idCategoriaNPF')"
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCategoriaNPF')"/> -->
 											<m:Input id="idCategoria"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Categoria}"
-															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Categoria')"  liveChange=".onChangeMC($event, 'Categoria')"   valueHelpOnly="false"></m:Input>
+															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Categoria')"  liveChange=".onChangeMC($event, 'Categoria')"   valueHelpOnly="true"></m:Input>
 									<!-- <m:Label text="{i18n>CE2}" required="true"/>
 										<m:Input id="idCE2NPF" editable="true" required="true" placeholder="Scegli {i18n>CE2}" maxSuggestionWidth="60%" showSuggestion="true"
 											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCE2NPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCE2NPF')"
@@ -191,10 +189,10 @@
 											suggest=".onSuggest($event, 'idCE3NPF')" suggestionItemSelected=".onSuggestionItemSelected($event, 'idCE3NPF')"/> -->
 									<m:Label required="true" text="{i18n>TipologiaNP}"/>
 										<m:Input id="idTipologia"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
-											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Tipologia')"  liveChange=".onChangeMC($event, 'Tipologia')"  valueHelpOnly="false"></m:Input>
+											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Tipologia')"  liveChange=".onChangeMC($event, 'Tipologia')"  valueHelpOnly="true"></m:Input>
 									<m:Label required="true" text="{i18n>Provento}"/>
 										<m:Input id="idProvento"  editable="true" required="true" class="sapUiTinyMarginEnd"  valueHelpRequest=".onHelp($event, 'Provento')"  liveChange=".onChangeMC($event, 'Provento')" placeholder="Scegli {i18n>Titolo}"
-															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpOnly="false"></m:Input>
+															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpOnly="true"></m:Input>
 									<core:Title  />
 									<m:Label text="{i18n>MacroAgg}" required="true"/>
 									<!-- 	<m:Input id="idMacroAggregatoNPF" required="true" editable="true" placeholder="Scegli {i18n>MacroAgg}" maxSuggestionWidth="60%"
