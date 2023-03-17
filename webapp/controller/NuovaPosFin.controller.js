@@ -290,45 +290,6 @@ sap.ui.define([
 
 									oView.byId("btnlockNumCap").setText("Scegli");
 
-									//PULISCO TUTTI I CAMPI 
-									/* oView.byId("idMissioneNPF").setValue("");
-									oView.byId("idProgrammaNPF").setValue("");
-									oView.byId("idAzioneNPF").setValue("");
-
-									oView.byId("idPGNPF").setValue("");
-
-									oView.byId("idTitolo").setValue("");
-									oView.byId("idCategoria").setValue("");
-									oView.byId("idCE2NPF").setValue("");
-									oView.byId("idCE3NPF").setValue("");
-									
-
-									// oView.byId("idTCRCNPF").setValue("");
-									// oView.byId("idTCRFNPF").setValue("");
-
-									oView.byId("idMacroAggregatoNPF").setValue("");
-									//lt tipo spesa cap bloccato
-				
-
-									oView.byId("idTipoSpesaCapNPF").setSelectedKey("");
-									oView.byId("idDenominazioneCapitoloIntNPF").setValue("");
-									oView.byId("idDenominazioneCapitoloRidNPF").setValue("");
-
-									oView.byId("idTipoSpesaPGNPF").setSelectedKey("");
-									oView.byId("idDenominazionePGIntNPF").setValue("");
-									oView.byId("idDenominazionePGRidNPF").setValue("");
-
-									oView.getModel("modelNuovaPosFin").setProperty("/MISS", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/PROG", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/AZIO", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/TIT", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CAT", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CAP", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/PG", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CE2", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CE3", "");
-
-									oView.getModel("modelTableCofogNPF").setProperty("/", []); */
 									oDialog.open(oButton);
 								}
 							}
@@ -368,55 +329,6 @@ sap.ui.define([
 
 									oView.byId("btnlockNumCap").setText("Ok");
 
-									//PULISCO TUTTI I CAMPI RELATIVI ALLA PF
-									/* oView.byId("idMissioneNPF").setValue("");
-									oView.byId("idProgrammaNPF").setValue("");
-									oView.byId("idAzioneNPF").setValue("");
-									oView.byId("idMacroAggregatoNPF").setValue("");
-									//lt resetto il tiolo spesa
-									oView.byId("idTipoSpesaCapNPF").setSelectedKey("");
-									oView.byId("idTitolo").setValue("");
-									oView.byId("idCategoria").setValue("");
-									oView.byId("idMissioneNPF").setEditable(true);
-									oView.byId("idProgrammaNPF").setEditable(true);
-									oView.byId("idAzioneNPF").setEditable(true);
-									oView.byId("idMacroAggregatoNPF").setEditable(true);
-									oView.byId("idTitolo").setEditable(true);
-									oView.byId("idCategoria").setEditable(true);
-									oView.byId("idDenominazioneCapitoloIntNPF").setEditable(true);
-									oView.byId("idDenominazioneCapitoloRidNPF").setEditable(true);
-									oView.byId("idTipoSpesaCapNPF").setEditable(true);
-
-
-
-									oView.byId("idPGNPF").setValue("");
-									oView.byId("idCE2NPF").setValue("");
-									oView.byId("idCE3NPF").setValue("");
-
-									// oView.byId("idTCRCNPF").setValue("");
-									// oView.byId("idTCRFNPF").setValue("");
-
-
-									oView.byId("idTipoSpesaCapNPF").setSelectedKey("");
-									
-									oView.byId("idDenominazioneCapitoloIntNPF").setValue("");
-									oView.byId("idDenominazioneCapitoloRidNPF").setValue("");
-
-									oView.byId("idTipoSpesaPGNPF").setSelectedKey("");
-									oView.byId("idDenominazionePGIntNPF").setValue("");
-									oView.byId("idDenominazionePGRidNPF").setValue("");
-
-									oView.getModel("modelNuovaPosFin").setProperty("/MISS", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/PROG", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/AZIO", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/TIT", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CAT", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CAP", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/PG", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CE2", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CE3", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/Codicetipospcapspe", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/Codicetiposppspe", ""); */
 
 									oDialog.open(oButton);
 								}
@@ -486,42 +398,6 @@ sap.ui.define([
 									oView.getModel("modelNuovaPosFin").setProperty("/CAT", "");
 									oView.byId("btnlockNumCap").setText("Prenota");
 
-									/* //PULISCO TUTTI I CAMPI RELATIVI ALLA PF
-									oView.byId("idMissioneNPF").setValue("");
-									oView.byId("idProgrammaNPF").setValue("");
-									oView.byId("idAzioneNPF").setValue("");
-
-									oView.byId("idPGNPF").setValue("");
-
-									oView.byId("idTitolo").setValue("");
-									oView.byId("idCategoria").setValue("");
-									oView.byId("idCE2NPF").setValue("");
-									oView.byId("idCE3NPF").setValue("");
-
-									// oView.byId("idTCRCNPF").setValue("");
-									// oView.byId("idTCRFNPF").setValue("");
-
-									oView.byId("idMacroAggregatoNPF").setValue("");
-
-									oView.byId("idTipoSpesaCapNPF").setSelectedKey("");
-									oView.byId("idDenominazioneCapitoloIntNPF").setValue("");
-									oView.byId("idDenominazioneCapitoloRidNPF").setValue("");
-
-									oView.byId("idTipoSpesaPGNPF").setSelectedKey("");
-									oView.byId("idDenominazionePGIntNPF").setValue("");
-									oView.byId("idDenominazionePGRidNPF").setValue("");
-
-									oView.getModel("modelNuovaPosFin").setProperty("/MISS", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/PROG", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/AZIO", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/TIT", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CAT", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CAP", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/PG", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CE2", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CE3", ""); */
-
-
 									//LOGICA GENERAZIONE CAP AUTOMATICA
 									oDataModel.callFunction("/GeneraCapitolo", { // function import name
 										method: "GET", // http method
@@ -583,45 +459,6 @@ sap.ui.define([
 				oView.byId("idDenominazioneCapitoloIntNPF").setEditable(false);
 				oView.byId("idDenominazioneCapitoloRidNPF").setEditable(false);
 
-				
-
-				//BLOCCO MODIFICHE A TUTTI I CAMPI RELATIVI AL CAP
-				/* oView.byId("idMissioneNPF").setEditable(false);
-				oView.byId("idProgrammaNPF").setEditable(false);
-				oView.byId("idAzioneNPF").setEditable(false);
-
-				oView.byId("idCE2NPF").setEditable(true);
-				oView.byId("idCE3NPF").setEditable(true);
-
-				oView.byId("idMacroAggregatoNPF").setEditable(false);
-				//lt tipo spesa cap bloccato
-				oView.byId("idTipoSpesaCapNPF").setEditable(false);
-
-				oView.byId("colEliminaNPF").setVisible(false);
-				oView.byId("idAggiungiRiga").setEnabled(false);
-				oView.getModel("modelNuovaPosFin").setProperty("/EDITPERCENT", false);
-
-
-				// modelCOFOGCapEsistente
-				oView.byId("idMissioneNPF").setValue(oLocalModel.getData("/PosFin").Codicemissione);
-				oView.getModel("modelNuovaPosFin").setProperty("/MISS", oLocalModel.getData("/PosFin").Codicemissione);
-				oView.byId("idProgrammaNPF").setValue(oLocalModel.getData("/PosFin").Codiceprogramma);
-				oView.getModel("modelNuovaPosFin").setProperty("/PROG", oLocalModel.getData("/PosFin").Codiceprogramma);
-				oView.byId("idAzioneNPF").setValue(oLocalModel.getData("/PosFin").Codiceazione);
-				oView.getModel("modelNuovaPosFin").setProperty("/AZIO", oLocalModel.getData("/PosFin").Codiceazione);
-
-
-				// oView.byId("idTCRCNPF").setValue(oLocalModel.getData("/PosFin").Numetcrcspe);
-				// oView.byId("idTCRFNPF").setValue(oLocalModel.getData("/PosFin").Numetcrfspe);
-
-				//lt metto posizione di spesa
-				oView.byId("idMacroAggregatoNPF").setSelectedKey(oLocalModel.getData("/PosFin").Codicetiposppspe);
-
-				oView.byId("idMacroAggregatoNPF").setValue(oLocalModel.getData("/PosFin").Numemacspe);
-
-				//lt inserisco come valore... 
-				//oView.byId("idTipoSpesaCapNPF").setValue(oLocalModel.getData("/PosFin").Codicetipospcapspe);
-				oView.byId("idTipoSpesaCapNPF").setSelectedKey(oLocalModel.getData("/PosFin").Codicetipospcapspe); */
 				oView.byId("idDenominazioneCapitoloIntNPF").setValue(oLocalModel.getData("/PosFin").Descrizionecapitolo);
 				oView.byId("idDenominazioneCapitoloRidNPF").setValue(oLocalModel.getData("/PosFin").Descrbrevecap);
 		
@@ -978,16 +815,7 @@ sap.ui.define([
 				var oItemMenuIdNuovo = oDialog.getAggregation("items")[1];
 				if (sTitle.toUpperCase() === "CREA PROPOSTA") {
 					oItemMenuIdEsistente.setVisible(true);// inserisco anche la gestione a true
-					//oItemMenuIdNuovo.setVisible(true);
 				}
-				/* if (sTitle.toUpperCase() === "ASSOCIA PROPOSTA") {
-					oItemMenuIdEsistente.setVisible(true);
-					oItemMenuIdNuovo.setVisible(true);
-				}
-				if (sTitle.toUpperCase() === "GESTISCI PROPOSTA") {
-					oItemMenuIdEsistente.setVisible(true);
-					oItemMenuIdNuovo.setVisible(false);
-				} */
 				oDialog.open(oButton);
 			});
 		},
@@ -1327,6 +1155,148 @@ sap.ui.define([
 			this.getView().byId("IdProposta").setValue("");
 			this.getView().byId("idIDPropostaNPF").setValue("");
 		},
+
+		//GESTIONE SALVATAGGIO DATI AL SALVA DI NPF
+		onPressSalvaNPF: function(e) {
+				var oView = this.getView();
+				var that = this;
+				var oGlobalModel = oView.getModel("modelOperazionEsaMod");		
+				
+				
+				//POSIZIONE FINANZIARIA
+				var sPosFin = oView.byId("idPopPosFin").getText();
+				var sAmministrazione = oView.byId("idAmm").getValue();
+				var sAmmin = sAmministrazione.substring(1);
+				var sCdr = oView.byId("idCdr").getValue();
+				var sNatura = oView.byId("idNatura").getValue();
+				var sCapitolo = oView.byId("idCapitoloNPF").getValue();
+				var sPg = oView.byId("idPGNPF").getValue();
+				var sTitolo = oView.byId("idTitolo").getValue();
+				var sTipologia = oView.byId("idTipologia").getValue();
+				var sDenominazioneCapitoloInt = oView.byId("idDenominazioneCapitoloIntNPF").getValue();
+				var sDenominazioneCapitoloRid = oView.byId("idDenominazioneCapitoloRidNPF").getValue();
+				var sTipoSpesaPG = oView.byId("idTipoSpesaPGNPF").getSelectedKey();
+				var sDenominazionePGInt = oView.byId("idDenominazionePGIntNPF").getValue();
+				var sDenominazionePGRid = oView.byId("idDenominazionePGRidNPF").getValue();
+
+				//PROPOSTA
+				var sProposta = oView.byId("idIDPropostaNPF").getValue();
+				var sKeycodepr = this.Keycode;
+				var sTipo, sIter;
+				if(oView.byId("idIterNPF").getVisible()) {
+					sIter = oView.byId("idIterNPF").getSelectedKey();
+				} else {
+					sIter = "01";
+				}
+				var sNickName = oView.byId("idNickNameNPF").getValue();
+
+				var modelDefaultPosFinToPropostaNav = this.getOwnerComponent().getModel("modelDefaultPosFinToPropostaNav");
+				var dataPosFinToPropostaDefault = modelDefaultPosFinToPropostaNav.getData();
+				
+				var aDatiProp = [{
+					Fikrs: dataPosFinToPropostaDefault.Fikrs,
+					Anno: dataPosFinToPropostaDefault.Anno,
+					Fase: dataPosFinToPropostaDefault.Fase,
+					Versione: dataPosFinToPropostaDefault.Versione,
+					Fipex: sPosFin,
+					Eos: "S",
+					Idproposta: sProposta,
+					Keycodepr: sKeycodepr,
+					Prctr: dataPosFinToPropostaDefault.Prctr,
+					Reale:dataPosFinToPropostaDefault.Reale,
+					Iter: sIter,
+					Nickname: sNickName,
+				}];
+							
+
+				var oDati = {
+					Fikrs: "S001",
+					Anno: "",
+					Fase: "DLB",
+					Reale: "",
+					Versione: "P",
+					Fipex: sPosFin,
+					Eos: "E",
+					Natura: sNatura,
+					Prctr: sAmministrazione,
+					Codiceammin: sAmmin,
+					Codicecdr: sCdr,
+					Codiceragioneria: sRagioneria,
+					Codicecapitolo: sCapitolo,
+					Codicepg: sPg,
+					Codicetitolo: sTitolo,
+					Codicecategoria: sCategoria,
+					Codiceclaeco2: sCE2,
+					Codiceclaeco3: sCE3,
+					Capo: sCapo,
+					Descrizionecapitolo: sDenominazioneCapitoloInt,
+					Descrbrevecap: sDenominazioneCapitoloRid,
+					Codicetipologia: sTipologia,
+					Descrizionepg: sDenominazionePGInt,
+					Descrbrevepg: sDenominazionePGRid,
+					PosFinToPropostaNav: aDatiProp
+				};
+				return;
+
+				if(!this.checkFieldsRequired(oDati, sSommaPercCofog ,aDatiCofog)) return;
+				oGlobalModel.create("/PosFinSet", oDati, {
+					success: function(oData, oResponse) {
+						//lt faccio comparire un messagebox e poi resetto il modello.
+						sap.m.MessageBox.success(that.oResourceBundle.getText("MBCreateSuccessPF", [oData.Fipex]), {
+							actions: [MessageBox.Action.CLOSE],
+							emphasizedAction: "Manage Products",
+							onClose: function (sAction) {
+								that.resetFields();
+							}
+						});
+
+					}.bind(this),
+					error: function(oError) {
+						sap.m.MessageBox.error(that.oResourceBundle.getText("MBCreateError"));
+					}
+				});
+			
+		},
+
+		
+			checkFieldsRequired: function(oDati){
+				var ritorno = true;
+				const fieldsToCheck = [ 
+					{ field : "Prctr"  					,label : "Amministrazione"}, 
+					{ field : "Codicecdr"  				,label : "CdR"}, 
+					{ field : "Codiceragioneria"  		,label : "Ragioneria"},
+					{ field : "Codicemissione"  		,label : "Missione"}, 
+					{ field : "Codiceprogramma"  		,label : "Programma"}, 
+					{ field : "Codiceazione"  			,label : "Azione"},
+					{ field : "Codicecapitolo"  		,label : "Capitolo"},
+					{ field : "Codicepg"  				,label : "Pg"}, 
+					{ field : "Codicetitolo"  			,label : "Titolo"},
+					{ field : "Codicecategoria"  		,label : "Categoria"}, 
+					{ field : "Codiceclaeco2"  			,label : "C.E.2"},
+					{ field : "Codiceclaeco3"   		,label : "C.E.3"}, 
+					// CHIDEDERE A FEDERICA { field : "Numemacspe"  			,label : "Macroaggregato"},
+					{ field : "Descrizionecapitolo"  	,label : "Denominazione Capitolo integrale"},
+					{ field : "Descrbrevecap"  			,label : "Denominazione Capitolo ridotta"},
+					{ field : "Descrbrevepg"  			,label : "Denominazione PG ridotta"},
+					{ field : "Descrizionepg"  			,label : "Denominazione PG integrale"}, 
+				];
+
+				var message = ""
+				fieldsToCheck.forEach(el => {
+						if(!oDati[el.field]){
+							message = message + "\n" + el.label
+						}				
+				});
+
+				if(message !== ""){		
+					message = `${this.oResourceBundle.getText("MBListaCampiObb")} ${message}`
+					sap.m.MessageBox.warning(message);
+					ritorno = false
+				}
+
+				return ritorno;
+			},
+
 
 		//lt torno indietro e prima di farlo resetto lo pseudo modello
 		tornaIndietro: function(oEvent){

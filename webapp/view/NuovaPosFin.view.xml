@@ -85,7 +85,6 @@
 							<f:SimpleForm id="SimpleFormDisplay480_Trial"
 								editable="false"
 								layout="ResponsiveGridLayout"
-								
 								labelSpanXL="12"
 								labelSpanL="12"
 								labelSpanM="12"
@@ -100,50 +99,31 @@
 								columnsM="3"
 								singleContainerFullSize="false" >
 								<f:content>
-									<core:Title  />
+								<core:Title  />
 									<m:Label text="{i18n>Amministrazione}" required="true"/>
 										<m:Input id="idAmm" editable="false" placeholder="Scegli {i18n>Amministrazione}" maxSuggestionWidth="60%" showSuggestion="true"
 															value="A020"></m:Input>
 										<!-- <m:Input id="idAmminNPF" required="true" editable="false" placeholder="Scegli {i18n>Amministrazione}" maxSuggestionWidth="60%" showSuggestion="true"
 											value="A020"></m:Input> -->
 									<m:Label text="{i18n>CdR}" />
-										<!-- <m:Input id="idCdRNPF" required="true" editable="true" placeholder="Scegli {i18n>CdR}" maxSuggestionWidth="60%" showSuggestion="true" showValueHelp="true"
-											valueHelpOnly="true" change="onChange($event, 'idCdRNPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCdRNPF')"
-											suggest=".onSuggest($event, 'idCdRNPF')" 
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCdRNPF')"/> -->
-											<m:Input id="idCdr" editable="true" showValueHelp="true" placeholder="Scegli {i18n>CDR}" liveChange=".onChangeMC($event, 'CentroResp')" 
-												valueHelpOnly="true" valueHelpRequest=".onHelp($event, 'CentroResp')"  >
+										<m:Input id="idCdr" editable="true" showValueHelp="true" placeholder="Scegli {i18n>CDR}" liveChange=".onChangeMC($event, 'CentroResp')" 
+											valueHelpOnly="true" valueHelpRequest=".onHelp($event, 'CentroResp')"  ></m:Input>
 
-											</m:Input>
+											
 									<m:Label text="{i18n>Ragioneria}" />
 										<m:Input id="idRagioneria" required="true" editable="true" placeholder="Scegli {i18n>Ragioneria}" maxSuggestionWidth="60%" showSuggestion="true"
 											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'Ragioneria')" 
 											valueHelpRequest=".onHelp($event, 'Ragioneria')" suggest=".onSuggest($event, 'Ragioneria')"
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'Ragioneria')"/>
 
-											<m:Label text="{i18n>Natura}" required="true"/>
-												<m:Input id="idNatura"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
-													maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Natura')"
-													liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="true"></m:Input>
-											<!-- <m:Input id="idRagioneria" editable="true" placeholder="Scegli {i18n>Ragioneria}" value="0840"></m:Input> -->
-									<!-- <m:Label text="{i18n>Missione}" />
-										<m:Input id="idMissioneNPF" required="true" editable="true" placeholder="Scegli {i18n>Missione}" maxSuggestionWidth="60%"
-											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idMissioneNPF')"
-											valueHelpRequest=".onValueHelpRequest($event, 'idMissioneNPF')" suggest=".onSuggest($event, 'idMissioneNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idMissioneNPF')"/>									
-									<m:Label text="{i18n>Programma}" />
-									<m:Input id="idProgrammaNPF" required="true" editable="true" placeholder="Scegli {i18n>Programma}" maxSuggestionWidth="60%"
-											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idProgrammaNPF')"
-											valueHelpRequest=".onValueHelpRequest($event, 'idProgrammaNPF')" suggest=".onSuggest($event, 'idProgrammaNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idProgrammaNPF')"/>
-									<m:Label text="{i18n>Azione}" />
-										<m:Input id="idAzioneNPF" required="true" editable="true" placeholder="Scegli {i18n>Azione}" maxSuggestionWidth="60%" showSuggestion="true"
-											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idAzioneNPF')"
-											valueHelpRequest=".onValueHelpRequest($event, 'idAzioneNPF')" suggest=".onSuggest($event, 'idAzioneNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idAzioneNPF')"/> -->
-									<core:Title />
+									<m:Label text="{i18n>Natura}" required="true"/>
+										<m:Input id="idNatura"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Natura')"
+											liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="true"></m:Input>
+									
+								<core:Title />									
 									<m:Label text="{i18n>Capitolo}" required="true"/>
-									<m:Input id="idCapitoloNPF"  editable="false" placeholder="Scegli {i18n>Capitolo}" maxSuggestionWidth="60%"
+										<m:Input id="idCapitoloNPF"  editable="false" placeholder="Scegli {i18n>Capitolo}" maxSuggestionWidth="60%"
 											showSuggestion="true" showValueHelp="false" valueHelpOnly="true" change="onChange($event, 'idCapitoloNPF')"
 											valueHelpRequest=".onValueHelpRequest($event, 'idCapitoloNPF')" suggest=".onSuggest($event, 'idCapitoloNPF')"
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCapitoloNPF')"></m:Input>
@@ -152,7 +132,6 @@
 											<m:layoutData>
 												<layout:GridData span="XL4 L6 M5 S12" />
 											</m:layoutData>
-											
 										</m:Button>
 									<m:Label text="{i18n>articolo}" required="true"/>
 										<m:Input id="idPGNPF" width="auto" editable="false"  class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>PG}"
@@ -165,40 +144,19 @@
 											</m:layoutData>
 										</m:Button>
 									<m:Label text="{i18n>Titolo}" required="true"/>
-										<!-- <m:Input id="idTitoloNPF" required="true" editable="true" placeholder="Scegli {i18n>Titolo}" maxSuggestionWidth="60%" showSuggestion="true"
-											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idTitoloNPF')"
-											valueHelpRequest=".onValueHelpRequest($event, 'idTitoloNPF')" suggest=".onSuggest($event, 'idTitoloNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idTitoloNPF')"/> -->
-											<m:Input id="idTitolo"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
-															maxSuggestionWidth="60%" showSuggestion="false" valueHelpRequest=".onHelp($event, 'Titolo')"  liveChange=".onChangeMC($event, 'Titolo')"  showValueHelp="true" valueHelpOnly="true"></m:Input>
-									
+										<m:Input id="idTitolo"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+											maxSuggestionWidth="60%" showSuggestion="false" valueHelpRequest=".onHelp($event, 'Titolo')"  liveChange=".onChangeMC($event, 'Titolo')"  showValueHelp="true" valueHelpOnly="true"></m:Input>
 									<m:Label text="{i18n>Categoria}" required="true"/>
-										<!-- <m:Input id="idCategoriaNPF" required="true" editable="true" placeholder="Scegli {i18n>Categoria}" maxSuggestionWidth="60%"
-											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCategoriaNPF')"
-											valueHelpRequest=".onValueHelpRequest($event, 'idCategoriaNPF')" suggest=".onSuggest($event, 'idCategoriaNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idCategoriaNPF')"/> -->
-											<m:Input id="idCategoria"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Categoria}"
-															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Categoria')"  liveChange=".onChangeMC($event, 'Categoria')"   valueHelpOnly="true"></m:Input>
-									<!-- <m:Label text="{i18n>CE2}" required="true"/>
-										<m:Input id="idCE2NPF" editable="true" required="true" placeholder="Scegli {i18n>CE2}" maxSuggestionWidth="60%" showSuggestion="true"
-											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCE2NPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCE2NPF')"
-											suggest=".onSuggest($event, 'idCE2NPF')" suggestionItemSelected=".onSuggestionItemSelected($event, 'idCE2NPF')"/>
-									<m:Label text="{i18n>CE3}" required="true"/>
-										<m:Input id="idCE3NPF" editable="true" required="true" placeholder="Scegli {i18n>CE3}" maxSuggestionWidth="60%" showSuggestion="true"
-											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idCE3NPF')" valueHelpRequest=".onValueHelpRequest($event, 'idCE3NPF')"
-											suggest=".onSuggest($event, 'idCE3NPF')" suggestionItemSelected=".onSuggestionItemSelected($event, 'idCE3NPF')"/> -->
+										<m:Input id="idCategoria"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Categoria}"
+											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Categoria')"  liveChange=".onChangeMC($event, 'Categoria')"   valueHelpOnly="true"></m:Input>
 									<m:Label required="true" text="{i18n>TipologiaNP}"/>
 										<m:Input id="idTipologia"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
 											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Tipologia')"  liveChange=".onChangeMC($event, 'Tipologia')"  valueHelpOnly="true"></m:Input>
 									<m:Label required="true" text="{i18n>Provento}"/>
 										<m:Input id="idProvento"  editable="true" required="true" class="sapUiTinyMarginEnd"  valueHelpRequest=".onHelp($event, 'Provento')"  liveChange=".onChangeMC($event, 'Provento')" placeholder="Scegli {i18n>Titolo}"
-															maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpOnly="true"></m:Input>
-									<core:Title  />
-									<m:Label text="{i18n>MacroAgg}" required="true"/>
-									<!-- 	<m:Input id="idMacroAggregatoNPF" required="true" editable="true" placeholder="Scegli {i18n>MacroAgg}" maxSuggestionWidth="60%"
-											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idMacroAggregatoNPF')"
-											valueHelpRequest=".onValueHelpRequest($event, 'idMacroAggregatoNPF')" suggest=".onSuggest($event, 'idMacroAggregatoNPF')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idMacroAggregatoNPF')" suggestionItems=""/> -->
+											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpOnly="true"></m:Input>
+								
+								<core:Title  />
 									<m:Label text="{i18n>Capo}" required="true"/>
 										<m:Input id="idCapoNPF" required="true" editable="true" placeholder="Scegli {i18n>Capo}" maxSuggestionWidth="60%"
 											showSuggestion="true" showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'Capo')"
@@ -228,7 +186,6 @@
 				<subSections>
 					<ObjectPageSubSection >
 						<blocks>
-							
 								<f:Form editable="true" id="formNuovaPosFin">
 									<!--<f:title>
 									<core:Title text="{i18n>formTitle}" />
