@@ -7,8 +7,9 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"../util/formatter",
 	"sap/ui/core/routing/History",
-	"sap/ui/model/json/JSONModel"
-], function(BaseController, Fragment, Filter, FilterOperator, syncStyleClass, MessageBox, formatter, History, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function(BaseController, Fragment, Filter, FilterOperator, syncStyleClass, MessageBox, formatter, History, JSONModel ,BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.AssociaProposta", {
@@ -32,9 +33,12 @@ sap.ui.define([
 
 			var oTreeTable = this.getView().byId(sIdTreeTable);
 			var aFilters = [];
-
+			//lt recupero solo quelle in lavorazione
+			aFilters.push( new Filter("Iter", FilterOperator.EQ, "01"))
 			// console.log(aFilters);
 			this._remove(aFilters, undefined);
+
+			BusyIndicator.show(0);
 
 			oTreeTable.bindRows({
 				path: sTreeTableBindingPath,
@@ -51,7 +55,13 @@ sap.ui.define([
 					},
 					useServersideApplicationFilters: true // necessario in combinazione con operationMode : 'Client' per inviare i filtri al BE ($filter)
 				},
-				filters: [aFilters]
+				filters: [aFilters],
+				events:{
+					//dataReceived : this.onDataReceivedAssociazione.bind(this)
+					dataReceived: function(oParameters) {
+						BusyIndicator.hide();
+					}.bind(this)
+				}
 			});
 
 			//Azzera la selezione delle righe
@@ -168,36 +178,9 @@ sap.ui.define([
 
 			return listPos;
 		},
-
-		_associaProps: function(prop) {
-			var positions = this.getView().getModel("modelPosFinSelected").getData().IdPosfin;
-			this._recursiveUpdateModel(positions, prop);
-		},
+		
 		_recursiveUpdateModel: async function(positions,prop){
 			this.associaProposte(positions,prop);
-		},
-
-		_recursiveUpdateModelOLD: function(positions, prop) {
-			var sRow = positions.shift();
-			var aPromises = [];
-			 if (!!sRow) {
-			
-				aPromises.push(this.updateModel(sRow, prop));
-			}
-
-			Promise.all(aPromises)
-				.then(function() {
-					if (positions.length > 0) {
-						return this._recursiveUpdateModel(positions, prop);
-					}
-					MessageBox.success(this.getView().getModel("i18n").getResourceBundle().getText("MBCreateSuccessAssociaProposta"));
-					this._setUseBatch(true);
-				}.bind(this))
-
-			.catch(function(e) {
-				console.error(e);
-				this._setUseBatch(true);
-			}.bind(this));
 		},
 
 		updateModel: function(position, prop) {

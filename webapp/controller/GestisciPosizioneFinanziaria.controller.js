@@ -6,15 +6,17 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageBox",
 	"zsap/com/r3/cobi/s4/esamodModEntrPosFin/model/formatter",
-], function(BaseController, JSONModel, Spreadsheet, Filter, FilterOperator, MessageBox, formatter) {
+	"sap/ui/core/BusyIndicator"
+], function(BaseController, JSONModel, Spreadsheet, Filter, FilterOperator, MessageBox, formatter, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.GestisciPosizioneFinanziaria", {
-
 		formatter: formatter,
+
 		onInit: function() {
 			this.oRouter = this.getRouter();
 			this.oRouter.getRoute("GestisciPosizioneFinanziaria").attachMatched(this._onRouteMatched, this);
+			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 			//this.oRouter.getTarget("GestisciPosizioneFinanziaria").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
 
 		},
@@ -27,10 +29,13 @@ sap.ui.define([
 		},
 
 		_getAvvioPfId: function() {
-			var tab1 = this.getView().byId(
-				"treeTablePFID");
-			var aPosFinSel = this.getOwnerComponent().getModel("modelPosFinSelected").getData();
+			var oTreeTablePos = this.getView().byId("treeTablePFID");
 
+			//Deleto le precedenti row prima di inserire le nuove
+			oTreeTablePos.unbindRows();
+
+			var oIdPosFinSel = this.getView().getModel("modelPosFinSelected").getData();
+			var aPosFinSel = oIdPosFinSel.IdPosfin;
 			var oSet = {
 				one: false,
 				enabled: true
@@ -55,7 +60,10 @@ sap.ui.define([
 				}
 			}
 
-			tab1.bindRows({
+			BusyIndicator.show(0);
+			var that = this;
+
+			oTreeTablePos.bindRows({
 				path: "ZSS4_COBI_PREN_ESAMOD_SRV>/ZET_AVVIOPF_IDSet",
 				parameters: {
 					useServersideApplicationFilters: true,
@@ -70,8 +78,49 @@ sap.ui.define([
 					}
 				},
 				filters: [aFilters],
+				events:{
+					//dataReceived : this.onDataReceived.bind(this)
+					dataReceived : function(oEvent) {
+						var isSingleRow= that.getView().getModel("modelOneRow").getData().one;
+						var oModelTreeTable = that.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV");
+						var oTable = that.getView().byId("treeTablePFID")
+						if(isSingleRow){
+							if(oEvent.getParameter("data")){
+								if(!!oEvent.getParameter("data").results[0]){
+									var path = oEvent.getParameter("data").results[0].__metadata.uri.split("/").pop();
+									oModelTreeTable.oData[path].SELECTED = true;
+									oTable.mAggregations.rows[0].mAggregations.cells[0].setSelected(true);
+									oTable.mAggregations.rows[0].mAggregations.cells[0].setEnabled(false);
+								}
+								
+							}
+						}else{
+							if(oEvent.getParameter("data") && oEvent.getParameter("data").results.length > 0){
+								var i = 0
+								oEvent.getParameter("data").results.forEach(el => {
+
+									if(el.HierarchyLevel === "0"){
+
+										var path = el.__metadata.uri.split("/").pop();
+										oModelTreeTable.oData[path].SELECTED = false;
+										oTable.mAggregations.rows[i].mAggregations.cells[0].setSelected(false);
+										oTable.mAggregations.rows[i].mAggregations.cells[0].setEnabled(true);
+									}
+
+									i = i+1
+									
+								});
+							}
+						}
+						BusyIndicator.hide();
+					}
+				}
 			});
 
+		},
+
+		stopBusy: function(oEvent){
+			BusyIndicator.hide();
 		},
 
 		onNavBackToPosFin: function() {

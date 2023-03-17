@@ -177,14 +177,17 @@ sap.ui.define([
 
 		onPressGestisciPosizione: function() {
 
+			var oModelSelPosFin = this.getView().getModel("modelPosFinSelected");
+			oModelSelPosFin.setData();
+			this._refreshModel(oModelSelPosFin);
 			this._rowSel();
-			var oModelSelPosFin = this.getOwnerComponent().getModel("modelPosFinSelected");
-			var aPosFinSel = oModelSelPosFin.getData();
+			var oPosFinSel = oModelSelPosFin.getData("IdPosfin");
+			var aPosFinSel = oPosFinSel.IdPosfin;
 
 			if (aPosFinSel) {
-				if (aPosFinSel.length > 1) {
+				/* if (aPosFinSel.length > 1) {
 					this._resetCheckbox("ZSS4_COBI_PREN_ESAMOD_SRV", this);
-				}
+				} */
 				this.oRouter.navTo("GestisciPosizioneFinanziaria");
 			} else {
 				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("MBTastoGestisciPagePosFinA"));
@@ -234,10 +237,10 @@ sap.ui.define([
 
 		_rowSel: function(event) {
 			var aSelected = this._getSelectedItems();
-			var PosFin = [];
 			if (aSelected.length > 0) {
 				// mi prendo la proprietà che mi interessa
-
+				
+				var PosFin = [];
 				//ricerca per IDposfin
 				for (var i = 0; i < aSelected.length; i++) {
 					var sFipex = aSelected[i].Fipex;
@@ -260,12 +263,12 @@ sap.ui.define([
 					PosFin.push(oBj);
 					//    PosFin.push(sIdPosFin4); --> modificata da G.Modugno per aggiungere la descrizione estesa della posfin
 					// fine modifica G.Modugno
-
+					this.getView().getModel("modelPosFinSelected").setProperty("/IdPosfin", PosFin);
 				}
 
 			}
 
-			this.getOwnerComponent().setModel(new JSONModel(PosFin), "modelPosFinSelected");
+			//this.getOwnerComponent().setModel(new JSONModel(PosFin), "modelPosFinSelected");
 		},
 
 		_getSelectedItems: function() {
