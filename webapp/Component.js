@@ -19,7 +19,6 @@ sap.ui.define([
 		init: function() {
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
-			this.getRouter().initialize();
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 			this.setModel(models.getFaseMacrofaseModel(), "modelFaseAttuale");
@@ -27,6 +26,7 @@ sap.ui.define([
 			this.setModel(models.getHeaderModelNuovaPosFin(), "modelNuovaPosFin");
 			this.setModel(models.getModelChangeControlsStatus(), "modelChangeControlsStatus");
 			this.setModel(models.getGestTipologicheModel(),"gestTipologicheModel");
+			this.getRouter().initialize();
 		},
 		getContentDensityClass: function() {
 			if (!this._sContentDensityClass) {

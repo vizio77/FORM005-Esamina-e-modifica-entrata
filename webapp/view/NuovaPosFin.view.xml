@@ -117,9 +117,9 @@
 											</m:Input>
 									<m:Label text="{i18n>Ragioneria}" />
 										<m:Input id="idRagioneria" required="true" editable="true" placeholder="Scegli {i18n>Ragioneria}" maxSuggestionWidth="60%" showSuggestion="true"
-											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'idRagioneria')" 
-											valueHelpRequest=".onHelp($event, 'Ragioneria')" suggest=".onSuggest($event, 'idRagioneria')"
-											suggestionItemSelected=".onSuggestionItemSelected($event, 'idRagioneria')"/>
+											showValueHelp="true" valueHelpOnly="true" change="onChange($event, 'Ragioneria')" 
+											valueHelpRequest=".onHelp($event, 'Ragioneria')" suggest=".onSuggest($event, 'Ragioneria')"
+											suggestionItemSelected=".onSuggestionItemSelected($event, 'Ragioneria')"/>
 
 											<m:Label text="{i18n>Natura}" required="true"/>
 												<m:Input id="idNatura"  editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"

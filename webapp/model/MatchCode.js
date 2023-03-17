@@ -848,8 +848,10 @@ sap.ui.define([
 					// that._enableInput("Missione", false);
 					return;
 				}
-				// that._enableInput("Missione", true);
-				this.getView().byId("idRagioneria").setValue(oSelectedItem.getTitle());
+				// that._enableInput("Missione", true);CodiceRagioneria
+				sPath = oSelectedItem.getBindingContext().getPath();
+				this._fillInput("idRagioneria", oModel.getData(sPath).CodiceRagioneria);
+				//this.getView().byId("idRagioneria").setValue(oSelectedItem.getTitle());
 			}
 
 			if (inputRef === "Capo") {

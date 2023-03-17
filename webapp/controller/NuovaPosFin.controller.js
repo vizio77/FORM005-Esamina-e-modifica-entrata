@@ -26,7 +26,7 @@ sap.ui.define([
 		_onRouteMatched: async function() {	
 			this._gestTipologiche();	
 			//lt resetto i campi per sicurezza
-			//this.resetFields();
+			this.resetFields();
 		},
 		resetFields: function(oEvent){
 			var oView = this.getView();
@@ -39,27 +39,19 @@ sap.ui.define([
 
 			var arrayFieldsVis = [
 							 
-							//"idAmminNPF",
-							"idCdRNPF",
-							"idRagioneriaNPF",		
-							  "idMissioneNPF",
-							  "idProgrammaNPF",
-							  "idAzioneNPF",
+							//"idAmm",
+							"idCdr",
+							"idRagioneria",	
+							  "idNatura",
 							  "idCapitoloNPF",
 							  "idPGNPF",
-							  //"idTidCategoriaNPFitoloNPF",
-							  "idTitoloNPF",
-							  "idCategoriaNPF",
-							  "idCE2NPF",
-							  "idCE3NPF",
-							  "idMissioneNPF",
-							  "idProgrammaNPF",
-							  "idAzioneNPF",
-							  "idMacroAggregatoNPF",
-							  "idTipoSpesaCapNPF",
+							  "idTitolo",
+							  "idCategoria",
+							  "idTipologia",
+							  "idProvento",
+							  "idCapoNPF",
 							  "idDenominazioneCapitoloIntNPF",
 							  "idDenominazioneCapitoloRidNPF",
-							  "idTipoSpesaPGNPF",
 							  "idDenominazionePGIntNPF",
 							  "idDenominazionePGRidNPF",
 							  "idIDPropostaNPF",
@@ -80,14 +72,10 @@ sap.ui.define([
 			oModelNuovaPosFin.setProperty("/DESCAMM", "MINISTERO DELL'ECONOMIA E DELLE FINANZE")
 			
 			//oView.byId("idAmminNPF").setValue("A020");
-			//oView.byId("idCdRNPF").setValue("0001");
-			//oView.byId("idRagioneriaNPF").setValue("0840");
-			//cofog
-			oView.byId("colEliminaNPF").setVisible(true);
-			oView.byId("idAggiungiRiga").setEnabled(true);
-			oView.getModel("modelNuovaPosFin").setProperty("/EDITPERCENT", true);
-
-			oView.getModel("modelTableCofogNPF").setProperty("/", []);
+			//oView.byId("idCdr").setValue("0001");
+			//oView.byId("idRagioneria").setValue("0840");
+			
+			
 			oView.getModel("modelNuovaPosFin").setProperty("/MISS", "");
 			oView.getModel("modelNuovaPosFin").setProperty("/PROG", "");
 			oView.getModel("modelNuovaPosFin").setProperty("/AZIO", "");
@@ -309,8 +297,8 @@ sap.ui.define([
 
 									oView.byId("idPGNPF").setValue("");
 
-									oView.byId("idTitoloNPF").setValue("");
-									oView.byId("idCategoriaNPF").setValue("");
+									oView.byId("idTitolo").setValue("");
+									oView.byId("idCategoria").setValue("");
 									oView.byId("idCE2NPF").setValue("");
 									oView.byId("idCE3NPF").setValue("");
 									
@@ -387,14 +375,14 @@ sap.ui.define([
 									oView.byId("idMacroAggregatoNPF").setValue("");
 									//lt resetto il tiolo spesa
 									oView.byId("idTipoSpesaCapNPF").setSelectedKey("");
-									oView.byId("idTitoloNPF").setValue("");
-									oView.byId("idCategoriaNPF").setValue("");
+									oView.byId("idTitolo").setValue("");
+									oView.byId("idCategoria").setValue("");
 									oView.byId("idMissioneNPF").setEditable(true);
 									oView.byId("idProgrammaNPF").setEditable(true);
 									oView.byId("idAzioneNPF").setEditable(true);
 									oView.byId("idMacroAggregatoNPF").setEditable(true);
-									oView.byId("idTitoloNPF").setEditable(true);
-									oView.byId("idCategoriaNPF").setEditable(true);
+									oView.byId("idTitolo").setEditable(true);
+									oView.byId("idCategoria").setEditable(true);
 									oView.byId("idDenominazioneCapitoloIntNPF").setEditable(true);
 									oView.byId("idDenominazioneCapitoloRidNPF").setEditable(true);
 									oView.byId("idTipoSpesaCapNPF").setEditable(true);
@@ -505,8 +493,8 @@ sap.ui.define([
 
 									oView.byId("idPGNPF").setValue("");
 
-									oView.byId("idTitoloNPF").setValue("");
-									oView.byId("idCategoriaNPF").setValue("");
+									oView.byId("idTitolo").setValue("");
+									oView.byId("idCategoria").setValue("");
 									oView.byId("idCE2NPF").setValue("");
 									oView.byId("idCE3NPF").setValue("");
 
@@ -656,7 +644,7 @@ sap.ui.define([
 				oView.byId("idAzioneNPF").setEditable(true);
 
 				oView.byId("idTitoloNPF").setEditable(true);
-				oView.byId("idCategoriaNPF").setEditable(true);
+				oView.byId("idCategoria").setEditable(true);
 				oView.byId("idCE2NPF").setEditable(true);
 				oView.byId("idCE3NPF").setEditable(true);
 
