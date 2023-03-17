@@ -271,7 +271,7 @@ sap.ui.define([
 									oView.byId("btnlockNumCap").setText("Ok");
 
 									//PULISCO TUTTI I CAMPI RELATIVI ALLA PF
-									oView.byId("idMissioneNPF").setValue("");
+									/* oView.byId("idMissioneNPF").setValue("");
 									oView.byId("idProgrammaNPF").setValue("");
 									oView.byId("idAzioneNPF").setValue("");
 									oView.byId("idMacroAggregatoNPF").setValue("");
@@ -318,7 +318,7 @@ sap.ui.define([
 									oView.getModel("modelNuovaPosFin").setProperty("/CE2", "");
 									oView.getModel("modelNuovaPosFin").setProperty("/CE3", "");
 									oView.getModel("modelNuovaPosFin").setProperty("/Codicetipospcapspe", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/Codicetiposppspe", "");
+									oView.getModel("modelNuovaPosFin").setProperty("/Codicetiposppspe", ""); */
 
 									oDialog.open(oButton);
 								}
@@ -374,7 +374,7 @@ sap.ui.define([
 
 									oView.byId("btnlockNumCap").setText("Prenota");
 
-									//PULISCO TUTTI I CAMPI RELATIVI ALLA PF
+									/* //PULISCO TUTTI I CAMPI RELATIVI ALLA PF
 									oView.byId("idMissioneNPF").setValue("");
 									oView.byId("idProgrammaNPF").setValue("");
 									oView.byId("idAzioneNPF").setValue("");
@@ -407,9 +407,8 @@ sap.ui.define([
 									oView.getModel("modelNuovaPosFin").setProperty("/CAP", "");
 									oView.getModel("modelNuovaPosFin").setProperty("/PG", "");
 									oView.getModel("modelNuovaPosFin").setProperty("/CE2", "");
-									oView.getModel("modelNuovaPosFin").setProperty("/CE3", "");
+									oView.getModel("modelNuovaPosFin").setProperty("/CE3", ""); */
 
-									oView.getModel("modelTableCofogNPF").setProperty("/", []);
 
 									//LOGICA GENERAZIONE CAP AUTOMATICA
 									oDataModel.callFunction("/GeneraCapitolo", { // function import name
@@ -560,24 +559,23 @@ sap.ui.define([
 							that.getView().getModel("modelNuovaPosFin").setProperty("/CAP", sCapitoloSel);
 
 							//SBLOCCO MODIFICHE A TUTTI I CAMPI RELATIVI AL CAP
-							oView.byId("idMissioneNPF").setEditable(true);
+							/* oView.byId("idMissioneNPF").setEditable(true);
 							oView.byId("idProgrammaNPF").setEditable(true);
 							oView.byId("idAzioneNPF").setEditable(true);
 
 							oView.byId("idTitoloNPF").setEditable(true);
 							oView.byId("idCategoriaNPF").setEditable(true);
 							oView.byId("idCE2NPF").setEditable(true);
-							oView.byId("idCE3NPF").setEditable(true);
+							oView.byId("idCE3NPF").setEditable(true); */
 
-							oView.byId("idMacroAggregatoNPF").setEditable(true);
 							oView.byId("idDenominazioneCapitoloIntNPF").setEditable(true);
 							oView.byId("idDenominazioneCapitoloRidNPF").setEditable(true);
 
-							oView.byId("idTipoSpesaCapNPF").setEditable(true);
+							/* oView.byId("idTipoSpesaCapNPF").setEditable(true); */
 
-							oView.byId("colEliminaNPF").setVisible(true);
+							/* oView.byId("colEliminaNPF").setVisible(true);
 							oView.byId("idAggiungiRiga").setEnabled(true);
-							oView.getModel("modelNuovaPosFin").setProperty("/EDITPERCENT", true);
+							oView.getModel("modelNuovaPosFin").setProperty("/EDITPERCENT", true); */
 
 							that.getView().byId("NPF_dialogCapitolo").close();
 
