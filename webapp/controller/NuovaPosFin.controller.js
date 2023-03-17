@@ -37,26 +37,25 @@ sap.ui.define([
 								"idIterNPF"
 							];
 
-			var arrayFieldsVis = [
-							 
+			var arrayFieldsVis = [							 
 							//"idAmm",
 							"idCdr",
 							"idRagioneria",	
-							  "idNatura",
-							  "idCapitoloNPF",
-							  "idPGNPF",
-							  "idTitolo",
-							  "idCategoria",
-							  "idTipologia",
-							  "idProvento",
-							  "idCapoNPF",
-							  "idDenominazioneCapitoloIntNPF",
-							  "idDenominazioneCapitoloRidNPF",
-							  "idDenominazionePGIntNPF",
-							  "idDenominazionePGRidNPF",
-							  "idIDPropostaNPF",
-							  "idNickNameNPF",
-							  "idIterNPF",
+							"idNatura",
+							"idCapitoloNPF",
+							"idPGNPF",
+							"idTitolo",
+							"idCategoria",
+							"idTipologia",
+							"idProvento",
+							"idCapoNPF",
+							"idDenominazioneCapitoloIntNPF",
+							"idDenominazioneCapitoloRidNPF",
+							"idDenominazionePGIntNPF",
+							"idDenominazionePGRidNPF",
+							"idIDPropostaNPF",
+							"idNickNameNPF",
+							"idIterNPF",
 							]
 				//var i = 0
 			arrayFieldsVis.forEach(el => {
@@ -1168,12 +1167,15 @@ sap.ui.define([
 				var sAmministrazione = oView.byId("idAmm").getValue();
 				var sAmmin = sAmministrazione.substring(1);
 				var sCdr = oView.byId("idCdr").getValue();
+				var sRagioneria = oView.byId("idRagioneria").getValue();
 				var sNatura = oView.byId("idNatura").getValue();
 				var sCapitolo = oView.byId("idCapitoloNPF").getValue();
 				var sPg = oView.byId("idPGNPF").getValue();
 				var sTitolo = oView.byId("idTitolo").getValue();
+				var sCategoria = oView.byId("idCategoria").getValue();
 				var sTipologia = oView.byId("idTipologia").getValue();
 				var sCodiceprovento = oView.byId("idProvento").getValue();
+				var sCapo = oView.byId("idCapoNPF").getValue();
 				var sDenominazioneCapitoloInt = oView.byId("idDenominazioneCapitoloIntNPF").getValue();
 				var sDenominazioneCapitoloRid = oView.byId("idDenominazioneCapitoloRidNPF").getValue();
 				var sDenominazionePGInt = oView.byId("idDenominazionePGIntNPF").getValue();
@@ -1196,15 +1198,15 @@ sap.ui.define([
 				
 				var aDatiProp = [{
 					Fikrs: aDataTipo.Fikrs,
-					Anno: aDataTipo.Anno,
-					Fase: aDataTipo.Fase,
+					Anno: aDataTipo.ANNO,
+					Fase: aDataTipo.FASE,
 					Versione: aDataTipo.Versione,
 					Fipex: sPosFin,
 					Eos: "E",
 					Idproposta: sProposta,
 					Keycodepr: sKeycodepr,
 					Prctr: aDataTipo.Prctr,
-					Reale:aDataTipo.Reale,
+					Reale:aDataTipo.REALE_RIF,
 					Iter: sIter,
 					Nickname: sNickName,
 				}];				
@@ -1236,9 +1238,10 @@ sap.ui.define([
 					Descrbrevepg: sDenominazionePGRid,
 					PosFinToPropostaNav: aDatiProp
 				};
-				return;
+				
 
-				if(!this.checkFieldsRequired(oDati, sSommaPercCofog ,aDatiCofog)) return;
+				if(!this.checkFieldsRequired(oDati, aDatiProp[0])) return;
+				
 				oGlobalModel.create("/PosFinSet", oDati, {
 					success: function(oData, oResponse) {
 						//lt faccio comparire un messagebox e poi resetto il modello.
@@ -1259,9 +1262,9 @@ sap.ui.define([
 			},
 
 		
-			checkFieldsRequired: function(oDati){
+			checkFieldsRequired: function(oDatiPos, oDatiProp){
 				var ritorno = true;
-				const fieldsToCheck = [ 
+				const fieldsToCheckPos = [ 
 					{ field : "Prctr"  					,label : "Amministrazione"}, 
 					{ field : "Codicecdr"  				,label : "CdR"}, 
 					{ field : "Codiceragioneria"  		,label : "Ragioneria"},
@@ -1272,16 +1275,26 @@ sap.ui.define([
 					{ field : "Codicecategoria"  		,label : "Categoria"}, 
 					{ field : "Codicetipologia"  		,label : "Tipologia"}, 
 					{ field : "Codiceprovento"  	    ,label : "Provento"},
-					// CHIDEDERE A FEDERICA { field : "Numemacspe"  			,label : "Macroaggregato"},
 					{ field : "Descrizionecapitolo"  	,label : "Denominazione Capitolo integrale"},
 					{ field : "Descrbrevecap"  			,label : "Denominazione Capitolo ridotta"},
 					{ field : "Descrbrevepg"  			,label : "Denominazione PG ridotta"},
 					{ field : "Descrizionepg"  			,label : "Denominazione PG integrale"}, 
 				];
+				const fieldsToCheckProp = [ 
+					{ field : "Idproposta"  			,label : "Proposta"}, 
+					{ field : "Nickname"  				,label : "NickName"}, 
+					{ field : "Iter"  					,label : "Iter Proposta"},					
+				];
 
 				var message = ""
-				fieldsToCheck.forEach(el => {
-						if(!oDati[el.field]){
+				fieldsToCheckPos.forEach(el => {
+						if(!oDatiPos[el.field]){
+							message = message + "\n" + el.label
+						}				
+				});
+
+				fieldsToCheckProp.forEach(el => {
+						if(!oDatiProp[el.field]){
 							message = message + "\n" + el.label
 						}				
 				});

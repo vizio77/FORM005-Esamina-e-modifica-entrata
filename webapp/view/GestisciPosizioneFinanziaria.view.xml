@@ -36,7 +36,7 @@
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://display" type="Emphasized" text="{i18n>Gestisci}" press="onPressNavToTabGestisci"/>
 						<Button type="Emphasized" text="{i18n>AssociaProposta}" press="onPressNavToAssociaID"/>
-						<Button id="idBtnDocumentale" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>
+						<Button id="idBtnDocumentale" text="{i18n>Documentale}" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>
 						<Button visible="true" type="Emphasized" text="{i18n>Export}" icon="sap-icon://excel-attachment" press="onTableExport"/>
 					</OverflowToolbar>
 				</t:extension>

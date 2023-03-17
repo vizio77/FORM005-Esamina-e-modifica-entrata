@@ -85,7 +85,7 @@
 						<Button type="Emphasized" icon="sap-icon://list" visible="{checkModel>/listaRidotta}" text="{i18n>ListaRidotta}" press="listaRidotta"/>
 						<Button text="{i18n>EsitoControlli}" press="onEsitoControlli" type="Emphasized"/>
 						<Button type="Emphasized" text="{i18n>Gestisci}" press="onPressGestisciPosizione"/>
-						<Button id="idBtnDocumentale" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>
+						<Button id="idBtnDocumentale" text="{i18n>Documentale}" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>
 						<Button type="Emphasized" text="{i18n>Export}" icon="sap-icon://excel-attachment" press="onPressExport"/>
 						<Button id="idNext" icon="sap-icon://navigation-right-arrow" type="Emphasized" press="onPressNextTreeTable"
 							enabled="{modelIsAfterAvvio>/enabledButtonNext}"/>

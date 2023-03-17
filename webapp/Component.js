@@ -26,6 +26,7 @@ sap.ui.define([
 			this.setModel(models.getHeaderModelNuovaPosFin(), "modelNuovaPosFin");
 			this.setModel(models.getModelChangeControlsStatus(), "modelChangeControlsStatus");
 			this.setModel(models.getGestTipologicheModel(),"gestTipologicheModel");
+			this.setModel(models.getModelDefaultPosFinToPropostaNav(), "modelDefaultPosFinToPropostaNav");
 			this.getRouter().initialize();
 		},
 		getContentDensityClass: function() {
