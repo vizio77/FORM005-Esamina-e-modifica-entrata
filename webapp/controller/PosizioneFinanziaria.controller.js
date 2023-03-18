@@ -308,11 +308,12 @@ sap.ui.define([
 			this._rowSel();
 			var aModelSelPosFin = this.getView().getModel("modelPosFinSelected").getData();
 
-			if (aModelSelPosFin === undefined) {
+			var arrSelected = this._getSelectedItems();
+
+			if (arrSelected.length === 0) {
 				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("MBTastoDettaglioContabile"));
 			} else {
-				if (aModelSelPosFin.length === 1) {
-					var arrSelected = this._getSelectedItems();
+				if (arrSelected.length === 1) {				
 					this.getOwnerComponent().setModel(new JSONModel(arrSelected), "modelDettaglioContabile");
 
 					this.oRouter.navTo("DettaglioContabile", {

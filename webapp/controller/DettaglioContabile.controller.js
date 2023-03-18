@@ -23,15 +23,15 @@ sap.ui.define([
 		},
 
 		onNavBack: function() {
-			this.getView().byId("idLinkPosFinSnap").setText('');
-			this.getView().byId("idLinkPosFin").setText('');
+			//this.getView().byId("idLinkPosFinSnap").setText('');
+			//this.getView().byId("idLinkPosFin").setText('');
 			var oFrame = this.getView().byId("linkSac");
 			var oFrameContent = oFrame.$()[0];
 			oFrameContent.setAttribute("src", "");
 
-			if (this.sourcePage === 'PosizioneFinanziaria') {
+			
 				this.oRouter.navTo("PosizioneFinanziaria");
-			}
+			
 		},
 
 		onPressInformationsLocal: function(event) {
@@ -61,23 +61,25 @@ sap.ui.define([
 			this.sNewUrl = "";
 			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
 			var oGlobalModel = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV");
-
-			var sPosfin = oselectedPosFinSel[0].PosFin;
-			var sAut = oselectedPosFinSel[0].Aut;
+			//lt recupero i dati direttamente dalla riga
+			var sPosfin = oRow.Fipex;
+			var sAut = oRow.Autorizzazioni;
 
 			var sEsamina_ModE = "ESAMINA_MOD";
 			var sSchermata = "E_DETT_POSFIN";
 			var sReon = "SI";
 
+			this.getView().setBusy(true);
 			var aResult = await this.readFromDb("2", "/SacUrlSet(SemanticObject='" + sEsamina_ModE + "',Schermata='" + sSchermata + "')", []);
+			this.getView().setBusy(false);
 			sPosfin = sPosfin.replaceAll(".", "");
 			var sUrl = aResult.URL;
 			var oFrame = this.getView().byId("linkSac");
 			var oFrameContent = oFrame.$()[0];
 			this.sNewUrl = sUrl + "&p_PosizioneURL=" + sPosfin + "&p_StruttAmmURL=" + sStrutAmm;
-			oFrameContent.setAttribute("src", sNewUrl);
+			oFrameContent.setAttribute("src", this.sNewUrl);
 
-			this.setLinkSac(sNewUrl, "linkSac");
+			//this.setLinkSac(sNewUrl, "linkSac");
 			this._refresh(sNewUrl);
 
 		},

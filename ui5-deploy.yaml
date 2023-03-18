@@ -20,4 +20,4 @@ builder:
           name: Z_S4_ESAMODEPF
           description: Esamina e modifica ent pos
           package: Z_ALM_S4_COBI_FIORI
-          transport: S2SK913936
+          transport: S2SK907970
