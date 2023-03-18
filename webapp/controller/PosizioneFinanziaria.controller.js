@@ -55,7 +55,7 @@ sap.ui.define([
 			this.MatchCode.onValueHelpRequest(oEvent, inputRef, this);
 		},
 
-		onSearch: async function(isAvvioButton, pointer) {
+		onSearchTreeTable: function(isAvvioButton, pointer) {
 
 			//this._openBusyDialog();
 
@@ -67,15 +67,35 @@ sap.ui.define([
 			if (isAvvioButton) {
 				this.filterMaxRows = "200";
 			}
-			var oFilterRows = new sap.ui.model.Filter("Maxrows", sap.ui.model.FilterOperator.BT, "200", (parseInt(this.filterMaxRows) - 200).toString());
+			var oFilterRows = new sap.ui.model.Filter("Maxrows", "EQ", this.filterMaxRows);
+			//var oFilterRows = new sap.ui.model.Filter("Maxrows", sap.ui.model.FilterOperator.BT, "200", (parseInt(this.filterMaxRows) - 200).toString());
 			aFilters = this._getAllFilter(aFilters);
-			// aFilters.aFilters.push(oFilterRows);
+			aFilters.aFilters.push(oFilterRows);
 			var sFipex = this.getView().byId("filterBarPosFin").getValue();
 			if (sFipex.length > 0) {
 				aFilters.aFilters.push(new Filter('Fipex', sap.ui.model.FilterOperator.EQ, sFipex));
 			}
-			await this._getDataTreeTable(aFilters);
-
+			//this._getDataTreeTable(aFilters, isAvvioButton);
+			var oTable = this.getView().byId("treeTablePF");
+			var oDataPosFin = this.getOwnerComponent().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").getData();
+			// this.getView().getModel('ExportposFin').setData(oDataPosFin);
+			var oTableBinding = oTable.getBinding();
+			oTable.bindRows({
+				path: "ZSS4_COBI_PREN_ESAMOD_SRV>/ZET_AVVIOPFSet",
+				parameters: {
+					useServersideApplicationFilters: true,
+					operationMode: 'Client',
+					collapseRecursive: false,
+					countMode: 'Inline',
+					treeAnnotationProperties: {
+						hierarchyLevelFor: 'HierarchyLevel',
+						hierarchyNodeFor: 'Node',
+						hierarchyParentNodeFor: 'ParentNodeId',
+						hierarchyDrillStateFor: 'DrillState'
+					}
+				},
+				filters: [aFilters],
+			});
 			var previewModel = this.getView().getModel("modelIsAfterAvvio").oData;
 
 			if (isAvvioButton) {
@@ -98,7 +118,13 @@ sap.ui.define([
 					previewModel.enabledButtonNext = true;
 				}
 			}
+
+			this._resetSelectedItems();
+
 			this.getView().getModel("modelIsAfterAvvio").refresh();
+
+			
+			
 			//this._closeDialog();
 		},
 
@@ -114,12 +140,12 @@ sap.ui.define([
 			return aFilter;
 		},
 
-		_getDataTreeTable: async function(aFilters) {
+		/* _getDataTreeTable: function(aFilters, isAvvioButton) {
 			var oTable = this.getView().byId("treeTablePF");
 			var oDataPosFin = this.getOwnerComponent().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").getData();
 			// this.getView().getModel('ExportposFin').setData(oDataPosFin);
 			var oTableBinding = oTable.getBinding();
-			await oTable.bindRows({
+			oTable.bindRows({
 				path: "ZSS4_COBI_PREN_ESAMOD_SRV>/ZET_AVVIOPFSet",
 				parameters: {
 					useServersideApplicationFilters: true,
@@ -135,8 +161,32 @@ sap.ui.define([
 				},
 				filters: [aFilters],
 			});
+			var previewModel = this.getView().getModel("modelIsAfterAvvio").oData;
+
+			if (isAvvioButton) {
+				previewModel.enabledButtonPrev = false;
+				previewModel.enabledButtonNext = true;
+				previewModel.intialValue = -199;
+				previewModel.beginValueM1 = 0;
+				previewModel.beginValueP1 = 201;
+				previewModel.finalValue = 400;
+			} else {
+				previewModel.intialValue = previewModel.intialValue + pointer;
+				previewModel.beginValueM1 = previewModel.beginValueM1 + pointer;
+				previewModel.beginValueP1 = previewModel.beginValueP1 + pointer;
+				previewModel.finalValue = previewModel.finalValue + pointer;
+				if (previewModel.intialValue === -199) {
+					previewModel.enabledButtonPrev = false;
+					previewModel.enabledButtonNext = true;
+				} else {
+					previewModel.enabledButtonPrev = true;
+					previewModel.enabledButtonNext = true;
+				}
+			}
 
 			this._resetSelectedItems();
+
+			this.getView().getModel("modelIsAfterAvvio").refresh();
 
 			// 		var aResult = await this._readFromDb(
 			// 	'0',
@@ -147,7 +197,7 @@ sap.ui.define([
 			// 	'modelTable'
 			// );
 
-		},
+		}, */
 
 		_resetSelectedItems: function() {
         	// this._resetCheckbox("modelTreeTable", this);
@@ -163,12 +213,15 @@ sap.ui.define([
             }
            return aSelected;
         },
+		onSearch: function() {
+			this.onSearchTreeTable(true,0);
+		},
 
 		onPressPrevTreeTable: function(oEvent) {
 			var filterMaxRows = this.filterMaxRows;
 			if (filterMaxRows > 200) {
 				this.filterMaxRows = parseInt(filterMaxRows) - 200
-				this.onSearch(false, -200);
+				this.onSearchTreeTable(false, -200);
 			}
 
 		},
@@ -177,7 +230,7 @@ sap.ui.define([
 
 			this.filterMaxRows = parseInt(filterMaxRows) + 200;
 
-			this.onSearch(false, 200);
+			this.onSearchTreeTable(false, 200);
 		},
 
 		createModeButtonTable: function() {

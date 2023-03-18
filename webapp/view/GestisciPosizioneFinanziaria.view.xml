@@ -77,7 +77,8 @@
 					<t:Column width="8rem">
 						<Label text="{i18n>Proposta}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta}" wrapping="false" textAlign="Begin"/>
+							<Text text="{= (${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} === '0000000000') ||  (${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} === '0')  ? '' : ${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} }" visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} !== '0000000000' ? true : false}" wrapping="false"/>
+							<!-- <Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta}" wrapping="false" textAlign="Begin"/> -->
 						</t:template>
 					</t:Column>
 					<t:Column width="8rem">

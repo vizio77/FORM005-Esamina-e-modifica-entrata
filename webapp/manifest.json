@@ -116,6 +116,10 @@
                 "dataSource": "ZSS4_COBI_PREN_ESAMOD_SRV",
                 "preload": true
             },
+            "modelTreeTable": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "dataSource": "ZSS4_COBI_PREN_ESAMOD_SRV"
+            },
             "modelGestTipologicheSRV": {
                 "type": "sap.ui.model.odata.v2.ODataModel",
                 "dataSource": "ZSS4_CO_GEST_TIPOLOGICHE_SRV"
