@@ -107,15 +107,31 @@
                 }
             },
             "ZSS4_COBI_PREN_ESAMOD_SRV": {
-                "dataSource": "ZSS4_COBI_PREN_ESAMOD_SRV"
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "None"
+                },
+                "dataSource": "ZSS4_COBI_PREN_ESAMOD_SRV",
+                "preload": true
             },
             "modelGestTipologicheSRV": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
                 "dataSource": "ZSS4_CO_GEST_TIPOLOGICHE_SRV"
             },
             "modelOperazionEsaMod": {
-                "dataSource": "modelOperazionEsaMod"
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "None"
+                },
+                "dataSource": "modelOperazionEsaMod",
+                "preload": true
             },
             "FiltriEntrate": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
                 "dataSource": "FiltriEntrate"
             }
         },
