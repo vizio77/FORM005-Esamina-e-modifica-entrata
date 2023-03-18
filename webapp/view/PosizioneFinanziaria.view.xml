@@ -98,124 +98,124 @@
 					<t:Column width="5rem">
 						<t:template>
 							<!-- <CheckBox visible="{= ${modelTreeTable>HierarchyLevel} === '0' ? true : false}" 			select="onSelectCheckBox" selected="{modelTreeTable>SELECTED}"></CheckBox> -->
-							<CheckBox visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '0' ? true : false}" 	select="onSelectCheckBox" selected="{ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}"></CheckBox>
+							<CheckBox visible="{= ${modelTreeTable>HierarchyLevel} === '0' ? true : false}" 	select="onSelectCheckBox" selected="{modelTreeTable>SELECTED}"></CheckBox>
 						</t:template>
 					</t:Column>
 					<t:Column width="6rem">
 						<Label text="{i18n>Titolo}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceTitolo}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceTitolo}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescTitolo}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrtitolo}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrtitolo}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="6rem">
 						<Label text="{i18n>Natura}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceNatura}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceNatura}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescNatura}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrnatura}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrnatura}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="6rem">
 						<Label text="{i18n>Tipologia}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceTipologia}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceTipologia}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescTipologia}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrtipologia}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrtipologia}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="6rem">
 						<Label text="{i18n>Provento}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceProvento}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceProvento}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescProvento}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrprovento}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrprovento}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="6rem">
 						<Label text="{i18n>Categoria}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCategoria}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceCategoria}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescCategoria}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrcategoria}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrcategoria}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="4rem">
 						<Label text="{i18n>CDR}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCdr}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceCdr}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescCdr}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrestesacdr}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrestesacdr}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="6rem">
 						<Label text="{i18n>Capitolo}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCapitolo}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceCapitolo}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescCapitolo}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrestesacap}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrestesacap}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="6rem">
 						<Label text="{i18n>Articolo}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceArticoloIntEnt}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceArticoloIntEnt}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
 						<Label text="{i18n>DescArticolo}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Descrarticolo}" wrapping="false"/>
+							<Text text="{modelTreeTable>Descrarticolo}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="13rem">
 						<Label text="{i18n>PosizioneFinanziaria}" class="boldCss"/>
 						<t:template>
-							<zcontrolPosFin:LinkPosFinEntrate anno="{ZSS4_COBI_PREN_ESAMOD_SRV>Anno}" fikrs="{ZSS4_COBI_PREN_ESAMOD_SRV>Fikrs}"
-								fase="{ZSS4_COBI_PREN_ESAMOD_SRV>Fase}" reale="{ZSS4_COBI_PREN_ESAMOD_SRV>Reale}" versione="{modelPosFinFragment>Versione}"
-								fipex="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" datbis="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Datbis', formatter: '.formatter.formatterDatbis'}"
-								text="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" semanticObject="ESAMINAMODIFICA"/>
+							<zcontrolPosFin:LinkPosFinEntrate anno="{modelTreeTable>Anno}" fikrs="{modelTreeTable>Fikrs}"
+								fase="{modelTreeTable>Fase}" reale="{modelTreeTable>Reale}" versione="{modelPosFinFragment>Versione}"
+								fipex="{modelTreeTable>Fipex}" datbis="{ path: 'modelTreeTable>Datbis', formatter: '.formatter.formatterDatbis'}"
+								text="{modelTreeTable>Fipex}" semanticObject="ESAMINAMODIFICA"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="13rem">
 						<Label text="{i18n>Autorizzazione}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Autorizzazioni}" wrapping="false"/>
+							<Text text="{modelTreeTable>Autorizzazioni}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="11rem">
 						<Label text="{i18n>piuProposte}" wrapping="true" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>StatoProp}" wrapping="false"/>
+							<Text text="{modelTreeTable>StatoProp}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="11rem">
@@ -223,7 +223,7 @@
 						<t:template>
 							<HBox justifyContent="End">
 								<Text
-									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Competenza23', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									text="{ path: 'modelTreeTable>Competenza23', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 									wrapping="true"/>
 							</HBox>
 						</t:template>
@@ -233,7 +233,7 @@
 						<t:template>
 							<HBox justifyContent="End">
 								<Text
-									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Competenza24', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									text="{ path: 'modelTreeTable>Competenza24', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 									wrapping="true"/>
 							</HBox>
 						</t:template>
@@ -243,7 +243,7 @@
 						<t:template>
 							<HBox justifyContent="End">
 								<Text
-									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Competenza25', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									text="{ path: 'modelTreeTable>Competenza25', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 									wrapping="true"/>
 							</HBox>
 						</t:template>
@@ -253,7 +253,7 @@
 						<t:template>
 							<HBox justifyContent="End">
 								<Text
-									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Cassa23', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									text="{ path: 'modelTreeTable>Cassa23', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 									wrapping="true"/>
 							</HBox>
 						</t:template>
@@ -263,7 +263,7 @@
 						<t:template>
 							<HBox justifyContent="End">
 								<Text
-									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Cassa24', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									text="{ path: 'modelTreeTable>Cassa24', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 									wrapping="true"/>
 							</HBox>
 						</t:template>
@@ -273,7 +273,7 @@
 						<t:template>
 							<HBox justifyContent="End">
 								<Text
-									text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Cassa25', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+									text="{ path: 'modelTreeTable>Cassa25', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 									wrapping="true"/>
 							</HBox>
 						</t:template>

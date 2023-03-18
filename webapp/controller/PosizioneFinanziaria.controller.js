@@ -30,7 +30,7 @@ sap.ui.define([
 		},
 
 		_onRouteMatched: async function() {
-			this._resetCheckbox("ZSS4_COBI_PREN_ESAMOD_SRV", this);
+			this._resetCheckbox("modelTreeTable", this);
 			await this._gestTipologiche();
 			//this.getView().byId("TextAnno").setText(sap.ui.getCore().getModel("gestTipologicheModel").getData().ANNO);
 			this.createModeButtonTable();
@@ -77,11 +77,11 @@ sap.ui.define([
 			}
 			//this._getDataTreeTable(aFilters, isAvvioButton);
 			var oTable = this.getView().byId("treeTablePF");
-			var oDataPosFin = this.getOwnerComponent().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").getData();
+			var oDataPosFin = this.getOwnerComponent().getModel("modelTreeTable").getData();
 			// this.getView().getModel('ExportposFin').setData(oDataPosFin);
 			var oTableBinding = oTable.getBinding();
 			oTable.bindRows({
-				path: "ZSS4_COBI_PREN_ESAMOD_SRV>/ZET_AVVIOPFSet",
+				path: "modelTreeTable>/ZET_AVVIOPFSet",
 				parameters: {
 					useServersideApplicationFilters: true,
 					operationMode: 'Client',
@@ -142,11 +142,11 @@ sap.ui.define([
 
 		/* _getDataTreeTable: function(aFilters, isAvvioButton) {
 			var oTable = this.getView().byId("treeTablePF");
-			var oDataPosFin = this.getOwnerComponent().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").getData();
+			var oDataPosFin = this.getOwnerComponent().getModel("modelTreeTable").getData();
 			// this.getView().getModel('ExportposFin').setData(oDataPosFin);
 			var oTableBinding = oTable.getBinding();
 			oTable.bindRows({
-				path: "ZSS4_COBI_PREN_ESAMOD_SRV>/ZET_AVVIOPFSet",
+				path: "modelTreeTable>/ZET_AVVIOPFSet",
 				parameters: {
 					useServersideApplicationFilters: true,
 					operationMode: 'Client',
@@ -201,8 +201,8 @@ sap.ui.define([
 
 		_resetSelectedItems: function() {
         	// this._resetCheckbox("modelTreeTable", this);
-            var aObject = Object.keys(this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData);
-            var aData = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData;
+            var aObject = Object.keys(this.getView().getModel("modelTreeTable").oData);
+            var aData = this.getView().getModel("modelTreeTable").oData;
             var aSelected = [],
                 aValResult = [];
             for (var i = 0; i < aObject.length; i++) {
@@ -256,7 +256,7 @@ sap.ui.define([
 
 			if (aPosFinSel) {
 				/* if (aPosFinSel.length > 1) {
-					this._resetCheckbox("ZSS4_COBI_PREN_ESAMOD_SRV", this);
+					this._resetCheckbox("modelTreeTable", this);
 				} */
 				this.oRouter.navTo("GestisciPosizioneFinanziaria");
 			} else {
@@ -265,11 +265,11 @@ sap.ui.define([
 		},
 		onSelectCheckBox: function(oEvent) {
 			// this._resetCheckbox("modelTreeTable", this);
-            var oEl = oEvent.getSource().getBindingContext("ZSS4_COBI_PREN_ESAMOD_SRV").sPath;
+            var oEl = oEvent.getSource().getBindingContext("modelTreeTable").sPath;
 
 			if(oEl){
 
-				var oObjectUpdate = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData[oEl.slice(1)];
+				var oObjectUpdate = this.getView().getModel("modelTreeTable").oData[oEl.slice(1)];
 				if (oObjectUpdate.SELECTED && oObjectUpdate.SELECTED === true) {
 					oObjectUpdate.SELECTED = false;
 				} else {
@@ -281,8 +281,8 @@ sap.ui.define([
 		onSelect: function(oEvent) {
 
 			var aRows = this.getView().byId("treeTablePF").getRows();
-			var oEl = oEvent.getSource().getBindingContext("ZSS4_COBI_PREN_ESAMOD_SRV").sPath;
-			var oObjectUpdate = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData[oEl.slice(1)];
+			var oEl = oEvent.getSource().getBindingContext("modelTreeTable").sPath;
+			var oObjectUpdate = this.getView().getModel("modelTreeTable").oData[oEl.slice(1)];
 			if (oObjectUpdate.SELECTED && oObjectUpdate.SELECTED === true) {
 
 				oObjectUpdate.SELECTED = false;
@@ -356,8 +356,8 @@ sap.ui.define([
 		},
 
 		_getSelectedItems: function() {
-			var aObject = Object.keys(this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData);
-			var aData = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData;
+			var aObject = Object.keys(this.getView().getModel("modelTreeTable").oData);
+			var aData = this.getView().getModel("modelTreeTable").oData;
 			var aSelected = [],
 				aValResult = [];
 			for (var i = 0; i < aObject.length; i++) {
