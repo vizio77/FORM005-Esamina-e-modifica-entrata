@@ -136,7 +136,7 @@
 									</Input>
 									<Input value="{= ${modelAnagraficaPf>/Descrnatura}.toUpperCase()}" editable="false" width="90%"
 										tooltip="{= ${modelAnagraficaPf>/Descrnatura}.toUpperCase()}"/>
-									<Label text="{i18n>categoria}"/>
+									<Label text="{i18n>Categoria}"/>
 									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicecategoria}" textAlign="Begin" width="30%"
 										tooltip="{modelAnagraficaPf>/Codicecategoria}" editable="false">
 										<layoutData>

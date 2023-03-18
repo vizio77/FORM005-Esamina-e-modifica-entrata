@@ -23,7 +23,7 @@ sap.ui.define([
 			this.getView().byId("TextAnno").setText(new Date().getFullYear() + 1);
 			this.getView().byId("idIconTabBar").setSelectedKey("Anagrafica");
 			this.setModelControlButton();
-			await this._getDatiAnagrafica();
+			await this._getDatiAnagrafica(true);
 		},
 
 		setModelControlButton: function() {
@@ -93,7 +93,7 @@ sap.ui.define([
 			}
 		},
 
-		_getDatiAnagrafica: async function() {
+		_getDatiAnagrafica: async function(busyStop) {
 			var sFipex = this.getView().byId("idLinkPosfinTab").getText();
 			// var sIdProposta = this.getView().byId("idPropostaTabID").getText();
 			var sKeycodepr, sFikrs, sAnno, sFase, sReale, sVersione, sEos;
@@ -118,6 +118,8 @@ sap.ui.define([
 				sVersione + "',Fipex='" + sFipex + "',Eos='" + sEos + "')";
 
 			var that = this;
+			if(busyStop) BusyIndicator.show(0);
+
 			try {
 				var aRes = await this._readFromDb("0", sPathPF, [], [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelAnagraficaPf");
@@ -138,6 +140,7 @@ sap.ui.define([
 				// MessageBox.error(JSON.parse(e.responseText).error.message.value);
 				this.MesssageBoxDynamic("attenzione", JSON.parse(e.responseText).error.message.value, "", "error");
 			}
+			if(busyStop) BusyIndicator.hide();
 
 		},
 
@@ -260,7 +263,7 @@ sap.ui.define([
 
 		onPressNavToInvioAllaValidazione: function(oEvt) {
 			var sBtnText = oEvt.getSource().getText();
-			var oDataModel = this._getDbModel("4");
+			var oDataModel = this._getDbModel("0");
 			var that = this;
 			if (sBtnText.toUpperCase() === this.getResourceBundle().getText("RevocaValid").toUpperCase()) {
 				MessageBox.warning(this.recuperaTestoI18n("MBTestoPopupRevocaValid"), {
@@ -379,7 +382,7 @@ sap.ui.define([
 
 		onPressConfermaValidazione: function() {
 			var sIdProposta = this.getView().getModel("modelHeader").getProperty("/IdProposta");
-			var oDataModel = this._getDbModel("4");
+			var oDataModel = this._getDbModel("0");
 			var sValidatore = this.getView().byId("idTableRisultatiRicercaValidatore").getSelectedItem().getBindingContext("modelTableVal").getProperty(
 				"Bname");
 
