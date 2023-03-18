@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:zcontrolAuth="zsap.com.r3.cobi.s4.z_s4_auth">
+	<Dialog id="AssociaAutPopover" title="{i18n>AssociaAutorizzazione}" class="sapUiContentPadding" beforeOpen="onBeforeOpen">
+		<beginButton>
+			<Button text="{i18n>Ok}" press="onPressOkAssAut" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Chiudi}" press="onPressChiudiAssAut" type="Emphasized"/>
+		</endButton>
+		<content>
+			<VBox>
+				<Label design="Bold" text="Autorizzazione:" labelFor="idAutorizz" class="sapUiTinyMarginTopBottom"/>
+				<zcontrolAuth:InputAutorizzazioni id="AutorizzazioniMCD" Eos="E"/>
+			</VBox>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

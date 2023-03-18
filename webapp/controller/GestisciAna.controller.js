@@ -6,7 +6,8 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"zsap/com/r3/cobi/s4/esamodModEntrPosFin/model/formatter",
 	"sap/ui/core/Fragment",
-], function(BaseController, JSONModel, Filter, FilterOperator, MessageBox, formatter, Fragment) {
+	"sap/ui/core/BusyIndicator",
+], function(BaseController, JSONModel, Filter, FilterOperator, MessageBox, formatter, Fragment, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.GestisciAna", {
@@ -21,8 +22,8 @@ sap.ui.define([
 			this.setModelContHeader();
 			this.getView().byId("TextAnno").setText(new Date().getFullYear() + 1);
 			this.getView().byId("idIconTabBar").setSelectedKey("Anagrafica");
-			await this._getDatiAnagrafica();
 			this.setModelControlButton();
+			await this._getDatiAnagrafica();
 		},
 
 		setModelControlButton: function() {
@@ -84,7 +85,7 @@ sap.ui.define([
 				aFilters.push(new Filter("Fase", FilterOperator.EQ, aData.Fase));
 				aFilters.push(new Filter("Versione", FilterOperator.EQ, aData.Versione));
 				aFilters.push(new Filter("Fipex", FilterOperator.EQ, aData.Fipex));
-				var aRes = await this._readFromDb("4", "/ZCOBI_PREN_ASSAUTSetSet", aFilters, [], "");
+				var aRes = await this._readFromDb("0", "/ZCOBI_PREN_ASSAUTSetSet", aFilters, [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelAnagraficaAuto");
 			} catch (e) {
 				this.MesssageBoxDynamic("attenzione", JSON.parse(e.responseText).error.message.value, "", "error");
@@ -118,7 +119,7 @@ sap.ui.define([
 
 			var that = this;
 			try {
-				var aRes = await this._readFromDb("4", sPathPF, [], [], "");
+				var aRes = await this._readFromDb("0", sPathPF, [], [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelAnagraficaPf");
 				var oObject = {
 					denomC: "",
@@ -141,7 +142,7 @@ sap.ui.define([
 		},
 
 		_TimelineCompiler: async function() {
-			this._openBusyDialog();
+			//this._openBusyDialog();
 
 			var aModelPosFin = this.getView().getModel("modelHeader").getData();
 
@@ -167,7 +168,7 @@ sap.ui.define([
 			];
 
 			try {
-				var aRes = await this._readFromDb("4", "/WorkFlowSet", aFilters, [], "");
+				var aRes = await this._readFromDb("0", "/WorkFlowSet", aFilters, [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelTimeLineWorkFlow")
 			} catch (errorResponse) {
 
@@ -175,15 +176,15 @@ sap.ui.define([
 				this.MesssageBoxDynamic("attenzione", "NessunDato", "", "error");
 
 			}
-			this._closeDialog();
+			//this._closeDialog();
 		},
 		_getNota: async function() {
 
-			this._openBusyDialog();
+			//this._openBusyDialog();
 
 			var aData = this.getView().getModel("modelHeader").getData();
 			try {
-				var aRes = await this._readFromDb("4", "/PropostaSet(Keycodepr='" + aData.KeyCode + "')", [], [], "");
+				var aRes = await this._readFromDb("0", "/PropostaSet(Keycodepr='" + aData.KeyCode + "')", [], [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelNote")
 				if (aRes.Idnota !== "0000000000") {
 					this.getView().byId("idInputScegliNoteIDProposta").setValue(aRes.Idnota);
@@ -193,13 +194,13 @@ sap.ui.define([
 					this.getView().byId("idInputScegliNoteIDProposta").setValue("");
 
 				}
-				var aRes = await this.readFromDb("4", "/ZES_NOTE_IDSet", [], [], "");
+				var aRes = await this._readFromDb("0", "/ZES_NOTE_IDSet", [], [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelListaIdNote");
 
 			} catch (e) {
 
 			}
-			this._closeDialog();
+			//this._closeDialog();
 
 		},
 
@@ -347,7 +348,7 @@ sap.ui.define([
 			aFilters.push(new Filter("McNamefir", FilterOperator.StartsWith, sNome));
 			aFilters.push(new Filter("McNamelas", FilterOperator.StartsWith, sCognome));
 			try {
-				var aRes = await this._readFromDb("4", "/ZES_VALIDATORESet", aFilters, [], "");
+				var aRes = await this._readFromDb("0", "/ZES_VALIDATORESet", aFilters, [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelTableVal");
 			} catch (errorResponse) {
 				var sDettagli = this._setErrorMex(errorResponse);
@@ -498,9 +499,9 @@ sap.ui.define([
 			// aFilter.push(new Filter("SemanticObject", FilterOperator.EQ, "ESAMINA_MOD"));
 			// aFilter.push(new Filter("Schermata", FilterOperator.EQ, "E_COMPETENZA"));
 			try {
-				// var oLink = await this._readFromDb("4", "/SacUrlSet", aFilter);
+				// var oLink = await this._readFromDb("0", "/SacUrlSet", aFilter);
 				var sEntitySet = "/SacUrlSet(SemanticObject='" + "ESAMINA_MOD" + "',Schermata='" + "E_COMPETENZA" + "')";
-				var oLink = await this._readFromDb("4", sEntitySet);
+				var oLink = await this._readFromDb("0", sEntitySet);
 				var oLinkUrl = oLink.URL + "&p_AutorizzazioneURL" + sFincode + "&p_IdPropostaURL=" + sIdProp + "&p_PosizioneURL=" + sPosFin.replaceAll(
 						".", "") +
 					"&p_StrutturaURL=" + sStrutt + "&p_REON=" + sReon;
@@ -541,7 +542,7 @@ sap.ui.define([
 			// aFilter.push(new Filter("Schermata", FilterOperator.EQ, "E_CASSA"));
 			try {
 				var sEntitySet = "/SacUrlSet(SemanticObject='" + "ESAMINA_MOD" + "',Schermata='" + "E_CASSA" + "')";
-				var oLink = await this._readFromDb("4", sEntitySet);
+				var oLink = await this._readFromDb("0", sEntitySet);
 				var oLinkUrl = oLink.URL + "&p_ID_PROP_URL=" + sIdProp + "&p_POS_FIN_URL=" + sPosFin.replaceAll(".", "") +
 					"&p_ST_AM_RESP_URL=" + sStrutt + "&p_REON=" + sReon;
 				var oFrame = this.getView().byId("linkSacCassa");
@@ -553,7 +554,74 @@ sap.ui.define([
 				// sap.m.MessageBox.error(this.recuperaTestoI18n("MBCreateErrorPageAut"));
 				this.MesssageBoxDynamic("attenzione", "MBCreateErrorPageAut", "", "error");
 			}
-		}
+		},
+		//LOGICHE SALVATAGGIO VARIAZIONE ANAGRAFICA
+		onSave: function() {
+			var oDatiAnagraficaPFBk = this.getView().getModel("modelAnagraficaPf").getData();
+			var oDatiAnagraficaPF = jQuery.extend(true, {}, oDatiAnagraficaPFBk);
+
+			var oView = this.getView();
+			var oGlobalModel = oView.getModel("ZSS4_COBI_PREN_ESAMOD_SRV");
+			
+			/* var sDenIntCap = oView.byId("idDenIntCap");
+			var sDenRidCap = oView.byId("idDenRidCap");
+			var sDenIntPG = oView.byId("idDenIntPG");
+			var sDenRidPG = oView.byId("idDenRidPG"); */
+
+			/* if (sCodStdCap === "000" && sDenIntCap.getValue() !== "" && sDenIntCap.getValue() !== undefined && sDenRidCap.getValue() !== "" &&
+				sDenRidCap.getValue() !== undefined && sDenIntPG.getValue() !== "" && sDenIntPG.getValue() !== undefined && sDenRidPG.getValue() !==
+				"" && sDenRidPG.getValue() !== undefined) {
+				MessageBox.error(this._oResourceBundle.getText("MBErrorCodCapStd"));
+			}
+			if (sCodStdCap.getValue().toUpperCase() === 'STANDARD') {
+				this.oModelPG80.setProperty("/capCodStd", false);
+			} */
+
+			debugger		
+
+			if (oDatiAnagraficaPF.PosFinToPropostaNav) {
+				delete oDatiAnagraficaPF.PosFinToPropostaNav;
+			}
+			if (oDatiAnagraficaPF.PropostaSet) {
+				delete oDatiAnagraficaPF.PropostaSet;
+			}
+
+			var that = this;
+
+			var sPathPF = "/" + oDatiAnagraficaPF.__metadata.uri.split("/")[oDatiAnagraficaPF.__metadata.uri.split("/").length - 1]
+			BusyIndicator.show(0);
+			//update PosFin
+			oGlobalModel.update(sPathPF, oDatiAnagraficaPF, {
+				success: function(oResponse, oData) {
+					BusyIndicator.hide();
+					// that.getView().byId("btnInvioRevocaValidazione").setEnabled(true);
+					MessageBox.success(that.getResourceBundle().getText("MBPFSalvataSuccessPagTab"));
+				},
+				error: function(oError) {
+					BusyIndicator.hide();
+					MessageBox.error(oError.responseText);
+				}
+			});		
+
+		},
 
 	});
 });
+
+/*  lt --> proposta non serve??!
+			//LOGICA UPDATE PROPOSTA
+			var oDatiProposta = {
+				Fipex: sFipex,
+				Flagana: "X"
+			};
+			var sPathProposta = "/PropostaSet(Keycodepr='" + sKeycodepr + "')";
+			oGlobalModel.update(sPathProposta, oDatiProposta, {
+				success: function(oResponse, oData) {
+					BusyIndicator.hide();
+					// MessageBox.success(that._oResourceBundle.getText(""));
+				},
+				error: function(oError) {
+					BusyIndicator.hide();
+					MessageBox.error(oError.responseText);
+				}
+			});	 */	

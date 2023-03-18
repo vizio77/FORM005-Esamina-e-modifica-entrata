@@ -70,7 +70,7 @@ sap.ui.define([
 			var sReon = "SI";
 
 			this.getView().setBusy(true);
-			var aResult = await this.readFromDb("2", "/SacUrlSet(SemanticObject='" + sEsamina_ModE + "',Schermata='" + sSchermata + "')", []);
+			var aResult = await this._readFromDb("2", "/SacUrlSet(SemanticObject='" + sEsamina_ModE + "',Schermata='" + sSchermata + "')", []);
 			this.getView().setBusy(false);
 			sPosfin = sPosfin.replaceAll(".", "");
 			var sUrl = aResult.URL;

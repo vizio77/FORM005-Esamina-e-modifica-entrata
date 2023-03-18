@@ -475,24 +475,20 @@ sap.ui.define([
 				oView.getModel("modelNuovaPosFin").setProperty("/CAP", sCapitoloSel);
 
 				//SBLOCCO MODIFICHE A TUTTI I CAMPI RELATIVI AL CAP
-				oView.byId("idMissioneNPF").setEditable(true);
-				oView.byId("idProgrammaNPF").setEditable(true);
-				oView.byId("idAzioneNPF").setEditable(true);
-
-				oView.byId("idTitoloNPF").setEditable(true);
+				oView.byId("idTitolo").setEditable(true);
 				oView.byId("idCategoria").setEditable(true);
-				oView.byId("idCE2NPF").setEditable(true);
-				oView.byId("idCE3NPF").setEditable(true);
-
-				oView.byId("idMacroAggregatoNPF").setEditable(true);
+				oView.byId("idCapoNPF").setEditable(true);
+				
+				oView.byId("idTitolo").setValue("");
+				oView.byId("idCategoria").setValue("");
+				oView.byId("idCapoNPF").setValue("");
+				
+				
 				oView.byId("idDenominazioneCapitoloIntNPF").setEditable(true);
 				oView.byId("idDenominazioneCapitoloRidNPF").setEditable(true);
-
-				oView.byId("idTipoSpesaCapNPF").setEditable(true);
-
-				oView.byId("colEliminaNPF").setVisible(true);
-				oView.byId("idAggiungiRiga").setEnabled(true);
-				oView.getModel("modelNuovaPosFin").setProperty("/EDITPERCENT", true);
+				
+				oView.getModel("modelNuovaPosFin").setProperty("/TIT", "");
+				oView.getModel("modelNuovaPosFin").setProperty("/CAT", "");
 
 				this.getView().byId("NPF_dialogCapitolo").close();
 			}
@@ -1011,7 +1007,7 @@ sap.ui.define([
 					aFilters.push(new Filter("Eos", FilterOperator.EQ, "E"));
 
 
-					var aRes = await this.readFromDb("2", "/PropostaSet", aFilters, [], "");
+					var aRes = await this._readFromDb("2", "/PropostaSet", aFilters, [], "");
 					// var aFilters = [new Filter("Idproposta", FilterOperator.EQ, oKeyCode)];
 					oDataModel.read("/PropostaSet", { // function import name
 						filters: aFilters, // function import parameters        

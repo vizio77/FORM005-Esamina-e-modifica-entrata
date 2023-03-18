@@ -12,7 +12,7 @@ sap.ui.define([
 	"use strict";
 	return Controller.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.BaseController", {
 
-		readFromDb: function(sDbSource, sEntitySet, aFilters, aSorters) {
+		_readFromDb: function(sDbSource, sEntitySet, aFilters, aSorters) {
 			var aReturn = this._getDbOperationReturn();
 			var oModel = this._getDbModel(sDbSource);
 			return new Promise(function(resolve, reject) {
@@ -85,7 +85,7 @@ sap.ui.define([
 		},
 		onPressNavToHome: function() {
 			this.oRouter = this.getRouter();
-			this.oRouter.navTo("Home");
+			this.oRouter.navTo("PosizioneFinanziaria");
 		},
 
 		getRouter: function() {
@@ -261,7 +261,7 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouterCust().navTo("PosizioneFinanziaria", {}, true /*no history*/ );
+				this.getRouter().navTo("PosizioneFinanziaria", {}, true /*no history*/ );
 			}
 		},
 
@@ -284,7 +284,7 @@ sap.ui.define([
 		_gestTipologiche: async function() {
 			var that = this;
 			try {
-				var aRes = await this.readFromDb("1", "/ZES_FOTO_ANNO_SET(TYPE_KEY='SCH_AMM')", [], [], "");
+				var aRes = await this._readFromDb("1", "/ZES_FOTO_ANNO_SET(TYPE_KEY='SCH_AMM')", [], [], "");
 				aRes.Fikrs = "S001";
 				if (this.getView().getModel("modelAdattaFiltri")) {
 					aRes.Prctr = this.getView().getModel("modelAdattaFiltri").getData().CodiceAmmin;
