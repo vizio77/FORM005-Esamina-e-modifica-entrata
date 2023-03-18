@@ -91,6 +91,10 @@ sap.ui.define([
 			this.setModel(models.getModelGestisciProposta(), "modelGestisciProposta");
 			
 			this.setModel(models.getModelDefaultPosFinToPropostaNav(), "modelDefaultPosFinToPropostaNav");
+
+
+			this.getModel("ZSS4_COBI_PREN_ESAMOD_SRV").aUrlParams[0] = "sap-language=IT";
+			this.getModel("modelOperazionEsaMod").aUrlParams[0] = "sap-language=IT";
 			this.getRouter().initialize();
 		},
 		getContentDensityClass: function() {

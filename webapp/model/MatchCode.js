@@ -833,9 +833,7 @@ sap.ui.define([
 			if (inputRef === "CentroResp") {
 				// oSelectedItem = oEvent.getParameter("selectedItem");
 				oEvent.getSource().getBinding("items").filter([]);
-
 				sPath = oSelectedItem.getBindingContext().getPath();
-
 				this._fillInput("idCdr", oModel.getData(sPath).Codicecdr);
 
 			}
