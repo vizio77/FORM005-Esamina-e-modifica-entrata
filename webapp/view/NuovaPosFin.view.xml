@@ -19,9 +19,9 @@
 								<!--<m:Link id="idPopPosFinSnap"
 									text="S020{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.{modelNuovaPosFin>/MISS}{modelNuovaPosFin>/PROG}{modelNuovaPosFin>/AZIO}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/CE2}{modelNuovaPosFin>/CE3}"
 									press="onPressShowPopOverHeaderNuovaPosFin" class="sapUiTinyMarginTop sapUiMediumMarginEnd"/>-->
-								<m:Link id="idPopPosFinSnap"
+								<zcontrollink:LinkPosizioneFinanziaria id="idPopPosFinSnap"
 									text="`E{modelNuovaPosFin>/AMM}{modelNuovaPosFin>/CAP}{modelNuovaPosFin>/PG}.00{modelNuovaPosFin>/TIT}{modelNuovaPosFin>/NAT}.{modelNuovaPosFin>/CAT}{modelNuovaPosFin>/TIP}{modelNuovaPosFin>/PRO}"
-									semanticobject="ESAMINAMODIFICA" class="sapUiTinyMarginTop sapUiMediumMarginEnd"/>
+									class="sapUiTinyMarginTop sapUiMediumMarginEnd"/>
 							</m:HBox>
 							<m:HBox>
 								<m:ObjectStatus id="idTextPosStrutturaSnap" active="true" title="{i18n>StrutturaAmmCen}" class="sapUiTinyMarginTop textBold"/>

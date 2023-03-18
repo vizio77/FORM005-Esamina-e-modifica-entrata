@@ -3,12 +3,14 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/m/SelectDialog",
 	"sap/m/TableSelectDialog",
+	"sap/ui/core/Fragment",
+	"sap/ui/core/syncStyleClass",
 	"sap/m/MessageBox",
 	"sap/ui/model/Filter",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/FilterOperator",
 
-], function(Controller, History, SelectDialog, TableSelectDialog, MessageBox, Filter, JSONModel, FilterOperator) {
+], function(Controller, History, SelectDialog, TableSelectDialog, Fragment, syncStyleClass, MessageBox, Filter, JSONModel, FilterOperator) {
 	"use strict";
 	return Controller.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.BaseController", {
 
@@ -99,6 +101,40 @@ sap.ui.define([
 				arr.splice(found, 1);
 				found = arr.indexOf(what);
 			}
+		},
+		onPressShowPopOverHeaderNuovaPosFin: function(e) {
+			var sBtn = e.getSource();
+			var oView = this.getView();
+			var sID = e.getSource().getId();
+			var sBtnText = sID.split("--")[1];
+
+			if (!this._PopOverHeader) {
+				this._PopOverHeader = Fragment.load({
+					id: oView.getId(),
+					name: "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view.fragment.PopOverHeaderNuovaPosFinLinks",
+					controller: this
+				}).then(function(oPopover) {
+					oView.addDependent(oPopover);
+					syncStyleClass(oView.getController().getOwnerComponent().getContentDensityClass(), oView, oPopover);
+					return oPopover;
+				});
+			}
+
+			this._PopOverHeader.then(function(oPopover) {
+				// Open ValueHelpDialog filtered by the input's value
+				oPopover.openBy(sBtn);
+			});
+			if (sBtnText === "idPopPosFinSnap" || sBtnText === "idPopPosFin") {
+				this.getView().byId("idBoxPosFin").setVisible(true);
+				this.getView().byId("idBoxStruttAmmCen").setVisible(false);
+				this.getView().byId("idPopHeader").setTitle(this.getView().getModel("i18n").getResourceBundle().getText("TitleHeaderPosFin"));
+			}
+			if (sBtnText === "idPopStrAmmCenSnap" || sBtnText === "idPopStrAmmCen") {
+				this.getView().byId("idBoxPosFin").setVisible(false);
+				this.getView().byId("idBoxStruttAmmCen").setVisible(true);
+				this.getView().byId("idPopHeader").setTitle(this.getView().getModel("i18n").getResourceBundle().getText("TitleHeaderStruAmmCen"));
+			}
+
 		},
 
 		getMessageBoxWarning: function(sText) {
