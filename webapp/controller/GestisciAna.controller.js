@@ -457,7 +457,7 @@ sap.ui.define([
 				"Fincode": sFincode
 			};
 			try {
-				await this.insertRecord("4", "/ZCOBI_PREN_ASSAUTSetSet", oEntry);
+				await this.insertRecord("0", "/ZCOBI_PREN_ASSAUTSetSet", oEntry);
 				this.MesssageBoxDynamic("opEse", "AUTOOK", "", "success");
 				// MessageBox.success(this.getResourceBundle().getText("AUTOOK"));
 				this.onPressChiudiAssAut();

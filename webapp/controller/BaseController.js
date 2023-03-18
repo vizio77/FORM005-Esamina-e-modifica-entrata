@@ -457,5 +457,62 @@ sap.ui.define([
 			oValueHelpDialog.open();
 		},
 
+		MesssageBoxDynamic: function(sTitle, sText, sMod, option) {
+			var that = this;
+			var bCompact = !!that.getView().$().closest(".sapUiSizeCompact").length;
+			if (option === "warningFull" || option === "warningAllert") {
+				sap.m.MessageBox.warning(
+					that.recuperaTestoI18n(sText), {
+						id: "messageWarningFull",
+						title: that.recuperaTestoI18n(sTitle),
+						actions: [MessageBox.Action.OK, "Annulla"],
+						styleClass: bCompact ? "sapUiSizeCompact" : "",
+						onClose: function(sAction) {
+							if (sAction === "OK") {} else if (sAction === "Annulla") {}
+						}
+					}
+				);
+			} else if (option === "success") {
+				sap.m.MessageBox.success(
+					that.recuperaTestoI18n(sText), {
+						title: that.recuperaTestoI18n(sTitle),
+						id: "succMess",
+						actions: [MessageBox.Action.OK],
+						styleClass: bCompact ? "sapUiSizeCompact" : "",
+						onClose: function(sAction) {
+							if (sAction === "OK") {
+								if (sMod === "sIterStatus") {
+									that.onPressNavToHome("Reload");
+								}
+							}
+						}
+					}
+				);
+			} else if (option === "error") {
+				sap.m.MessageBox.error(
+					that.recuperaTestoI18n(sText), {
+						title: that.recuperaTestoI18n(sTitle),
+						id: "errorMess",
+						actions: [MessageBox.Action.OK],
+						styleClass: bCompact ? "sapUiSizeCompact" : "",
+						onClose: function(sAction) {
+							if (sAction === "OK") {}
+						}
+					}
+				);
+			}
+			if (option === "warningFull") {
+				sap.ui.getCore().byId("messageWarningFull").getButtons()[0].setType("Emphasized");
+				sap.ui.getCore().byId("messageWarningFull").getButtons()[1].setType("Emphasized");
+			} else if (option === "warningAllert") {
+				sap.ui.getCore().byId("messageWarningFull").getButtons()[0].setType("Emphasized");
+				sap.ui.getCore().byId("messageWarningFull").getButtons()[1].setVisible(false);
+			} else if (option === "success") {
+				sap.ui.getCore().byId("succMess").getButtons()[0].setType("Emphasized");
+			} else {
+				sap.ui.getCore().byId("errorMess").getButtons()[0].setType("Emphasized");
+			}
+		}
+
 	});
 });

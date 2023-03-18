@@ -58,7 +58,7 @@
 				enableColumnReordering="false">
 				<t:extension>
 					<OverflowToolbar class="sapUiSmallMarginTop">
-						<!--<ToolbarSpacer/>-->
+						<ToolbarSpacer/>
 						<!--<Button id="idBtnDettaglioAnagraficoID" icon="sap-icon://form" type="Emphasized" text="{i18n>Anagrafica} {i18n>Proposta}" press="onPressNavToDettaglioAnagraficoID"/>-->
 						<!--<Button id="idBtnDettaglioContabileID" icon="sap-icon://detail-view" type="Emphasized" text="{i18n>Contabile} {i18n>Proposta}" press="onPressNavToDettaglioContabileID"/>-->
 						<!--<Button id="idBtnEsitoControlli" type="Emphasized" text="{i18n>EsitoControlli}" press="onPressEsitoControlli"/>-->
@@ -69,7 +69,7 @@
 						<!--<Button id="idBtnCassa" type="Emphasized" text="{i18n>Cassa}" press="onPressNavToCassa"/>-->
 						<!--<Button id="idBtnDocumentale" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>-->
 						<Button id="idBtnAssocia" visible="true" type="Emphasized" text="{i18n>AssociaPropostaBtn}"  press="onPressAssocia"/>
-						<Button id="idBtnCreaProposta" type="Emphasized" text="{i18n>Crea} {i18n>Proposta}" press="onPressNavToCreaID"/>
+						<!-- <Button id="idBtnCreaProposta" type="Emphasized" text="{i18n>Crea} {i18n>Proposta}" press="onPressNavToCreaID"/> -->
 					</OverflowToolbar>
 				</t:extension>
 				<t:columns>
@@ -341,7 +341,7 @@
 				<Button id="idBtnNPF" type="Emphasized" icon="sap-icon://form" text="{i18n>NuovaPosFin}" press="onPressNavToNuovaPosizione"/>
 				<!--<Button type="Emphasized" text="{i18n>RimodulazioneVert}" icon="sap-icon://strikethrough" press="onPressNavToRV"/>-->
 				<Button type="Emphasized" text="{i18n>Indietro}" press="onPressBack"/>
-				<Button type="Emphasized" text="{i18n>Home}" press="onPressNavToHomeLoc"/>
+				<Button type="Emphasized" text="{i18n>Home}" press="navToAppLaunchpad('Z_S4_ESAMODEPRP')"/>
 			</OverflowToolbar>
 		</f:footer>
 	</f:DynamicPage>

@@ -136,6 +136,8 @@ sap.ui.define([
 				filters: [aFilters],
 			});
 
+			this._resetSelectedItems();
+
 			// 		var aResult = await this._readFromDb(
 			// 	'0',
 			// 	"/ZET_AVVIOPFSet", aFilters.aFilters
@@ -146,6 +148,21 @@ sap.ui.define([
 			// );
 
 		},
+
+		_resetSelectedItems: function() {
+        	// this._resetCheckbox("modelTreeTable", this);
+            var aObject = Object.keys(this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData);
+            var aData = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData;
+            var aSelected = [],
+                aValResult = [];
+            for (var i = 0; i < aObject.length; i++) {
+                if (aObject[i].includes("ZET_AVVIOPFSet") && aData[aObject[i]].SELECTED === true) {
+					aData[aObject[i]].SELECTED = false;
+                    aSelected.push(aData[aObject[i]]);
+                }
+            }
+           return aSelected;
+        },
 
 		onPressPrevTreeTable: function(oEvent) {
 			var filterMaxRows = this.filterMaxRows;

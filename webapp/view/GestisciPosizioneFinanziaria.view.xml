@@ -165,7 +165,7 @@
 			<OverflowToolbar>
 				<ToolbarSpacer/>
 				<Button type="Emphasized" text="{i18n>Indietro}" press="onNavBack"/>
-				<Button type="Emphasized" text="{i18n>Home}" press="onPressNavToHome"/>
+				<Button type="Emphasized" text="{i18n>Home}" press="navToAppLaunchpad('Z_S4_ESAMODEPRP')"/>
 			</OverflowToolbar>
 		</f:footer>
 	</f:DynamicPage>

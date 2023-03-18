@@ -319,12 +319,17 @@ sap.ui.define([
 			var oPosFinSel = oModelSelPosFin.getData("IdPosfin");
 			var aPosFinSel = oPosFinSel.IdPosfin;
 
-			// for (var i = 0; i < aPosFinSel.length; i++) {
-			// 	if (aPosFinSel[i]["IdPosfin"] != '0') {
-			// 		MessageBox.warning("Posizioni con proposte già associate. Non è possibile procedere.");
-			// 		return;
-			// 	}
-			// }
+			if(aPosFinSel){
+				for (var i = 0; i < aPosFinSel.length; i++) {
+					if (aPosFinSel[i]["IdProposta"] !== '0') {
+						MessageBox.warning("Posizioni con proposte già associate. Non è possibile procedere.");
+						return;
+					}
+				}
+			} else {
+				MessageBox.warning("Selezionare una Posizione.");
+				return;
+			}
 
 			var rowSelected = this._getSelectedItems();
 

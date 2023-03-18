@@ -83,7 +83,7 @@
 							press="onPressNavToDettaglioContabile"/>
 						<Button type="Emphasized" icon="sap-icon://list" visible="{checkModel>/listaEstesa}" text="{i18n>ListaEstesa}" press="listaEstesa"/>
 						<Button type="Emphasized" icon="sap-icon://list" visible="{checkModel>/listaRidotta}" text="{i18n>ListaRidotta}" press="listaRidotta"/>
-						<Button text="{i18n>EsitoControlli}" press="onEsitoControlli" type="Emphasized"/>
+<!-- lt elimino in attesa del collaudo --><Button text="{i18n>EsitoControlli}" press="onEsitoControlli" visible="false" type="Emphasized"/>
 						<Button type="Emphasized" text="{i18n>Gestisci}" press="onPressGestisciPosizione"/>
 						<Button id="idBtnDocumentale" text="{i18n>Documentale}" icon="sap-icon://copy" type="Emphasized" tooltip="{i18n>Documentale}" press="onPressNavToDettaglio"/>
 						<Button type="Emphasized" text="{i18n>Export}" icon="sap-icon://excel-attachment" press="onPressExport"/>

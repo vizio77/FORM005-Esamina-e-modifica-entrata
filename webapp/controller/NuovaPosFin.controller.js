@@ -80,6 +80,7 @@ sap.ui.define([
 			oView.getModel("modelNuovaPosFin").setProperty("/AZIO", "");
 			oView.getModel("modelNuovaPosFin").setProperty("/TIT", "");
 			oView.getModel("modelNuovaPosFin").setProperty("/CAT", "");
+			oView.getModel("modelNuovaPosFin").setProperty("/NAT", "");
 			oView.getModel("modelNuovaPosFin").setProperty("/CAP", "");
 			oView.getModel("modelNuovaPosFin").setProperty("/PG", "");
 			oView.getModel("modelNuovaPosFin").setProperty("/CE2", "");
