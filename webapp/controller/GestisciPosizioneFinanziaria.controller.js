@@ -134,7 +134,7 @@ sap.ui.define([
 			var aSelected = [],
 				aValResult = [];
 			for (var i = 0; i < aObject.length; i++) {
-				if (aData[aObject[i]].SELECTED === true) {
+				if (aObject[i].includes("ZET_AVVIOPF_IDSet") && aData[aObject[i]].SELECTED === true) {
 					aSelected.push(aData[aObject[i]]);
 				}
 			}
@@ -153,6 +153,17 @@ sap.ui.define([
 			}
 
 			return aSelected;
+		},
+
+		onSelectCheckBox: function(oEvent) {
+			//this._resetCheckbox("modelTreeTable", this);
+			var oEl = oEvent.getSource().getBindingContext("ZSS4_COBI_PREN_ESAMOD_SRV").sPath;
+			var oObjectUpdate = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData[oEl.slice(1)];
+			if (oObjectUpdate.SELECTED && oObjectUpdate.SELECTED === true) {
+				oObjectUpdate.SELECTED = false;
+			} else {
+				oObjectUpdate.SELECTED = true;
+			}
 		},
 
 		onSelect: function(oEvent) {
@@ -197,20 +208,33 @@ sap.ui.define([
 		},
 
 		onPressNavToTabGestisci: function() {
-			//verifica nomi delle proprietà dell'entity della treetable
-			//var sPage = this.sRouterParameter;
-
 			this._rowSel();
 			var aModelPageTab = this.getView().getModel("modelPosFinSelected").getData();
+			var oModelSelPosFin = this.getView().getModel("modelPosFinSelected");
+			oModelSelPosFin.setData();
+			this._refreshModel(oModelSelPosFin);
 
-			// var sPage = this.getView().getModel("i18n").getResourceBundle().getText("subtitlePosFinID");
+			var aSelected = this._getSelectedItems();
+			if(this._getSelectedItems().length > 1){	
+				MessageBox.warning("Non è possibile gestire più di una posizione finanziaria. Selezionare una sola riga.");
+				return;
+			}
 
-			if (aModelPageTab.length === 0) {
+			var conProposta = $.grep(this._getSelectedItems(), function (n, i) {
+				return n.IdProposta !== "" && n.IdProposta !== "0";
+			});
+
+			if(conProposta.length === 0){
+				MessageBox.warning("Non è possibile gestire più di una posizione finanziaria perchè non è stata ancora associata ad una proposta");
+				return;
+			}
+
+			if (aSelected.length === 0) {
 				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("MBTastoAutPagePosFinId"));
 			} else {
-				var sIdProposta = aModelPageTab[0].Idproposta;
-				// var sIter = oModelPageTab.getData()[0].Iter;
-				var sCodIter = aModelPageTab[0].CodiceIter;
+				var sIdProposta = aSelected[0].Idproposta;
+				var sCodIter = aSelected[0].CodiceIter;
+				this.getOwnerComponent().setModel(new JSONModel(aSelected[0]), "modelNavGestisci");
 
 				// if (aModelPageTab.length === 1 && sIdProposta !== "" && sIdProposta !== undefined && sIdProposta !== "0000000000" && sIdProposta !==
 				// 	"0" && sCodIter === "01") {
@@ -281,7 +305,7 @@ sap.ui.define([
 				}
 				that.getView().getModel("modelPageAut").setData(aRows);
 				that.getView().getModel("modelPosFinSelected").setProperty("/IdPosfin", aRows);;
-				this.getOwnerComponent().setModel(new JSONModel(aRows), "modelNavAna");
+				this.getOwnerComponent().setModel(new JSONModel(aRows), "modelNavAna");				
 			}
 		},
 

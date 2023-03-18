@@ -20,49 +20,79 @@ sap.ui.define([
 		_onObjectMatched: async function() {
 			this.setModelContHeader();
 			this.getView().byId("TextAnno").setText(new Date().getFullYear() + 1);
+			this.getView().byId("idIconTabBar").setSelectedKey("Anagrafica");
 			await this._getDatiAnagrafica();
+			this.setModelControlButton();
+		},
+
+		setModelControlButton: function() {
+			var oObject = {
+				salva: ""
+			};
+			this.getView().setModel(new JSONModel(oObject), "modelControlButton");
 		},
 
 		setModelContHeader: function() {
-			var oSelectedItem = this.getOwnerComponent().getModel("modelNavAna").getData()[0];
-			if (oSelectedItem.IdProposta === undefined || oSelectedItem.IdProposta === "0" || oSelectedItem.IdProposta.length === 0) {
-				this.getView().byId("WorkFlow").setEnabled(false);
-				this.getView().byId("Note").setEnabled(false);
-			}
+			var oSelectedItem = this.getOwnerComponent().getModel("modelNavGestisci").getData();
 			this.getView().setModel(new JSONModel(oSelectedItem), "modelHeader");
 		},
 
 		onPressIconTabBar: async function(oEvent) {
+			this._openBusyDialog();
 			var sSelectedTab = oEvent.getParameters().selectedKey;
 
 			switch (sSelectedTab) {
 				case 'Cassa':
 					this.getView().byId('btnInfoCassaTabID').setVisible(true);
 					this.getView().byId('btnInfoCompetenzaTabID').setVisible(false);
-					// await this._getSchedaSacCassa();
+					this.getView().getModel("modelControlButton").setProperty("/salva", "X");
+					await this._getSchedaSacCassa();
 					break;
 				case 'WorkFlow':
 					await this._TimelineCompiler();
+					this.getView().getModel("modelControlButton").setProperty("/salva", "");
 					break;
 				case 'Anagrafica':
 					await this._getDatiAnagrafica();
-					await this._AutRead();
+					this.getView().getModel("modelControlButton").setProperty("/salva", "");
+					// await this._AutRead();
 					break;
 				case 'Note':
 					await this._getNota();
+					this.getView().getModel("modelControlButton").setProperty("/salva", "");
 					break;
 				case 'Competenza':
 					this.getView().byId('btnInfoCassaTabID').setVisible(false);
 					this.getView().byId('btnInfoCompetenzaTabID').setVisible(true);
-					// await this._dataAuto();
+					this.getView().getModel("modelControlButton").setProperty("/salva", "X");
+					await this._dataAuto();
 					break;
 
 			}
+			this._closeDialog();
+			this.getView().getModel("modelControlButton").refresh();
+		},
 
+		_dataAuto: async function() {
+			try {
+				var aFilters = [];
+				var aData = this.getView().getModel("modelHeader").getData();
+				aFilters.push(new Filter("Fikrs", FilterOperator.EQ, aData.Fikrs));
+				// var oFilterEos = new Filter("Eos", FilterOperator.EQ, sEos);
+				aFilters.push(new Filter("Anno", FilterOperator.EQ, aData.AnnoFipex));
+				aFilters.push(new Filter("Reale", FilterOperator.EQ, aData.Reale));
+				aFilters.push(new Filter("Fase", FilterOperator.EQ, aData.Fase));
+				aFilters.push(new Filter("Versione", FilterOperator.EQ, aData.Versione));
+				aFilters.push(new Filter("Fipex", FilterOperator.EQ, aData.Fipex));
+				var aRes = await this._readFromDb("4", "/ZCOBI_PREN_ASSAUTSetSet", aFilters, [], "");
+				this.getView().setModel(new JSONModel(aRes), "modelAnagraficaAuto");
+			} catch (e) {
+				this.MesssageBoxDynamic("attenzione", JSON.parse(e.responseText).error.message.value, "", "error");
+				// MessageBox.error(e);
+			}
 		},
 
 		_getDatiAnagrafica: async function() {
-			this._openBusyDialog();
 			var sFipex = this.getView().byId("idLinkPosfinTab").getText();
 			// var sIdProposta = this.getView().byId("idPropostaTabID").getText();
 			var sKeycodepr, sFikrs, sAnno, sFase, sReale, sVersione, sEos;
@@ -75,7 +105,7 @@ sap.ui.define([
 
 			sFipex = aModelPosFin.Fipex;
 			sPosfin = aModelPosFin.Fipex;
-			sKeycodepr = aModelPosFin.Keycodepr;
+			sKeycodepr = aModelPosFin.KeyCode;
 			sFikrs = aModelPosFin.Fikrs;
 			sAnno = aModelPosFin.AnnoFipex;
 			sFase = aModelPosFin.Fase;
@@ -88,13 +118,25 @@ sap.ui.define([
 
 			var that = this;
 			try {
-				var aRes = await this.readFromDb("2", sPathPF, [], [], "");
+				var aRes = await this._readFromDb("4", sPathPF, [], [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelAnagraficaPf");
-
+				var oObject = {
+					denomC: "",
+					denomA: ""
+				};
+				this.getView().setModel(new JSONModel(oObject), "modelControlDenom");
+				var sModelControl = this.getView().getModel("modelControlDenom");
+				if (parseInt(aRes.Coddenomstdcap) > 0) {
+					sModelControl.setProperty("/denomC", "X");
+				}
+				if (parseInt(aRes.Coddenomstdpg) > 0) {
+					sModelControl.setProperty("/denomA", "X");
+				}
+				sModelControl.refresh();
 			} catch (e) {
-				MessageBox.error(e.responseText);
+				// MessageBox.error(JSON.parse(e.responseText).error.message.value);
+				this.MesssageBoxDynamic("attenzione", JSON.parse(e.responseText).error.message.value, "", "error");
 			}
-			this._closeDialog();
 
 		},
 
@@ -129,7 +171,8 @@ sap.ui.define([
 				this.getView().setModel(new JSONModel(aRes), "modelTimeLineWorkFlow")
 			} catch (errorResponse) {
 
-				MessageBox.error(this.getResourceBundle().getText("NessunDato"));
+				// MessageBox.error(this.getResourceBundle().getText("NessunDato"));
+				this.MesssageBoxDynamic("attenzione", "NessunDato", "", "error");
 
 			}
 			this._closeDialog();
@@ -192,12 +235,15 @@ sap.ui.define([
 				var sPath = "/PropostaSet(Keycodepr='" + aData.KeyCode + "')";
 				try {
 					await this.modifyRecord("4", sPath, oEntry);
-					MessageBox.success(this.getResourceBundle().getText("MBCreateSuccessPagTabNota"));
+					// MessageBox.success(this.getResourceBundle().getText("MBCreateSuccessPagTabNota"));
+					this.MesssageBoxDynamic("opEse", "MBCreateSuccessPagTabNota", "", "success");
 				} catch (e) {
-					MessageBox.error(e.responseText);
+					// MessageBox.error(e.responseText);
+					this.MesssageBoxDynamic("attenzione", JSON.parse(e.responseText).error.message.value, "", "error");
 				}
 			} else {
-				MessageBox.error(that.getView().getModel("i18n").getResourceBundle().getText("MBCreateTestoMancantePagTabNota"));
+				// MessageBox.error(that.getView().getModel("i18n").getResourceBundle().getText("MBCreateTestoMancantePagTabNota"));
+				this.MesssageBoxDynamic("attenzione", "MBCreateTestoMancantePagTabNota", "", "error");
 			}
 			this._closeDialog();
 		},
@@ -213,12 +259,12 @@ sap.ui.define([
 
 		onPressNavToInvioAllaValidazione: function(oEvt) {
 			var sBtnText = oEvt.getSource().getText();
-
-			var oDataModel = this._getDbModel("2");
+			var oDataModel = this._getDbModel("4");
 			var that = this;
 			if (sBtnText.toUpperCase() === this.getResourceBundle().getText("RevocaValid").toUpperCase()) {
-				MessageBox.warning(this.getResourceBundle().getText("MBTestoPopupRevocaValid"), {
+				MessageBox.warning(this.recuperaTestoI18n("MBTestoPopupRevocaValid"), {
 					icon: MessageBox.Icon.WARNING,
+					id: "MessageWarn",
 					title: this.getResourceBundle().getText("RevocaValid"),
 					actions: [MessageBox.Action.YES, MessageBox.Action.NO],
 					emphasizedAction: MessageBox.Action.NO,
@@ -231,7 +277,8 @@ sap.ui.define([
 									"IdProposta": sIdProposta
 								}, // function import parameters        
 								success: function(oData, oResponse) {
-									MessageBox.success(that.getResourceBundle().getText("MBRevocaValidSuccessPagTab"));
+									// MessageBox.success(that.getResourceBundle().getText("MBRevocaValidSuccessPagTab"));
+									that.MesssageBoxDynamic("opEse", "MBRevocaValidSuccessPagTab", "sIterStatus", "success");
 									var sIter = oData.Iter;
 									if (sIter === "01") {
 										sIter = "Proposta in lavorazione";
@@ -240,20 +287,24 @@ sap.ui.define([
 										sIter = "Proposta inviata alla validazione";
 									}
 
-									that.onNavBackHome();
+									// that.onPressNavToHome();
 								},
 								error: function(oError) {
-										MessageBox.error(oError.responseText);
+										// MessageBox.error(JSON.parse(oError.responseText).error.message.value);
+										that.MesssageBoxDynamic("attenzione", JSON.parse(oError.responseText).error.message.value, "", "error");
 									} // callback function for error
 							});
 						}
 					}
 				});
+				sap.ui.getCore().byId("MessageWarn").getButtons()[0].setType("Emphasized");
+				sap.ui.getCore().byId("MessageWarn").getButtons()[1].setType("Emphasized");
 			}
-			if (sBtnText.toUpperCase() === this.getResourceBundle().getText("InvioValid").toUpperCase()) {
-				MessageBox.warning(this.getResourceBundle().getText("MBTestoPopupInvioValid"), {
+			if (sBtnText.toUpperCase() === that.getResourceBundle().getText("InvioValid").toUpperCase()) {
+				MessageBox.warning(that.getResourceBundle().getText("MBTestoPopupInvioValid"), {
 					icon: MessageBox.Icon.WARNING,
-					title: this.getResourceBundle().getText("InvioValid"),
+					id: "MessageWarn",
+					title: that.getResourceBundle().getText("InvioValid"),
 					actions: [MessageBox.Action.YES, MessageBox.Action.NO],
 					emphasizedAction: MessageBox.Action.NO,
 					onClose: function(oAction) {
@@ -264,7 +315,7 @@ sap.ui.define([
 							if (!that.popupSceltaValidatore) {
 								that.popupSceltaValidatore = Fragment.load({
 									id: oView.getId(),
-									name: "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view.fragment.PopupSceltaValidatore",
+									name: "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view.Fragment.PopupSceltaValidatore",
 									controller: that
 								}).then(function(oDialog) {
 									oView.addDependent(oDialog);
@@ -278,7 +329,9 @@ sap.ui.define([
 						}
 					}
 				});
-				this.getView().setModel(new JSONModel({
+				sap.ui.getCore().byId("MessageWarn").getButtons()[0].setType("Emphasized");
+				sap.ui.getCore().byId("MessageWarn").getButtons()[1].setType("Emphasized");
+				that.getView().setModel(new JSONModel({
 					Nome: "",
 					Cognome: ""
 				}), "modelUserSearch");
@@ -293,18 +346,20 @@ sap.ui.define([
 			var sCognome = oDataModel.Cognome.toUpperCase();
 			aFilters.push(new Filter("McNamefir", FilterOperator.StartsWith, sNome));
 			aFilters.push(new Filter("McNamelas", FilterOperator.StartsWith, sCognome));
-
 			try {
-				var aRes = await this.readFromDb("4", "/ZES_VALIDATORESet", aFilters, [], "");
+				var aRes = await this._readFromDb("4", "/ZES_VALIDATORESet", aFilters, [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelTableVal");
 			} catch (errorResponse) {
 				var sDettagli = this._setErrorMex(errorResponse);
-				var oErrorMessage = errorResponse.responseText;
+				var oErrorMessage = JSON.parse(errorResponse.responseText).error.message.value;
 				MessageBox.error(oErrorMessage, {
+					id: "MessageError",
 					details: sDettagli,
 					initialFocus: sap.m.MessageBox.Action.CLOSE,
 					styleClass: "sapUiSizeCompact"
 				});
+				sap.ui.getCore().byId("MessageError").getButtons()[0].setType("Emphasized");
+				sap.ui.getCore().byId("MessageError").getButtons()[1].setType("Emphasized");
 
 			}
 			// }
@@ -322,8 +377,8 @@ sap.ui.define([
 		},
 
 		onPressConfermaValidazione: function() {
-			var sIdProposta = this.getView().byId("idPropostaTabID").getText();
-			var oDataModel = this._getDbModel("2");
+			var sIdProposta = this.getView().getModel("modelHeader").getProperty("/IdProposta");
+			var oDataModel = this._getDbModel("4");
 			var sValidatore = this.getView().byId("idTableRisultatiRicercaValidatore").getSelectedItem().getBindingContext("modelTableVal").getProperty(
 				"Bname");
 
@@ -335,7 +390,8 @@ sap.ui.define([
 					"Validatore": sValidatore
 				}, // function import parameters        
 				success: function(oData, oResponse) {
-					MessageBox.success(that.getResourceBundle().getText("MBInvioValidSuccessPagTab"));
+					// MessageBox.success(that.getResourceBundle().getText("MBInvioValidSuccessPagTab"));
+					that.MesssageBoxDynamic("opEse", "MBInvioValidSuccessPagTab", "sIterStatus", "success");
 
 					var sIter = oData.Iter;
 					var sCodIter;
@@ -348,13 +404,156 @@ sap.ui.define([
 						sCodIter = "02";
 					}
 					that.onCloseDialogVal();
-					that.onNavBackHome();
+					// that.onPressNavToHome();
 				}, // callback function for success
 				error: function(oError) {
-						MessageBox.error(oError.responseText);
+						// MessageBox.error(oError.responseText);
+						that.MesssageBoxDynamic("attenzione", JSON.parse(oError.responseText).error.message.value, "", "error");
 					} // callback function for error 
 			});
 		},
+
+		onPressAssociaAut: function() {
+
+			var oView = this.getView();
+
+			if (!this.AssociaAut) {
+				this.AssociaAut = Fragment.load({
+					id: oView.getId(),
+					name: "zsap.com.r3.cobi.s4.esamodModEntrPosFin.view.Fragment.AssociaAutorizzazionePopOver",
+					controller: this
+				}).then(function(oPopover) {
+					oView.addDependent(oPopover);
+					return oPopover;
+				});
+			}
+			this.AssociaAut.then(function(oPopover) {
+				oPopover.open();
+			});
+
+		},
+
+		onPressChiudiAssAut: function() {
+			var oPopover = this.getView().byId("AssociaAutPopover");
+			oPopover.close();
+			oPopover.destroy();
+			oPopover = undefined;
+		},
+
+		onPressOkAssAut: async function() {
+			var aDataAnag = this.getView().getModel("modelAnagraficaPf").getData();
+			var aCheckAnagrafica = this.Editable;
+			var sFincode = this.byId("AutorizzazioniMCD").getAutorizzazione().FINCODE
+				// if (aCheckAnagrafica === true) {
+			var oEntry = {
+				"Fipex": aDataAnag.Codificareppf,
+				"Fikrs": aDataAnag.Fikrs,
+				"Anno": aDataAnag.Anno,
+				"Fase": aDataAnag.Fase,
+				"Reale": aDataAnag.Reale,
+				"Versione": aDataAnag.Versione,
+				"Fictr": this.getView().getModel("modelHeader").getData().Fictr,
+				"Fincode": sFincode
+			};
+			try {
+				await this.insertRecord("4", "/ZCOBI_PREN_ASSAUTSetSet", oEntry);
+				this.MesssageBoxDynamic("opEse", "AUTOOK", "", "success");
+				// MessageBox.success(this.getResourceBundle().getText("AUTOOK"));
+				this.onPressChiudiAssAut();
+				this.getView().getModel("modelAnagraficaPf").refresh();
+				// aCheckAnagrafica = true;
+				await this._getDatiAnagrafica();
+				await this._dataAuto();
+			} catch (e) {
+				// MessageBox.warning(this.getResourceBundle().getText("ERRORFOFP"));
+				this.MesssageBoxDynamic("attenzione", e, "", "warningAllert");
+			}
+			// } else {
+			// }
+
+		},
+
+		onPressAvvioComp: async function() {
+			var that = this;
+			this.urlSac = "";
+			var oModelPosFin = this.getView().getModel("modelHeader");
+			var sIdProp = oModelPosFin.getData().KeyCode;
+			var sPosFin = oModelPosFin.getData().Fipex;
+			var sStrutt = oModelPosFin.getData().Fictr;
+			var sFincode = this.getView().byId("selectCompetenza").getSelectedKey();
+			var sCodIter = oModelPosFin.getData().CodIter;
+			if (sCodIter === "01") {
+				var sReon = "NO";
+			} else {
+				sReon = "SI";
+			}
+			// var oDati = {
+			// 	// "PosFin": sPosFin,
+			// 	// "IdProposta": sIdProp,
+			// 	// "Autorizzazione": sAut,
+			// 	"SemanticObject": "ESAMINA_MOD",
+			// 	"Schermata": "E_COMPETENZA"
+			// };
+			// var aFilter = [];
+			// aFilter.push(new Filter("SemanticObject", FilterOperator.EQ, "ESAMINA_MOD"));
+			// aFilter.push(new Filter("Schermata", FilterOperator.EQ, "E_COMPETENZA"));
+			try {
+				// var oLink = await this._readFromDb("4", "/SacUrlSet", aFilter);
+				var sEntitySet = "/SacUrlSet(SemanticObject='" + "ESAMINA_MOD" + "',Schermata='" + "E_COMPETENZA" + "')";
+				var oLink = await this._readFromDb("4", sEntitySet);
+				var oLinkUrl = oLink.URL + "&p_AutorizzazioneURL" + sFincode + "&p_IdPropostaURL=" + sIdProp + "&p_PosizioneURL=" + sPosFin.replaceAll(
+						".", "") +
+					"&p_StrutturaURL=" + sStrutt + "&p_REON=" + sReon;
+				var oFrame = this.getView().byId("linkSacCompetenza");
+				this.urlSac = oLinkUrl;
+				var oFrameContent = oFrame.$()[0];
+				oFrameContent.setAttribute("src", this.urlSac);
+				// this._refresh();
+			} catch (e) {
+				// sap.m.MessageBox.error(this.recuperaTestoI18n("MBCreateErrorPageAut"));
+				this.MesssageBoxDynamic("attenzione", "MBCreateErrorPageAut", "", "error");
+			}
+		},
+
+		_getSchedaSacCassa: async function() {
+			var that = this;
+			this.urlSac = "";
+			var oModelPosFin = this.getView().getModel("modelHeader");
+			var sIdProp = oModelPosFin.getData().KeyCode;
+			var sPosFin = oModelPosFin.getData().Fipex;
+			var sStrutt = oModelPosFin.getData().Fictr;
+			var sFincode = this.getView().byId("selectCompetenza").getSelectedKey();
+			var sCodIter = oModelPosFin.getData().CodIter;
+			if (sCodIter === "01") {
+				var sReon = "NO";
+			} else {
+				sReon = "SI";
+			}
+			// var oDati = {
+			// 	// "PosFin": sPosFin,
+			// 	// "IdProposta": sIdProp,
+			// 	// "Autorizzazione": sAut,
+			// 	"SemanticObject": "ESAMINA_MOD",
+			// 	"Schermata": "E_CASSA"
+			// };
+			// var aFilter = [];
+			// aFilter.push(new Filter("SemanticObject", FilterOperator.EQ, "ESAMINA_MOD"));
+			// aFilter.push(new Filter("Schermata", FilterOperator.EQ, "E_CASSA"));
+			try {
+				var sEntitySet = "/SacUrlSet(SemanticObject='" + "ESAMINA_MOD" + "',Schermata='" + "E_CASSA" + "')";
+				var oLink = await this._readFromDb("4", sEntitySet);
+				var oLinkUrl = oLink.URL + "&p_ID_PROP_URL=" + sIdProp + "&p_POS_FIN_URL=" + sPosFin.replaceAll(".", "") +
+					"&p_ST_AM_RESP_URL=" + sStrutt + "&p_REON=" + sReon;
+				var oFrame = this.getView().byId("linkSacCassa");
+				this.urlSac = oLinkUrl;
+				var oFrameContent = oFrame.$()[0];
+				oFrameContent.setAttribute("src", this.urlSac);
+				// this._refresh();
+			} catch (e) {
+				// sap.m.MessageBox.error(this.recuperaTestoI18n("MBCreateErrorPageAut"));
+				this.MesssageBoxDynamic("attenzione", "MBCreateErrorPageAut", "", "error");
+			}
+		}
 
 	});
 });

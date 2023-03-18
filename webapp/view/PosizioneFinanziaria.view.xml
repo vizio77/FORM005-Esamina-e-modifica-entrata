@@ -97,7 +97,7 @@
 				<t:columns>
 					<t:Column width="5rem">
 						<t:template>
-							<CheckBox id="idTableSelect" select="onSelect" selected="{ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}"
+							<CheckBox id="idTableSelect" select="onSelectCheckBox" selected="{ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}"
 								visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '0' ? true : false}"></CheckBox>
 						</t:template>
 					</t:Column>

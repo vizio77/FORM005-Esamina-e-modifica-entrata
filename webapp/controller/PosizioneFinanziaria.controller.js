@@ -193,6 +193,20 @@ sap.ui.define([
 				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("MBTastoGestisciPagePosFinA"));
 			}
 		},
+		onSelectCheckBox: function(oEvent) {
+			// this._resetCheckbox("modelTreeTable", this);
+            var oEl = oEvent.getSource().getBindingContext("ZSS4_COBI_PREN_ESAMOD_SRV").sPath;
+
+			if(oEl){
+
+				var oObjectUpdate = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData[oEl.slice(1)];
+				if (oObjectUpdate.SELECTED && oObjectUpdate.SELECTED === true) {
+					oObjectUpdate.SELECTED = false;
+				} else {
+					oObjectUpdate.SELECTED = true;
+				}
+			}
+		},
 
 		onSelect: function(oEvent) {
 
@@ -277,7 +291,7 @@ sap.ui.define([
 			var aSelected = [],
 				aValResult = [];
 			for (var i = 0; i < aObject.length; i++) {
-				if (aData[aObject[i]].SELECTED === true) {
+				if ( aObject[i].includes("ZET_AVVIOPFSet") && aData[aObject[i]].SELECTED === true) {
 					aSelected.push(aData[aObject[i]]);
 				}
 			}

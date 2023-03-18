@@ -2,7 +2,8 @@
 	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls" xmlns:f="sap.f" xmlns:layout="sap.ui.layout"
 	xmlns:commons="sap.suite.ui.commons" xmlns:card="sap.f.cards" xmlns:form="sap.ui.layout.form"
-	xmlns:zcontrollinkSar="custlinksar.custlinksar.controls">
+	xmlns:zcontrollinkSar="custlinksar.custlinksar.controls" xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:TooltipAutorizzazione="zsap.com.r3.cobi.s4.z_s4_auth_tooltip">
 	<f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true">
 		<!-- DynamicPage Header  -->
 		<f:header>
@@ -14,7 +15,7 @@
 								<VBox direction='Row' visible="true">
 									<layout:VerticalLayout class="sapUiTinyMarginBeginEnd sapUiSmallMarginTop">
 										<layout:HorizontalLayout>
-											<ObjectStatus id="idTextPosFinTabID" active="true" title="{i18n>PosFin}" text="" class="textBold " press="onObjectStatusPosFinPress"/>
+											<ObjectStatus id="idTextPosFinTabID" active="true" title="{i18n>PosFin}" text="" class="textBold" press="onObjectStatusPosFinPress"/>
 											<zcontrolPosFin:LinkPosFinEntrate id="idLinkPosfinTab" text="{modelHeader>/Fipex}" anno="{modelHeader>/AnnoFipex}"
 												fikrs="{modelHeader>/Fikrs}" fase="{modelHeader>/Fase}" reale="{modelHeader>/Reale}" versione="{modelHeader>/Versione}"
 												fipex="{modelHeader>/Fipex}" datbis="99991231"/>
@@ -78,15 +79,15 @@
 								<form:content>
 									<core:Title text=""/>
 									<Label required="true" text="Amm."/>
-									<Input value="{modelAnagraficaPf>/Prctr}" width="80%" editable="false">
+									<Input value="{modelAnagraficaPf>/Prctr}" textAlign="Begin" width="30%" editable="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="4" cellsLarge="2"/>
 										</layoutData>
 									</Input>
 									<Input value="{modelAnagraficaPf>/Descrestamministr}" width="90%" editable="false"/>
 									<Label text="{i18n>capitolo}"/>
-									<Input value="{modelAnagraficaPf>/Codicecapitolo}" width="80%" tooltip="{modelAnagraficaPf>/Codicecapitolo}" editable="false"
-										valueHelpRequest="onHVFormPosFin">
+									<Input value="{modelAnagraficaPf>/Codicecapitolo}" textAlign="Begin" width="30%" tooltip="{modelAnagraficaPf>/Codicecapitolo}"
+										editable="false" valueHelpRequest="onHVFormPosFin">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 										</layoutData>
@@ -94,7 +95,8 @@
 									<Input value="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()} " width="90%"
 										tooltip="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}" editable="false"/>
 									<Label text="{i18n>articolo}"/>
-									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicepg}" width="80%" tooltip="{modelAnagraficaPf>/Codicepg}" editable="false">
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicepg}" textAlign="Begin" width="30%" tooltip="{modelAnagraficaPf>/Codicepg}"
+										editable="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 										</layoutData>
@@ -102,46 +104,59 @@
 									<Input value="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}" editable="false" width="90%"
 										tooltip="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}"/>
 									<Label text="{i18n>CdR}" required="true"/>
-									<Input editable="false" value="{modelAnagraficaPf>/Codicecdr}" width="80%" showValueHelp="false" valueHelpOnly="false">
+									<Input editable="false" value="{modelAnagraficaPf>/Codicecdr}" textAlign="Begin" width="30%" showValueHelp="false" valueHelpOnly="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="4" cellsLarge="2"/>
 										</layoutData>
 									</Input>
 									<Input showValueHelp="false" value="{modelAnagraficaPf>/Descrestcdr}" width="90%" editable="false"/>
 									<Label text="{i18n>Ragioneria}" required="true"/>
-									<Input editable="false" value="{modelAnagraficaPf>/Codiceragioneria}" width="80%" showValueHelp="falsefalse" valueHelpOnly="false">
+									<Input editable="false" value="{modelAnagraficaPf>/Codiceragioneria}" textAlign="Begin" width="30%" showValueHelp="falsefalse"
+										valueHelpOnly="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="4" cellsLarge="2"/>
 										</layoutData>
 									</Input>
 									<Input value="{modelAnagraficaPf>/Descrestragioneria}" width="90%" editable="false"/>
 									<Label text="{i18n>titolo}"/>
-									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicetitolo}" width="80%" tooltip="{modelAnagraficaPf>/Codicetitolo}"
-										editable="false">
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicetitolo}" textAlign="Begin" width="30%"
+										tooltip="{modelAnagraficaPf>/Codicetitolo}" editable="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 										</layoutData>
 									</Input>
-									<Input value="{= ${modelAnagraficaPf>/}.toUpperCase()}" editable="false" width="90%" tooltip="{= ${modelAnagraficaPf>/}.toUpperCase()}"/>
+									<Input value="{= ${modelAnagraficaPf>/Descrtitolo}.toUpperCase()}" editable="false" width="90%"
+										tooltip="{= ${modelAnagraficaPf>/Descrtitolo}.toUpperCase()}"/>
 									<Label text="{i18n>natura}"/>
-									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicenatura}" width="80%" tooltip="{modelAnagraficaPf>/Codicenatura}"
-										editable="false">
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicenatura}" textAlign="Begin" width="30%"
+										tooltip="{modelAnagraficaPf>/Codicenatura}" editable="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 										</layoutData>
 									</Input>
-									<Input value="{= ${modelAnagraficaPf>/}.toUpperCase()}" editable="false" width="90%" tooltip="{= ${modelAnagraficaPf>/}.toUpperCase()}"/>
+									<Input value="{= ${modelAnagraficaPf>/Descrnatura}.toUpperCase()}" editable="false" width="90%"
+										tooltip="{= ${modelAnagraficaPf>/Descrnatura}.toUpperCase()}"/>
+									<Label text="{i18n>categoria}"/>
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicecategoria}" textAlign="Begin" width="30%"
+										tooltip="{modelAnagraficaPf>/Codicecategoria}" editable="false">
+										<layoutData>
+											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+										</layoutData>
+									</Input>
+									<Input value="{= ${modelAnagraficaPf>/Descrcategoria}.toUpperCase()}" editable="false" width="90%"
+										tooltip="{= ${modelAnagraficaPf>/}.toUpperCase()}"/>
 									<Label text="{i18n>tipologia}"/>
-									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicetipologia}" width="80%" tooltip="{modelAnagraficaPf>/Codicetipologia}"
-										editable="false">
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codicetipologia}" textAlign="Begin" width="30%"
+										tooltip="{modelAnagraficaPf>/Codicetipologia}" editable="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 										</layoutData>
 									</Input>
-									<Input value="{= ${modelAnagraficaPf>/}.toUpperCase()}" editable="false" width="90%" tooltip="{= ${modelAnagraficaPf>/}.toUpperCase()}"/>
+									<Input value="{= ${modelAnagraficaPf>/Descrtipologia}.toUpperCase()}" editable="false" width="90%"
+										tooltip="{= ${modelAnagraficaPf>/Descrtipologia}.toUpperCase()}"/>
 									<Label text="{i18n>provento}"/>
-									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codiceprovento}" width="80%" tooltip="{modelAnagraficaPf>/Codiceprovento}"
-										editable="false">
+									<Input showValueHelp="false" value="{modelAnagraficaPf>/Codiceprovento}" textAlign="Begin" width="30%"
+										tooltip="{modelAnagraficaPf>/Codiceprovento}" editable="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 										</layoutData>
@@ -154,14 +169,16 @@
 								<form:content>
 									<core:Title text="{i18n>DenominazioneCapitolo}"/>
 									<Label text="{i18n>CodStandard}"/>
-									<Input value="{modelAnagraficaPf>/Coddenomstdcap}" width="5.3%" tooltip="{modelAnagraficaPf>/Codicecapitolo}" editable="false"/>
+									<Input value="{modelAnagraficaPf>/Coddenomstdcap}" width="5.3%" textAlign="Center" tooltip="{modelAnagraficaPf>/Codicecapitolo}"
+										editable="false"/>
 									<Label text="{i18n>DenInt}" labelFor="idInputDenIntCap" required="true"/>
 									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}" width="85%"
-										editable="{= ${modelAnagraficaPf>Coddenomstdcap} === '' ? true : false }"
+										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomC} ==='X' ? false : true}"
 										tooltip="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}"/>
 									<Label text="{i18n>DenRid}" labelFor="idInputDenRidCap" required="true"/>
 									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrbrevecap}.toUpperCase()}" width="85%"
-										tooltip="{= ${modelAnagraficaPf>/Descrbrevecap}.toUpperCase()}" editable="{= ${modelAnagraficaPf>Coddenomstdcap} === '' ? true : false }"/>
+										tooltip="{= ${modelAnagraficaPf>/Descrbrevecap}.toUpperCase()}"
+										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomC} ==='X' ? false : true}"/>
 								</form:content>
 							</form:SimpleForm>
 							<!--<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsM="2" columnsL="3" columnsXL="3">-->
@@ -171,14 +188,16 @@
 								<form:content>
 									<core:Title text="{i18n>DenominazionePG}"/>
 									<Label text="{i18n>CodStandard}" labelFor="idInputCodStaPg"/>
-									<Input id="idInputCodStaPg" editable="false" width="5.3%" tooltip="{modelAnagraficaPf>/Coddenomstdpg}"
+									<Input id="idInputCodStaPg" editable="false" width="5.3%" textAlign="Center" tooltip="{modelAnagraficaPf>/Coddenomstdpg}"
 										value="{modelAnagraficaPf>/Coddenomstdpg}"/>
 									<Label text="{i18n>DenInt}" labelFor="idInputDenIntPg" required="true"/>
 									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}" width="85%"
-										editable="{= ${modelAnagraficaPf>Coddenomstdpg} === '' ? true : false }" tooltip="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}"/>
+										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomA} ==='X' ? false : true}"
+										tooltip="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}"/>
 									<Label text="{i18n>DenRid}" labelFor="idInputDenRidPg" required="true"/>
 									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrbrevepg}.toUpperCase()}" width="85%"
-										tooltip="{= ${modelAnagraficaPf>/Descrbrevepg}.toUpperCase()}" editable="{= ${modelAnagraficaPf>Coddenomstdcap} === '' ? true : false }"/>
+										tooltip="{= ${modelAnagraficaPf>/Descrbrevepg}.toUpperCase()}"
+										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomA} ==='X' ? false : true}"/>
 								</form:content>
 							</form:SimpleForm>
 							<!--<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">-->
@@ -202,8 +221,9 @@
 									<HBox class="sapUiMediumMarginBegin">
 										<Label design="Bold" text="Autorizzazione:" labelFor="idAutorizz" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTop"/>
 										<!--<zcontrolAuth:InputAutorizzazioni id="AutorizzazioniMC" Eos="S"/>-->
-										<Select width="auto" items="{modelAnagraficaAuto>/}" editable="true">
-											<core:Item key="{modelAnagraficaAuto>Fincode}" text="{modelAnagraficaAuto>Beschr}"/>
+										<Select id="selectCompetenza" width="auto" items="{modelAnagraficaAuto>/}" editable="true">
+											<!--<core:Item key="" text=""/>-->
+											<core:Item key="{modelAnagraficaAuto>Fincode}" text="{modelAnagraficaAuto>Zzdescrestesa}"/>
 										</Select>
 										<OverflowToolbar style="Clear" width="44em" class="sapUiTinyMarginBegin">
 											<HBox id="idBoxReiscrizioni" visible="true"></HBox>
@@ -237,7 +257,7 @@
 							</ScrollContainer>
 						</Panel>
 					</IconTabFilter>
-					<IconTabFilter key="WorkFlow" id="WorkFlow" icon="sap-icon://history" text="{i18n>WorkFlow}" enabled="true" design="Vertical"
+					<IconTabFilter key="WorkFlow" id="Tab8" icon="sap-icon://history" text="{i18n>WorkFlow}" enabled="true" design="Vertical"
 						class="sapUiSmallMarginEnd">
 						<ScrollContainer horizontal="false" vertical="true" height="100%" width="100%">
 							<VBox>
@@ -259,7 +279,7 @@
 							</VBox>
 						</ScrollContainer>
 					</IconTabFilter>
-					<IconTabFilter key="Note" id="Note" icon="sap-icon://calendar" text="{i18n>Nota}" enabled="true" design="Vertical"
+					<IconTabFilter key="Note" id="Tab9" icon="sap-icon://calendar" text="{i18n>Nota}" enabled="true" design="Vertical"
 						class="sapUiSmallMarginEnd">
 						<ScrollContainer horizontal="false" vertical="true" height="100%" width="100%">
 							<VBox>
@@ -267,17 +287,18 @@
 									<Panel height="550px" headerText="{i18n>Nota} {i18n>Proposta}">
 										<VBox class="sapUiTinyMarginTop">
 											<Label text="{i18n>ScegliNota}"/>
-											<Input id="idInputScegliNoteIDProposta" class="sapUiTinyMarginEnd" editable="{= ${modelHeader>/CodIter} === '01' ? true : false}"
+											<Input id="idInputScegliNoteIDProposta" class="sapUiTinyMarginEnd" editable="false" valueHelpOnly="true"
 												placeholder="{i18n>ScegliNota} {i18n>Standard}" showSuggestion="true" showValueHelp="true" submit="onSubmitIdNota"
-												valueHelpRequest="handleValueHelp('Note')"/>
+												valueHelpRequest="handleValueHelp($event, 'Note')"/>
 											<Label text="Testo" class="sapUiTinyMarginTop"/>
 											<TextArea id="idNota" height="15rem" showExceededText="true" width="30em" value="{modelNote>/Testonota}" liveChange="onLiveWriteNota"
-												maxLength="2000" editable="{= ${modelHeader>/CodIter} === '01' ? true : false}"/>
-											<layout:HorizontalLayout >
-												<Button id="idBtnSalvaNota" type="Emphasized" text="{i18n>Salva} {i18n>Nota}" press="onSaveNota"
-													enabled="{= ${modelHeader>/CodIter} === '01' ? true : false}"/>
-												<Button type="Emphasized" text="{i18n>Resetta}" visible="{= ${modelHeader>/CodIter} === '01' ? true : false}" press="onPressResettaNote"/>
-											</layout:HorizontalLayout>
+												maxLength="2000" editable="false"/>
+											<!--<layout:HorizontalLayout >-->
+											<!--	<Button id="idBtnSalvaNota" visible="false" type="Emphasized" text="{i18n>Salva} {i18n>Nota}" press="onSaveNota"-->
+											<!--		enabled="{= ${modelHeader>/CodIter} === '01' ? true : false}"/>-->
+											<!--	<Button type="Emphasized" text="{i18n>Resetta}" visible="{= ${modelHeader>/CodIter} === '01' ? true : false}" press="onPressResettaNote"-->
+											<!--		visible="false"/>-->
+											<!--</layout:HorizontalLayout>-->
 										</VBox>
 									</Panel>
 								</FlexBox>
@@ -290,7 +311,8 @@
 		<f:footer>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
-				<Button type="Emphasized" text="{i18n>salva}" press="onSave" enabled="{= ${modelHeader>/CodIter} === '01' ? true : false"/>
+				<Button type="Emphasized" text="{i18n>salva}" press="onSave" enabled="{= ${modelHeader>/CodIter} ==='01' ? true : false}"
+					visible="{= ${modelControlButton>/salva} === '' ? true : false}"/>
 				<Button enabled="true" type="Emphasized" text="{i18n>Invio}" visible="{= ${modelHeader>/CodIter} === '01' ? true : false}"
 					press="onPressNavToInvioAllaValidazione"/>
 				<Button enabled="true" type="Emphasized" text="{i18n>RevocaValid}" visible="{= ${modelHeader>/CodIter} === '02' ? true : false}"
