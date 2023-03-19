@@ -2,7 +2,8 @@
 	xmlns:fb="sap.ui.comp.filterbar" controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.PosizioneFinanziaria"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls"
 	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls" xmlns:layout="sap.ui.layout"
-	xmlns:zcontrolAdatta="zsap.com.r3.cobi.s4.custadattafiltri.spese.adattafiltrispese.controls">
+	xmlns:zcontrolAdatta="zsap.com.r3.cobi.s4.custadattafiltri.spese.adattafiltrispese.controls"
+	xmlns:TooltipAutorizzazione="zsap.com.r3.cobi.s4.z_s4_auth_tooltip">
 	<f:DynamicPage id="dynamicPageIdPosFin" headerExpanded="true" showFooter="true">
 		<f:title>
 			<f:DynamicPageTitle>
@@ -201,7 +202,7 @@
 						<Label text="{i18n>PosizioneFinanziaria}" class="boldCss"/>
 						<t:template>
 							<zcontrolPosFin:LinkPosFinEntrate anno="{modelTreeTable>Anno}" fikrs="{modelTreeTable>Fikrs}"
-								fase="{modelTreeTable>Fase}" reale="{modelTreeTable>Reale}" versione="{modelPosFinFragment>Versione}"
+								fase="{modelTreeTable>Fase}" reale="{modelTreeTable>Reale}" versione="{modelTreeTable>Versione}"
 								fipex="{modelTreeTable>Fipex}" datbis="{ path: 'modelTreeTable>Datbis', formatter: '.formatter.formatterDatbis'}"
 								text="{modelTreeTable>Fipex}" semanticObject="ESAMINAMODIFICA"/>
 						</t:template>
@@ -209,7 +210,13 @@
 					<t:Column width="13rem">
 						<Label text="{i18n>Autorizzazione}" class="boldCss"/>
 						<t:template>
-							<Text text="{modelTreeTable>Autorizzazioni}" wrapping="false"/>
+							<Text text="{= ${modelTreeTable>HierarchyLevel} === '0' ? '' : (${modelTreeTable>Autorizzazioni} ) }" wrapping="false"/>
+								<!-- <TooltipAutorizzazione:TooltipAutorizzazione id="InputAutorizzazioniHome"
+								text="{= ${modelThree>HierarchyLevel} === '1' ? '' : (${modelThree>Autorizzazioni} ) }" Fincode="{modelThree>Fincode}"
+								Fikrs="{modelThree>Fikrs}" espDescrizione="X"/> -->
+								<!-- <TooltipAutorizzazione:TooltipAutorizzazione id="InputAutorizzazioniHome"
+								text="{= ${modelTreeTable>HierarchyLevel} === '0' ? '' : (${modelTreeTable>Autorizzazioni} ) }" Fincode="{modelTreeTable>Fincode}"
+								Fikrs="{modelTreeTable>Fikrs}" espDescrizione="X"/> -->
 						</t:template>
 					</t:Column>
 					<t:Column width="11rem">

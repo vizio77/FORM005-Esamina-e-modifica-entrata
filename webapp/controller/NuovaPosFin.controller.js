@@ -8,8 +8,9 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"zsap/com/r3/cobi/s4/esamodModEntrPosFin/model/MatchCode",
 	"zsap/com/r3/cobi/s4/esamodModEntrPosFin/model/models",
+	"sap/ui/core/BusyIndicator"
 
-], function(BaseController, syncStyleClass, JSONModel, Fragment, Filter, FilterOperator, MessageBox, MatchCode, models) {
+], function(BaseController, syncStyleClass, JSONModel, Fragment, Filter, FilterOperator, MessageBox, MatchCode, models, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.NuovaPosFin", {
@@ -1238,20 +1239,23 @@ sap.ui.define([
 				
 
 				if(!this.checkFieldsRequired(oDati, aDatiProp[0])) return;
-				
+				BusyIndicator.show(0);
 				oGlobalModel.create("/PosFinSet", oDati, {
 					success: function(oData, oResponse) {
+						BusyIndicator.hide();
 						//lt faccio comparire un messagebox e poi resetto il modello.
 						sap.m.MessageBox.success(that.oResourceBundle.getText("MBCreateSuccessPF", [oData.Fipex]), {
 							actions: [MessageBox.Action.CLOSE],
 							emphasizedAction: "Manage Products",
 							onClose: function (sAction) {
 								that.resetFields();
+								
 							}
 						});
-
+						
 					}.bind(this),
 					error: function(oError) {
+						BusyIndicator.hide();
 						sap.m.MessageBox.error(that.oResourceBundle.getText("MBCreateError"));
 					}
 				});

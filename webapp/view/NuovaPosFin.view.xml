@@ -117,7 +117,7 @@
 											suggestionItemSelected=".onSuggestionItemSelected($event, 'Ragioneria')"/>
 
 									<m:Label text="{i18n>Natura}" required="true"/>
-										<m:Input id="idNatura" value="{modelNuovaPosFin>/NAT}" editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Titolo}"
+										<m:Input id="idNatura" value="{modelNuovaPosFin>/NAT}" editable="true" required="true" class="sapUiTinyMarginEnd" placeholder="Scegli {i18n>Natura}"
 											maxSuggestionWidth="60%" showSuggestion="false" showValueHelp="true" valueHelpRequest=".onHelp($event, 'Natura')"
 											liveChange=".onChangeMC($event, 'Natura')"  valueHelpOnly="true"></m:Input>
 									

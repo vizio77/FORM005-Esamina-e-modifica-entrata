@@ -528,8 +528,8 @@ sap.ui.define([
 		onValueHelpSearch: function(oEvent, inputRef, that) {
 			var sValue, aOrFiltersCond, aFilters;
 			sValue = oEvent.getParameter("value");
-			var sAmminVal, sMissioneVal, sProgrammaVal, sTitoloVal, sCategoriaVal, sCE2Val, sCapitoloVal;
-			var fAmm, fMiss, fProg, fCap, fTit, fCat, fCE2;
+			var sAmminVal, sMissioneVal, sProgrammaVal, sTitoloVal, sCategoriaVal, sTipVal, sCE2Val, sTip, sCapitoloVal;
+			var fAmm, fMiss, fProg, fCap, fTit, fCat, fCE2 , sTip;
 			if (!inputRef) {
 				inputRef = oEvent.getParameters().id;
 			}
@@ -553,19 +553,19 @@ sap.ui.define([
 					new Filter({
 						filters: [
 							//new Filter("Codicecdr", FilterOperator.Contains, sValue),
-							new Filter("DescrEstesa", FilterOperator.Contains, sValue)
+							new Filter("Descrestesa", FilterOperator.Contains, sValue)
 						],
 						and: false
 					});
 				oEvent.getSource().getBinding("items").filter(aOrFiltersCond);
 			}
-
+			
 			if (inputRef === "Ragioneria") {
 
 				aOrFiltersCond =
 					new Filter({
 						filters: [
-							// new Filter("CodiceRagioneria", FilterOperator.Contains, sValue),
+							new Filter("CodiceRagioneria", FilterOperator.Contains, sValue),
 							new Filter("DescrEstesa", FilterOperator.Contains, sValue)
 						],
 						and: false
@@ -573,6 +573,18 @@ sap.ui.define([
 				oEvent.getSource().getBinding("items").filter(aOrFiltersCond);
 			}
 
+			if (inputRef === "Natura") {
+
+				aOrFiltersCond =
+					new Filter({
+						filters: [
+							new Filter("Codicenatura", FilterOperator.Contains, sValue),
+							new Filter("Descrestesa", FilterOperator.Contains, sValue)
+						],
+						and: false
+					});
+				oEvent.getSource().getBinding("items").filter(aOrFiltersCond);
+			}
 			if (inputRef === "Missione") {
 
 				aOrFiltersCond =
@@ -704,8 +716,20 @@ sap.ui.define([
 				aOrFiltersCond =
 					new Filter({
 						filters: [
-							//new Filter("Codicetitolo", FilterOperator.Contains, sValue),
-							new Filter("Descrtitolo", FilterOperator.Contains, sValue)
+							new Filter("Codicetitolo", FilterOperator.Contains, sValue),
+							//new Filter("Descrtit", FilterOperator.Contains, sValue)
+						],
+						and: false
+					});
+				oEvent.getSource().getBinding("items").filter(aOrFiltersCond);
+			}
+			if (inputRef === "Capo") {
+
+				aOrFiltersCond =
+					new Filter({
+						filters: [
+							new Filter("Numecoddettcapoent", FilterOperator.Contains, sValue),
+							//new Filter("Desctipocap", FilterOperator.Contains, sValue),
 						],
 						and: false
 					});
@@ -713,13 +737,13 @@ sap.ui.define([
 			}
 
 			if (inputRef === "Categoria") {
-				sTitoloVal = that.getView().byId("TitoloFA").getValue();
+				sTitoloVal = this.Ref.getView().byId("idTitolo").getValue()
 
 				aOrFiltersCond =
 					new Filter({
 						filters: [
-							//new Filter("Codicecategoria", FilterOperator.Contains, sValue),
-							new Filter("Descrcategoria", FilterOperator.Contains, sValue)
+							new Filter("Codicecategoria", FilterOperator.Contains, sValue),
+							//new Filter("Descrcat", FilterOperator.Contains, sValue)
 						],
 						and: false
 					});
@@ -736,6 +760,34 @@ sap.ui.define([
 				oEvent.getSource().getBinding("items").filter(aFilters);
 			}
 
+			if (inputRef === "Tipologia") {
+				sTitoloVal = this.Ref.getView().byId("idTitolo").getValue()
+				sCategoriaVal = this.Ref.getView().byId("idCategoria").getValue();
+
+				aOrFiltersCond =
+					new Filter({
+						filters: [
+							//new Filter("Codiceclaeco2", FilterOperator.Contains, sValue),
+							new Filter("Codicetipologia", FilterOperator.Contains, sValue)
+						],
+						and: false
+					});
+				aFilters = new Filter({
+					filters: [
+						aOrFiltersCond
+					],
+					and: true
+				});
+				if (sTitoloVal !== undefined && sTitoloVal !== "") {
+					fTit = new Filter("Codicetitolo", FilterOperator.EQ, sTitoloVal);
+					aFilters.aFilters.push(fTit);
+				}
+				if (sCategoriaVal !== undefined && sCategoriaVal !== "") {
+					fCat = new Filter("Codicecategoria", FilterOperator.EQ, sCategoriaVal);
+					aFilters.aFilters.push(fCat);
+				}
+				oEvent.getSource().getBinding("items").filter(aFilters);
+			}
 			if (inputRef === "CE2") {
 				sTitoloVal = that.getView().byId("TitoloFA").getValue();
 				sCategoriaVal = that.getView().byId("CategoriaFA").getValue();
@@ -765,6 +817,39 @@ sap.ui.define([
 				oEvent.getSource().getBinding("items").filter(aFilters);
 			}
 
+			if (inputRef === "Provento") {
+				sTitoloVal = this.Ref.getView().byId("TitoloFA").getValue();
+				sCategoriaVal = this.Ref.getView().byId("CategoriaFA").getValue();
+				sTip = this.Ref.getView().byId("idTipologia").getValue();
+
+				aOrFiltersCond =
+					new Filter({
+						filters: [
+							//new Filter("Codiceclaeco3", FilterOperator.Contains, sValue),
+							new Filter("Descrpro", FilterOperator.Contains, sValue)
+						],
+						and: false
+					});
+				aFilters = new Filter({
+					filters: [
+						aOrFiltersCond
+					],
+					and: true
+				});
+				if (sTitoloVal !== undefined && sTitoloVal !== "") {
+					fTit = new Filter("Codicetitolo", FilterOperator.EQ, sTitoloVal);
+					aFilters.aFilters.push(fTit);
+				}
+				if (sCategoriaVal !== undefined && sCategoriaVal !== "") {
+					fCat = new Filter("Codicecategoria", FilterOperator.EQ, sCategoriaVal);
+					aFilters.aFilters.push(fCat);
+				}
+				if (sTip !== undefined && sTip !== "") {
+					sTipVal = new Filter("Codicetipologia", FilterOperator.EQ, sTip);
+					aFilters.aFilters.push(sTipVal);
+				}
+				oEvent.getSource().getBinding("items").filter([aFilters]);
+			}
 			if (inputRef === "CE3") {
 				sTitoloVal = that.getView().byId("TitoloFA").getValue();
 				sCategoriaVal = that.getView().byId("CategoriaFA").getValue();
