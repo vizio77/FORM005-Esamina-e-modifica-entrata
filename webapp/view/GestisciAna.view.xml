@@ -111,7 +111,7 @@
 									</Input>
 									<Input showValueHelp="false" value="{modelAnagraficaPf>/Descrestcdr}" width="90%" editable="false"/>
 									<Label text="{i18n>Ragioneria}" required="true"/>
-									<Input editable="false" value="{modelAnagraficaPf>/Codiceragioneria}" textAlign="Begin" width="30%" showValueHelp="falsefalse"
+									<Input editable="false" value="{modelAnagraficaPf>/Codiceragioneria}" textAlign="Begin" width="30%" showValueHelp="false"
 										valueHelpOnly="false">
 										<layoutData>
 											<form:ColumnElementData cellsSmall="4" cellsLarge="2"/>
@@ -172,11 +172,11 @@
 									<Input value="{modelAnagraficaPf>/Coddenomstdcap}" width="5.3%" textAlign="Center" tooltip="{modelAnagraficaPf>/Codicecapitolo}"
 										editable="false"/>
 									<Label text="{i18n>DenInt}" labelFor="idInputDenIntCap" required="true"/>
-									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}" width="85%"
+									<TextArea rows="4" value="{modelAnagraficaPf>/Descrizionecapitolo}" width="85%"
 										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomC} ==='X' ? false : true}"
 										tooltip="{= ${modelAnagraficaPf>/Descrizionecapitolo}.toUpperCase()}"/>
 									<Label text="{i18n>DenRid}" labelFor="idInputDenRidCap" required="true"/>
-									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrbrevecap}.toUpperCase()}" width="85%"
+									<TextArea rows="4" value="{modelAnagraficaPf>/Descrbrevecap}" width="85%"
 										tooltip="{= ${modelAnagraficaPf>/Descrbrevecap}.toUpperCase()}"
 										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomC} ==='X' ? false : true}"/>
 								</form:content>
@@ -191,11 +191,11 @@
 									<Input id="idInputCodStaPg" editable="false" width="5.3%" textAlign="Center" tooltip="{modelAnagraficaPf>/Coddenomstdpg}"
 										value="{modelAnagraficaPf>/Coddenomstdpg}"/>
 									<Label text="{i18n>DenInt}" labelFor="idInputDenIntPg" required="true"/>
-									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}" width="85%"
+									<TextArea rows="4" value="{modelAnagraficaPf>/Descrizionepg}" width="85%"
 										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomA} ==='X' ? false : true}"
 										tooltip="{= ${modelAnagraficaPf>/Descrizionepg}.toUpperCase()}"/>
 									<Label text="{i18n>DenRid}" labelFor="idInputDenRidPg" required="true"/>
-									<TextArea rows="4" value="{= ${modelAnagraficaPf>/Descrbrevepg}.toUpperCase()}" width="85%"
+									<TextArea rows="4" value="{modelAnagraficaPf>/Descrbrevepg}" width="85%"
 										tooltip="{= ${modelAnagraficaPf>/Descrbrevepg}.toUpperCase()}"
 										editable="{= ${modelHeader>/CodIter} !== '01' ? false : true &amp;&amp; ${modelControlDenom>/denomA} ==='X' ? false : true}"/>
 								</form:content>

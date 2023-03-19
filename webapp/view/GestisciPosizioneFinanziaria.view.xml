@@ -63,7 +63,7 @@
 						<Label text="{i18n>PosizioneFinanziaria}" class="boldCss"/>
 						<t:template>
 							<zcontrolPosFin:LinkPosFinEntrate anno="{ZSS4_COBI_PREN_ESAMOD_SRV>Anno}" fikrs="{ZSS4_COBI_PREN_ESAMOD_SRV>Fikrs}"
-								fase="{ZSS4_COBI_PREN_ESAMOD_SRV>Fase}" reale="{ZSS4_COBI_PREN_ESAMOD_SRV>Reale}" versione="{modelPosFinFragment>Versione}"
+								fase="{ZSS4_COBI_PREN_ESAMOD_SRV>Fase}" reale="{ZSS4_COBI_PREN_ESAMOD_SRV>Reale}" versione="{ZSS4_COBI_PREN_ESAMOD_SRV>Versione}"
 								fipex="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" datbis="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Datbis', formatter: '.formatter.formatterDatbis'}"
 								text="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" semanticObject="ESAMINAMODIFICA"/>
 						</t:template>
