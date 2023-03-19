@@ -317,6 +317,28 @@ sap.ui.define([
 			// this.getView().getModel(newModel).refresh();
 			this.getView().setBusy(false);
 		},
+		_onClearInput: function(oEvent) {
+			//this._onClearInput();
+			var aSelectionsSets = oEvent.getParameters().selectionSet;
+			//lt setto il valore della posizione finanziaria a "" così da resettare il valore
+			this.byId("filterBarPosFin").setValue("")
+			//this.clearGlobalModel();
+			for (var i = 0; i < aSelectionsSets.length; i++) {
+				var oControl = this.getView().byId(aSelectionsSets[i].getId());
+				//oControl.setValue("");
+				if (oControl.getMetadata().getName() === "sap.m.ComboBox") {
+					oControl.setSelectedKey("");
+				}
+
+				if (oControl.getMetadata().getName() === "sap.m.Input" & aSelectionsSets[i].getEnabled()) {
+					oControl.setValue("");
+				}
+
+				if (oControl.getMetadata().getName() === "sap.m.CheckBox") {
+					oControl.setSelected(false);
+				}
+			}
+		},
 		_gestTipologiche: async function() {
 			var that = this;
 			try {
@@ -330,6 +352,7 @@ sap.ui.define([
 
 				aRes.Versione = "P";
 				sap.ui.getCore().setModel(new JSONModel(aRes), "gestTipologicheModel");
+				this.getOwnerComponent().setModel(new JSONModel(aRes), "modelFiltriEntrata");
 			} catch (errorResponse) {
 				var sDettagli = that._setErrorMex(errorResponse);
 				var oErrorMessage = errorResponse.responseText;

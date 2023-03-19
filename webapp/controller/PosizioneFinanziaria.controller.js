@@ -216,6 +216,28 @@ sap.ui.define([
 		onSearch: function() {
 			this.onSearchTreeTable(true,0);
 		},
+		onClear: function(oEvent) {
+			this.getView().byId("filterBarPosFin").setValue("")
+			//this._onClearInput(oEvent);
+			var oTreeTablePF = this.getView().byId("treeTablePF");
+			oTreeTablePF.unbindRows();
+			this.getView().getModel("modelAdattaFiltri").setData({})
+			this.getView().getModel("modelAdattaFiltri").setProperty("/CodiceAmmin" , "A020")
+			this._resetSelectedItems()
+			//lt da togliere quando ci saranno i coni visibilità ecc
+			//this.getView().byId("AmmFA").setValue("A020")
+		},
+		onReset: function(oEvent) {
+			this.getView().byId("filterBarPosFin").setValue("")
+			//this._onClearInput(oEvent);
+			var oTreeTablePF = this.getView().byId("treeTablePF");
+			oTreeTablePF.unbindRows();
+			this.getView().getModel("modelAdattaFiltri").setData({})
+			this.getView().getModel("modelAdattaFiltri").setProperty("/CodiceAmmin" , "A020")
+			this._resetSelectedItems()
+			//lt da togliere quando ci saranno i coni visibilità ecc
+			//this.getView().byId("AmmFA").setValue("A020")
+		},
 
 		onPressPrevTreeTable: function(oEvent) {
 			var filterMaxRows = this.filterMaxRows;

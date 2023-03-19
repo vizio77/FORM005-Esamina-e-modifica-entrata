@@ -29,7 +29,7 @@
 		<f:header>
 			<f:DynamicPageHeader pinnable="false">
 				<f:content>
-					<zcontrolAdatta:InputAdattaFiltriSpese eos="E" id="idBar" showClearOnFB="false" clear="onClear" search="onSearch" showGoOnFB="true"
+					<zcontrolAdatta:InputAdattaFiltriSpese eos="E" id="idBar" showClearOnFB="true" reset="onReset" clear="onClear" search="onSearch" showGoOnFB="true"
 						showFilterConfiguration="true" useToolbar="false">
 						<zcontrolAdatta:filterGroupItems >
 							<fb:FilterGroupItem groupName="A" name="y" label="{i18n>Amministrazione}" partOfCurrentVariant="true" visibleInFilterBar="true">
@@ -41,9 +41,9 @@
 							<fb:FilterGroupItem visibleInFilterBar="true" groupName="G1" groupTitle="{i18n>FiltriBase}" name="A" label="{i18n>posFin}" labelTooltip="">
 								<fb:control>
 									<zcontrol:InputPosizioneFinanziaria id="filterBarPosFin" 
-										fase="{modelAdattaFiltri>/FASE}" 
-										reale="{modelAdattaFiltri>/REALE_RIF}"
-										anno="{modelAdattaFiltri>/ANNO}" 
+										fase="{modelFiltriEntrata>/FASE}" 
+										reale="{modelFiltriEntrata>/REALE_RIF}"
+										anno="{modelFiltriEntrata>/ANNO}" 
 										entrata="X" 
 										versione="D" change="onChangeT($event, 'posFin')"
 										maxSuggestionWidth="60%" 
