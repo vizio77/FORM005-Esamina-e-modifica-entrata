@@ -95,7 +95,7 @@ sap.ui.define([
 								
 							}
 						}else{
-							if(oEvent.getParameter("data") && oEvent.getParameter("data").results.length > 0){
+							/* if(oEvent.getParameter("data") && oEvent.getParameter("data").results.length > 0){
 								var i = 0
 								oEvent.getParameter("data").results.forEach(el => {
 
@@ -103,14 +103,16 @@ sap.ui.define([
 
 										var path = el.__metadata.uri.split("/").pop();
 										oModelTreeTable.oData[path].SELECTED = false;
-										oTable.mAggregations.rows[i].mAggregations.cells[0].setSelected(false);
-										oTable.mAggregations.rows[i].mAggregations.cells[0].setEnabled(true);
+										if(oTable.mAggregations){
+											oTable.mAggregations.rows[i].mAggregations.cells[0].setSelected(false);
+											oTable.mAggregations.rows[i].mAggregations.cells[0].setEnabled(true);
+										}
+										i = i+1									
 									}
-
-									i = i+1
-									
 								});
-							}
+							} */
+							//deseleziono le celle
+							oTable.clearSelection()
 						}
 						BusyIndicator.hide();
 					}
@@ -215,8 +217,14 @@ sap.ui.define([
 			this._refreshModel(oModelSelPosFin);
 
 			var aSelected = this._getSelectedItems();
+
+			if(this._getSelectedItems().length === 0){	
+				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("selezionaSoloUnaRiga"));
+				return;
+			}
+
 			if(this._getSelectedItems().length > 1){	
-				MessageBox.warning("Non è possibile gestire più di una posizione finanziaria. Selezionare una sola riga.");
+				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("selezionaSoloUnaRiga"));
 				return;
 			}
 
@@ -225,7 +233,7 @@ sap.ui.define([
 			});
 
 			if(conProposta.length === 0){
-				MessageBox.warning("Non è possibile gestire più di una posizione finanziaria perchè non è stata ancora associata ad una proposta");
+				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("noPossibileGestioneNoAssociazione", [aSelected[0].Fipex]));
 				return;
 			}
 

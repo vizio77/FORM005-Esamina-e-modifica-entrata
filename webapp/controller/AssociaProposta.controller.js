@@ -33,8 +33,12 @@ sap.ui.define([
 
 			var oTreeTable = this.getView().byId(sIdTreeTable);
 			var aFilters = [];
+			
+			var codAmministrazione = this.amministrazione
+			if(!codAmministrazione)codAmministrazione = "A020"
 			//lt recupero solo quelle in lavorazione
 			aFilters.push( new Filter("Iter", FilterOperator.EQ, "01"))
+			aFilters.push( new Filter("CodiceAmmin", FilterOperator.EQ, codAmministrazione))
 			// console.log(aFilters);
 			this._remove(aFilters, undefined);
 
@@ -65,10 +69,8 @@ sap.ui.define([
 			});
 
 			//Azzera la selezione delle righe
-			var oItems = oTreeTable.getRows();
-			for (var j = 0; j < oItems.length; j++) {
-				oItems[j].getAggregation("cells")[0].setSelected(false);
-			}
+			//var oItems = oTreeTable.getRows();
+			oTreeTable.clearSelection()
 		},
 
 		_getAvvioAssociaProposta: function() {
@@ -76,6 +78,13 @@ sap.ui.define([
 
 			//filtri per IDposfin
 			var oIdPosFinSel = this.getView().getModel("modelPosFinSelected").getData().IdPosfin;
+
+			if(oIdPosFinSel && oIdPosFinSel.length > 0){
+				this.amministrazione = oIdPosFinSel[0].CodiceAmmin
+
+			}else{
+				this.amministrazione = "A020";
+			}
 			//var aPosFinSel = oIdPosFinSel.IdPosfin;
 			//var aPosFinSel = oIdPosFinSel.IdPosfin;
 			var oModel = new JSONModel(oIdPosFinSel);
