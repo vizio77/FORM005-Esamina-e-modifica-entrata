@@ -222,7 +222,7 @@
 					<t:Column width="11rem">
 						<Label text="{i18n>piuProposte}" wrapping="true" class="boldCss"/>
 						<t:template>
-							<Text text="{modelTreeTable>StatoProp}" wrapping="false"/>
+							<Text text="{modelTreeTable>CoinvoltaId}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="11rem">

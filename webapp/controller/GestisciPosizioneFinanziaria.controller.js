@@ -64,7 +64,7 @@ sap.ui.define([
 			var that = this;
 
 			oTreeTablePos.bindRows({
-				path: "ZSS4_COBI_PREN_ESAMOD_SRV>/ZET_AVVIOPF_IDSet",
+				path: "modelTreeTableGestione>/ZET_AVVIOPF_IDSet",
 				parameters: {
 					useServersideApplicationFilters: true,
 					operationMode: 'Client',
@@ -82,10 +82,10 @@ sap.ui.define([
 					//dataReceived : this.onDataReceived.bind(this)
 					dataReceived : function(oEvent) {
 						var isSingleRow= that.getView().getModel("modelOneRow").getData().one;
-						var oModelTreeTable = that.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV");
+						var oModelTreeTable = that.getView().getModel("modelTreeTableGestione");
 						var oTable = that.getView().byId("treeTablePFID")
 						if(isSingleRow){
-							if(oEvent.getParameter("data")){
+							/* if(oEvent.getParameter("data")){
 								if(!!oEvent.getParameter("data").results[0]){
 									var path = oEvent.getParameter("data").results[0].__metadata.uri.split("/").pop();
 									oModelTreeTable.oData[path].SELECTED = true;
@@ -93,7 +93,7 @@ sap.ui.define([
 									oTable.mAggregations.rows[0].mAggregations.cells[0].setEnabled(false);
 								}
 								
-							}
+							} */
 						}else{
 							/* if(oEvent.getParameter("data") && oEvent.getParameter("data").results.length > 0){
 								var i = 0
@@ -112,14 +112,29 @@ sap.ui.define([
 								});
 							} */
 							//deseleziono le celle
-							oTable.clearSelection()
 						}
+						//oTable.clearSelection()
+						that._resetSelectedItems();
 						BusyIndicator.hide();
 					}
 				}
 			});
 
 		},
+		_resetSelectedItems: function() {
+        	// this._resetCheckbox("modelTreeTable", this);
+            var aObject = Object.keys(this.getView().getModel("modelTreeTableGestione").oData);
+            var aData = this.getView().getModel("modelTreeTableGestione").oData;
+            var aSelected = [],
+                aValResult = [];
+            for (var i = 0; i < aObject.length; i++) {
+                if (aObject[i].includes("ZET_AVVIOPF_IDSet") && aData[aObject[i]].SELECTED === true) {
+					aData[aObject[i]].SELECTED = false;
+                    aSelected.push(aData[aObject[i]]);
+                }
+            }
+           return aSelected;
+        },
 
 		stopBusy: function(oEvent){
 			BusyIndicator.hide();
@@ -131,8 +146,8 @@ sap.ui.define([
 		},
 
 		_getSelectedItems: function() {
-			var aObject = Object.keys(this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData);
-			var aData = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData;
+			var aObject = Object.keys(this.getView().getModel("modelTreeTableGestione").oData);
+			var aData = this.getView().getModel("modelTreeTableGestione").oData;
 			var aSelected = [],
 				aValResult = [];
 			for (var i = 0; i < aObject.length; i++) {
@@ -144,8 +159,8 @@ sap.ui.define([
 			return aSelected;
 		},
 		_getNoSelectedItems: function() {
-			var aObject = Object.keys(this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData);
-			var aData = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData;
+			var aObject = Object.keys(this.getView().getModel("modelTreeTableGestione").oData);
+			var aData = this.getView().getModel("modelTreeTableGestione").oData;
 			var aSelected = [],
 				aValResult = [];
 			for (var i = 0; i < aObject.length; i++) {
@@ -159,8 +174,8 @@ sap.ui.define([
 
 		onSelectCheckBox: function(oEvent) {
 			//this._resetCheckbox("modelTreeTable", this);
-			var oEl = oEvent.getSource().getBindingContext("ZSS4_COBI_PREN_ESAMOD_SRV").sPath;
-			var oObjectUpdate = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData[oEl.slice(1)];
+			var oEl = oEvent.getSource().getBindingContext("modelTreeTableGestione").sPath;
+			var oObjectUpdate = this.getView().getModel("modelTreeTableGestione").oData[oEl.slice(1)];
 			if (oObjectUpdate.SELECTED && oObjectUpdate.SELECTED === true) {
 				oObjectUpdate.SELECTED = false;
 			} else {
@@ -171,8 +186,8 @@ sap.ui.define([
 		onSelect: function(oEvent) {
 
 			var aRows = this.getView().byId("treeTablePFID").getRows();
-			var oEl = oEvent.getSource().getBindingContext("ZSS4_COBI_PREN_ESAMOD_SRV").sPath;
-			var oObjectUpdate = this.getView().getModel("ZSS4_COBI_PREN_ESAMOD_SRV").oData[oEl.slice(1)];
+			var oEl = oEvent.getSource().getBindingContext("modelTreeTableGestione").sPath;
+			var oObjectUpdate = this.getView().getModel("modelTreeTableGestione").oData[oEl.slice(1)];
 			if (oObjectUpdate.SELECTED && oObjectUpdate.SELECTED === true) {
 
 				oObjectUpdate.SELECTED = false;
@@ -211,10 +226,10 @@ sap.ui.define([
 
 		onPressNavToTabGestisci: function() {
 			this._rowSel();
-			var aModelPageTab = this.getView().getModel("modelPosFinSelected").getData();
-			var oModelSelPosFin = this.getView().getModel("modelPosFinSelected");
-			oModelSelPosFin.setData();
-			this._refreshModel(oModelSelPosFin);
+			//var aModelPageTab = this.getView().getModel("modelPosFinSelected").getData();
+			//var oModelSelPosFin = this.getView().getModel("modelPosFinSelected");
+			//oModelSelPosFin.setData();
+			//this._refreshModel(oModelSelPosFin);
 
 			var aSelected = this._getSelectedItems();
 
@@ -246,7 +261,7 @@ sap.ui.define([
 
 				// if (aModelPageTab.length === 1 && sIdProposta !== "" && sIdProposta !== undefined && sIdProposta !== "0000000000" && sIdProposta !==
 				// 	"0" && sCodIter === "01") {
-					this._resetCheckbox("ZSS4_COBI_PREN_ESAMOD_SRV", "treeTablePFID");
+					this._resetCheckbox("modelTreeTableGestione", "treeTablePFID");
 					this.oRouter.navTo("GestisciAna");
 				// } else {
 				// 	MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("MBTastoAutPagePosFinId"));
@@ -263,6 +278,7 @@ sap.ui.define([
 			if (aSelected.length > 0) {
 				// mi prendo la proprietà che mi interessa
 				var aRows = [];
+				var aSel = [];
 				for (var i = 0; i < aSelected.length; i++) {
 					// var sPosFin = this.getView().getModel().getProperty(aSelectedPath[i]).Posfin;
 					var sIdPosFin = aSelected[i].Fipex;
@@ -309,11 +325,12 @@ sap.ui.define([
 				 
 					};
 					aRows.push(oData);
+					aSel.push(aSelected[i]);
 
 				}
 				that.getView().getModel("modelPageAut").setData(aRows);
 				that.getView().getModel("modelPosFinSelected").setProperty("/IdPosfin", aRows);;
-				this.getOwnerComponent().setModel(new JSONModel(aRows), "modelNavAna");				
+				this.getOwnerComponent().setModel(new JSONModel({"IdPosfin" : aSel}), "modelListaPos");				
 			}
 		},
 

@@ -4,10 +4,11 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageBox",
+	"sap/ui/core/routing/History",
 	"zsap/com/r3/cobi/s4/esamodModEntrPosFin/model/formatter",
 	"sap/ui/core/Fragment",
 	"sap/ui/core/BusyIndicator",
-], function(BaseController, JSONModel, Filter, FilterOperator, MessageBox, formatter, Fragment, BusyIndicator) {
+], function(BaseController, JSONModel, Filter, FilterOperator, MessageBox, History, formatter, Fragment, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.GestisciAna", {
@@ -182,10 +183,31 @@ sap.ui.define([
 			//this._closeDialog();
 		},
 		_getNota: async function() {
+            //this._openBusyDialog();
+            var aData = this.getView().getModel("modelHeader").getData();
+            try {
+                var aRes = await this._readFromDb("0", "/PropostaSet(Keycodepr='" + aData.IdProposta + "',Fikrs='" + aData.Fikrs + "',Fase='" +
+                    aData.Fase + "',Reale='" + aData.Reale + "',Versione='" + aData.Versione + "',Anno='" + aData.AnnoFipex + "',Prctr='"+aData.CodiceAmmin+"')", [], [], "");
+                this.getView().setModel(new JSONModel(aRes), "modelNote")
+                if (parseInt(aRes.Idnota) !== 0) {
+                    this.getView().byId("idInputScegliNoteIDProposta").setValue(aRes.Idnota);
+                    this.getView().byId("idNota").setEditable(false);
+                } else {
+                    this.getView().byId("idInputScegliNoteIDProposta").setEditable(false);
+                    this.getView().byId("idInputScegliNoteIDProposta").setValue("");
+                }
+                var aRes = await this.readFromDb("4", "/ZES_NOTE_IDSet", [], [], "");
+                this.getView().setModel(new JSONModel(aRes), "modelListaIdNote");
+            } catch (e) {
+            }
+            //this._closeDialog();
+        },
+		/* _getNota: async function() {
 
 			//this._openBusyDialog();
 
 			var aData = this.getView().getModel("modelHeader").getData();
+
 			try {
 				var aRes = await this._readFromDb("0", "/PropostaSet(Keycodepr='" + aData.KeyCode + "')", [], [], "");
 				this.getView().setModel(new JSONModel(aRes), "modelNote")
@@ -205,7 +227,7 @@ sap.ui.define([
 			}
 			//this._closeDialog();
 
-		},
+		}, */
 
 		onLiveWriteNota: function(oEvent) {
 			var sText = oEvent.getParameter("newValue");
@@ -236,6 +258,7 @@ sap.ui.define([
 					Testonota: sTestoNuovaNota,
 					Keycodepr: aData.KeyCode
 				};
+
 				var sPath = "/PropostaSet(Keycodepr='" + aData.KeyCode + "')";
 				try {
 					await this.modifyRecord("4", sPath, oEntry);
@@ -607,6 +630,18 @@ sap.ui.define([
 			});		
 
 		},
+
+		onPressBack: function() {
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("PosizioneFinanziaria", {}, true);
+			}
+		}
 
 	});
 });

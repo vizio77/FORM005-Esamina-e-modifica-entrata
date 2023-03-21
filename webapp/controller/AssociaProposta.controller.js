@@ -137,7 +137,7 @@ sap.ui.define([
 			} */
 		},
 		_associaProps:function(prop){
-			var positions = this.getView().getModel("modelPosFinSelected").getData().IdPosfin;
+			var positions = this.getView().getModel("modelListaPos").getData().IdPosfin;
 			this._recursiveUpdateModel(positions,prop);
 		},
 
@@ -188,7 +188,7 @@ sap.ui.define([
 			return listPos;
 		},
 		
-		_recursiveUpdateModel: async function(positions,prop){
+		_recursiveUpdateModel: async function(positions,prop){			
 			this.associaProposte(positions,prop);
 		},
 
@@ -202,7 +202,10 @@ sap.ui.define([
 				Idproposta: sIdProposta
 			};
 
-			var sPath = "/PropostaSet(Keycodepr='" + sKeycodepr + "')";
+			var sPath = "/PropostaSet(Keycodepr='" + sKeycodepr + "',Fikrs='" + position.Fikrs + "',Fase='" +
+                    position.Fase + "',Reale='" + position.Reale + "',Versione='" + position.Versione + "',Anno='" + position.AnnoFipex + "',Prctr='"+position.CodiceAmmin+"')"
+
+			//var sPath = "/PropostaSet(Keycodepr='" + sKeycodepr + "')";
 
 			return new Promise(function (resolve, reject) {
 				oModel.update(sPath, oEntry, {

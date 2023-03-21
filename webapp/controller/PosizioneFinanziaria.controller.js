@@ -114,7 +114,7 @@ sap.ui.define([
 				previewModel.intialValue = previewModel.intialValue + pointer;
 				previewModel.beginValueM1 = previewModel.beginValueM1 + pointer;
 				previewModel.beginValueP1 = previewModel.beginValueP1 + pointer;
-				previewModel.finalValue = previewModel.finalValue + pointer;
+				previewModel.finalValue = previewMS2SK907970odel.finalValue + pointer;
 				if (previewModel.intialValue === -199) {
 					previewModel.enabledButtonPrev = false;
 					previewModel.enabledButtonNext = true;

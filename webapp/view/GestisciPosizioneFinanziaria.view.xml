@@ -43,119 +43,119 @@
 				<t:columns>
 					<t:Column width="8rem">
 						<t:template>
-							<CheckBox select="onSelectCheckBox" id="checkBoxGestPosFin" visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>HierarchyLevel} === '0' ? true : false}"
-								selected="{=${modelOneRow>/one} || ${ZSS4_COBI_PREN_ESAMOD_SRV>SELECTED}}" enabled="{modelOneRow>/enabled}"/>
+							<CheckBox select="onSelectCheckBox" id="checkBoxGestPosFin" visible="{= ${modelTreeTableGestione>HierarchyLevel} === '0' ? true : false}"
+								selected="{modelTreeTableGestione>SELECTED}" />
 						</t:template>
 					</t:Column>
 					<t:Column width="10rem">
 						<Label text="{i18n>Amministrazione}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceAmmin}" wrapping="false" textAlign="Begin"/>
+							<Text text="{modelTreeTableGestione>CodiceAmmin}" wrapping="false" textAlign="Begin"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="4rem">
 						<Label text="{i18n>CDR}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>CodiceCdr}" wrapping="false" textAlign="Begin"/>
+							<Text text="{modelTreeTableGestione>CodiceCdr}" wrapping="false" textAlign="Begin"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="13rem">
 						<Label text="{i18n>PosizioneFinanziaria}" class="boldCss"/>
 						<t:template>
-							<zcontrolPosFin:LinkPosFinEntrate anno="{ZSS4_COBI_PREN_ESAMOD_SRV>Anno}" fikrs="{ZSS4_COBI_PREN_ESAMOD_SRV>Fikrs}"
-								fase="{ZSS4_COBI_PREN_ESAMOD_SRV>Fase}" reale="{ZSS4_COBI_PREN_ESAMOD_SRV>Reale}" versione="{ZSS4_COBI_PREN_ESAMOD_SRV>Versione}"
-								fipex="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" datbis="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Datbis', formatter: '.formatter.formatterDatbis'}"
-								text="{ZSS4_COBI_PREN_ESAMOD_SRV>Fipex}" semanticObject="ESAMINAMODIFICA"/>
+							<zcontrolPosFin:LinkPosFinEntrate anno="{modelTreeTableGestione>Anno}" fikrs="{modelTreeTableGestione>Fikrs}"
+								fase="{modelTreeTableGestione>Fase}" reale="{modelTreeTableGestione>Reale}" versione="{modelTreeTableGestione>Versione}"
+								fipex="{modelTreeTableGestione>Fipex}" datbis="{ path: 'modelTreeTableGestione>Datbis', formatter: '.formatter.formatterDatbis'}"
+								text="{modelTreeTableGestione>Fipex}" semanticObject="ESAMINAMODIFICA"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="13rem">
 						<Label text="{i18n>Autorizzazione}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Autorizzazioni}" wrapping="false"/>
+							<Text text="{modelTreeTableGestione>Autorizzazioni}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="8rem">
 						<Label text="{i18n>Proposta}" class="boldCss"/>
 						<t:template>
-							<Text text="{= (${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} === '0000000000') ||  (${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} === '0')  ? '' : ${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} }" visible="{= ${ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta} !== '0000000000' ? true : false}" wrapping="false"/>
-							<!-- <Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>IdProposta}" wrapping="false" textAlign="Begin"/> -->
+							<Text text="{= (${modelTreeTableGestione>IdProposta} === '0000000000') ||  (${modelTreeTableGestione>IdProposta} === '0')  ? '' : ${modelTreeTableGestione>IdProposta} }" visible="{= ${modelTreeTableGestione>IdProposta} !== '0000000000' ? true : false}" wrapping="false"/>
+							<!-- <Text text="{modelTreeTableGestione>IdProposta}" wrapping="false" textAlign="Begin"/> -->
 						</t:template>
 					</t:Column>
 					<t:Column width="8rem">
 						<Label text="{i18n>Nickname}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Nickname}" wrapping="false" textAlign="Begin"/>
+							<Text text="{modelTreeTableGestione>Nickname}" wrapping="false" textAlign="Begin"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="8rem">
 						<Label text="{i18n>Iter}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Iter}" wrapping="true" textAlign="Begin"/>
+							<Text text="{modelTreeTableGestione>Iter}" wrapping="true" textAlign="Begin"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="8rem">
 						<Label text="{i18n>EsitoControllo}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>EsitoControlli}" wrapping="true" textAlign="Begin"/>
+							<Text text="{modelTreeTableGestione>EsitoControlli}" wrapping="true" textAlign="Begin"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="8rem">
 						<Label text="{i18n>TipoVariazione}" class="boldCss"/>
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>TipoVariazioniId}" textAlign="Begin"/>
+							<Text text="{modelTreeTableGestione>TipoVariazioniId}" textAlign="Begin"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="12rem">
 						<Label text="{i18n>variazionCompAnno1} &#xA; {i18n>2023}" wrapping="true" class="boldCss"/>
 						<t:template>
-							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCompetenza2023}" textAlign="Begin" />-->
+							<!--<Text text="{modelTreeTableGestione>VarPropCompetenza2023}" textAlign="Begin" />-->
 							<Text
-								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcomp2023', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								text="{ path: 'modelTreeTableGestione>Varpropcomp2023', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 								wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="12rem">
 						<Label text="{i18n>variazionCompAnno2} &#xA; {i18n>2024}" wrapping="true" class="boldCss"/>
 						<t:template>
-							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCompetenza2024}" textAlign="Begin" />-->
+							<!--<Text text="{modelTreeTableGestione>VarPropCompetenza2024}" textAlign="Begin" />-->
 							<Text
-								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcomp2024', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								text="{ path: 'modelTreeTableGestione>Varpropcomp2024', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 								wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="12rem">
 						<Label text="{i18n>variazionCompAnno3} &#xA; {i18n>2025}" wrapping="true" class="boldCss"/>
 						<t:template>
-							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCompetenza2025}" textAlign="Begin" />-->
+							<!--<Text text="{modelTreeTableGestione>VarPropCompetenza2025}" textAlign="Begin" />-->
 							<Text
-								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcomp2025', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								text="{ path: 'modelTreeTableGestione>Varpropcomp2025', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 								wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="12rem">
 						<Label text="{i18n>variazionCassaAnno1} &#xA; {i18n>2023}" class="boldCss" wrapping="true"/>
 						<t:template>
-							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCassaTot2023}" textAlign="Begin" />-->
+							<!--<Text text="{modelTreeTableGestione>VarPropCassaTot2023}" textAlign="Begin" />-->
 							<Text
-								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcassa2023', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								text="{ path: 'modelTreeTableGestione>Varpropcassa2023', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 								wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="12rem">
 						<Label text="{i18n>variazionCassaAnno2} &#xA; {i18n>2024}" wrapping="true" class="boldCss"/>
 						<t:template>
-							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCassaTot2024}" textAlign="Begin" />-->
+							<!--<Text text="{modelTreeTableGestione>VarPropCassaTot2024}" textAlign="Begin" />-->
 							<Text
-								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcassa2024', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								text="{ path: 'modelTreeTableGestione>Varpropcassa2024', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 								wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column width="12rem">
 						<Label text="{i18n>variazionCassaAnno3}&#xA;  {i18n>2025}" wrapping="true" class="boldCss"/>
 						<t:template>
-							<!--<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>VarPropCassaTot2025}" textAlign="Begin" />-->
+							<!--<Text text="{modelTreeTableGestione>VarPropCassaTot2025}" textAlign="Begin" />-->
 							<Text
-								text="{ path: 'ZSS4_COBI_PREN_ESAMOD_SRV>Varpropcassa2025', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
+								text="{ path: 'modelTreeTableGestione>Varpropcassa2025', type:'sap.ui.model.type.Float' ,formatOptions: {style: 'standard', decimals: 2, shortDecimals: 2}}"
 								wrapping="false"/>
 						</t:template>
 					</t:Column>
