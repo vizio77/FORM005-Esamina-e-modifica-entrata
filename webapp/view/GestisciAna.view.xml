@@ -221,10 +221,12 @@
 									<HBox class="sapUiMediumMarginBegin">
 										<Label design="Bold" text="Autorizzazione:" labelFor="idAutorizz" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTop"/>
 										<!--<zcontrolAuth:InputAutorizzazioni id="AutorizzazioniMC" Eos="S"/>-->
-										<Select id="selectCompetenza" width="auto" items="{modelAnagraficaAuto>/}" editable="true">
+										<Select id="selectCompetenza" width="auto" selectedKey="{modelHeader>/Fincode}" items="{modelAnagraficaAuto>/}" editable="true">
 											<!--<core:Item key="" text=""/>-->
 											<core:Item key="{modelAnagraficaAuto>Fincode}" text="{modelAnagraficaAuto>Zzdescrestesa}"/>
 										</Select>
+										<TooltipAutorizzazioneBtn:TooltipAutorizzazioneBtn id="InputAutorizzazioniBtn" icon="sap-icon://hint" type="Emphasized"
+											class="sapUiTinyMarginBottom" Fincode="{modelHeader>/Fincode}" Fikrs="S001" placement="Bottom"/>
 										<OverflowToolbar style="Clear" width="44em" class="sapUiTinyMarginBegin">
 											<HBox id="idBoxReiscrizioni" visible="true"></HBox>
 											<Button id="BtnAssociaAutTabID" type="Emphasized" text="{i18n>AssociaAutorizzazione}" class="sapUiTinyMarginBegin textBold"
