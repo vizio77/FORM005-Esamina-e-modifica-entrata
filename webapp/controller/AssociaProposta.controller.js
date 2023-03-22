@@ -77,7 +77,8 @@ sap.ui.define([
 			var oTable = this.getView().byId("tableAssociaProposta");
 
 			//filtri per IDposfin
-			var oIdPosFinSel = this.getView().getModel("modelPosFinSelected").getData().IdPosfin;
+			//var oIdPosFinSel = this.getView().getModel("modelPosFinSelected").getData().IdPosfin;
+			var oIdPosFinSel = this.getView().getModel("modelListaPos").getData().IdPosfin;
 
 			if(oIdPosFinSel && oIdPosFinSel.length > 0){
 				this.amministrazione = oIdPosFinSel[0].CodiceAmmin
@@ -122,19 +123,6 @@ sap.ui.define([
 
 			this._associaProps(righeSelezionate[0]);
 
-			/* var aRows = oModelPageAut.getData();
-			if (aRows.length === 0) {
-				MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("MBTastoCompetenzaPageIDProposta"));
-			} else {
-				var sIdProposta = oModelPageAut.getData()[0].IdProposta;
-				var sCodIter = oModelPageAut.getData()[0].CodiceIter;
-				if (aRows.length === 1 && sIdProposta !== "" && sIdProposta !== undefined && sIdProposta !== "0000000000" && sCodIter === "01") {
-					this._resetCheckbox("ZSS4_COBI_PREN_ESAMOD_SRV", this);
-					this._associaProps(aRows);
-				} else {
-					MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("MBTastoAutPagePosFinId"));
-				}
-			} */
 		},
 		_associaProps:function(prop){
 			var positions = this.getView().getModel("modelListaPos").getData().IdPosfin;

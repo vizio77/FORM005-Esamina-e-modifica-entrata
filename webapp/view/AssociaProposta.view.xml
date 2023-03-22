@@ -1,6 +1,9 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.f" xmlns:t="sap.ui.table"
-	xmlns:fb="sap.ui.comp.filterbar" xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls" xmlns:zcontrollink="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink.controls"
-	controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.AssociaProposta" xmlns:html="http://www.w3.org/1999/xhtml">
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls" 
+	xmlns:zcontrollink="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink.controls"
+	controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.AssociaProposta" 
+	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
 	<f:DynamicPage id="dynamicPageAssociaProposta" headerExpanded="true" showFooter="true">
 		<f:title>
 			<f:DynamicPageTitle>
@@ -33,7 +36,12 @@
 				<t:columns>
 					<t:Column label="{i18n>PosFin}" width="14rem">
 						<t:template>
-							<zcontrollink:LinkPosizioneFinanziaria 
+							<zcontrolPosFin:LinkPosFinEntrate anno="{Anno}" fikrs="{Fikrs}"
+								fase="{Fase}" reale="{Reale}" versione="{Versione}"
+								fipex="{ path: 'Fipex', formatter: '.formatter.formatterPosFin'}" 
+								datbis="{ path: 'modelTreeTableGestione>Datbis', formatter: '.formatter.formatterDatbis'}"
+								text="{Fipex}" semanticObject="ESAMINAMODIFICA"/>
+							<!-- <zcontrollink:LinkPosizioneFinanziaria 
 							text="{Fipex}" 
 							semanticobject="ESAMINAMODIFICA" 
 							anno="{AnnoFipex}" 
@@ -42,7 +50,7 @@
 							reale="{Reale}" 
 							versione="{Versione}" 
 							fipex="{ path: 'Fipex', formatter: '.formatter.formatterPosFin'}" 
-							datbis="{ path: 'Datbis', formatter: '.formatter.formatterDatbis'}"/>
+							datbis="{ path: 'Datbis', formatter: '.formatter.formatterDatbis'}"/> -->
 						</t:template>
 					</t:Column>
 				</t:columns>
