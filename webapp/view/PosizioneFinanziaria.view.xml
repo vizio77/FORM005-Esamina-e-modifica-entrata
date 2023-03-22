@@ -210,10 +210,11 @@
 					<t:Column width="13rem">
 						<Label text="{i18n>Autorizzazione}" class="boldCss"/>
 						<t:template>
-							<Text text="{= ${modelTreeTable>HierarchyLevel} === '0' ? '' : (${modelTreeTable>Autorizzazioni} ) }" wrapping="false"/>
-								<!-- <TooltipAutorizzazione:TooltipAutorizzazione id="InputAutorizzazioniHome"
-								text="{= ${modelThree>HierarchyLevel} === '1' ? '' : (${modelThree>Autorizzazioni} ) }" Fincode="{modelThree>Fincode}"
-								Fikrs="{modelThree>Fikrs}" espDescrizione="X"/> -->
+							<!-- <Text text="{= ${modelTreeTable>HierarchyLevel} === '0' ? '' : (${modelTreeTable>Autorizzazioni} ) }" wrapping="false"/> -->
+								<TooltipAutorizzazione:TooltipAutorizzazione 
+								text="{modelTreeTable>Autorizzazioni}"
+								visible="{= ${modelTreeTable>HierarchyLevel} === '1' ? true : false }" Fincode="{modelTreeTable>Fincode}" Fikrs="S001"
+								/><!-- espDescrizione="X" -->
 								<!-- <TooltipAutorizzazione:TooltipAutorizzazione id="InputAutorizzazioniHome"
 								text="{= ${modelTreeTable>HierarchyLevel} === '0' ? '' : (${modelTreeTable>Autorizzazioni} ) }" Fincode="{modelTreeTable>Fincode}"
 								Fikrs="{modelTreeTable>Fikrs}" espDescrizione="X"/> -->

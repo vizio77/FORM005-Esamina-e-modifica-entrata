@@ -2,6 +2,7 @@
 	xmlns:fb="sap.ui.comp.filterbar" xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls" 
 	xmlns:zcontrollink="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink.controls"
 	controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.AssociaProposta" 
+	xmlns:TooltipAutorizzazione="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
 	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<f:DynamicPage id="dynamicPageAssociaProposta" headerExpanded="true" showFooter="true">
@@ -218,7 +219,9 @@
 					</t:Column>
 					<t:Column label="{i18n>Autorizzazione}" width="16rem">
 						<t:template>
-							<Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Autorizzazioni}" wrapping="true" textAlign="Begin"/>
+							<TooltipAutorizzazione:TooltipAutorizzazione text="{ZSS4_COBI_PREN_ESAMOD_SRV>Autorizzazioni}" Fincode="{ZSS4_COBI_PREN_ESAMOD_SRV>Fincode}" Fikrs="S001"
+												placement="Top"/>
+							<!-- <Text text="{ZSS4_COBI_PREN_ESAMOD_SRV>Autorizzazioni}" wrapping="true" textAlign="Begin"/> -->
 						</t:template>
 					</t:Column>
 					<t:Column visible="{modelListaEstesaRidotta>/visible}" width="10rem" wrapping="true" >

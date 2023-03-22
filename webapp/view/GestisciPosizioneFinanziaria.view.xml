@@ -1,7 +1,9 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:t="sap.ui.table"
 	xmlns:fb="sap.ui.comp.filterbar" xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls"
 	controllerName="zsap.com.r3.cobi.s4.esamodModEntrPosFin.controller.GestisciPosizioneFinanziaria"
-	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls" xmlns:html="http://www.w3.org/1999/xhtml">
+	xmlns:zcontrolPosFin="zsap.com.r3.cobi.s4.custposfin.z_s4_pflinke.controls" 
+	xmlns:TooltipAutorizzazione="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:html="http://www.w3.org/1999/xhtml">
 	<f:DynamicPage id="dynamicPageIdPosFin" headerExpanded="true" showFooter="true" xmlns:layout="sap.ui.layout">
 		<f:title>
 			<f:DynamicPageTitle>
@@ -71,7 +73,9 @@
 					<t:Column width="13rem">
 						<Label text="{i18n>Autorizzazione}" class="boldCss"/>
 						<t:template>
-							<Text text="{modelTreeTableGestione>Autorizzazioni}" wrapping="false"/>
+							<TooltipAutorizzazione:TooltipAutorizzazione text="{modelTreeTableGestione>Autorizzazioni}" Fincode="{modelTreeTableGestione>Fincode}" Fikrs="S001"
+												placement="Top"/>
+							<!-- <Text text="{modelTreeTableGestione>Autorizzazioni}" wrapping="false"/> -->
 						</t:template>
 					</t:Column>
 					<t:Column width="8rem">

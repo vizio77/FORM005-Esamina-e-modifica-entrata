@@ -319,8 +319,8 @@
 					press="onPressNavToInvioAllaValidazione"/>
 				<Button enabled="true" type="Emphasized" text="{i18n>RevocaValid}" visible="{= ${modelHeader>/CodIter} === '02' ? true : false}"
 					press="onPressNavToInvioAllaValidazione"/>
+					<Button icon="sap-icon://documents" type="Emphasized" text="{i18n>FascicoloDocumentale}"/>
 				<Button icon="" press="onPressBack" type="Emphasized" text="{i18n>indietro}"/>
-				<Button icon="sap-icon://documents" type="Emphasized" text="{i18n>FascicoloDocumentale}"/>
 				<Button type="Emphasized" text="{i18n>Home}" press="navToAppLaunchpad('Z_S4_ESAMODEPRP')"/>
 			</OverflowToolbar>
 		</f:footer>
