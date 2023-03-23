@@ -189,7 +189,7 @@
 					<t:Column width="6rem">
 						<Label text="{i18n>Articolo}" class="boldCss"/>
 						<t:template>
-							<Text text="{modelTreeTable>CodiceArticoloIntEnt}" wrapping="false"/>
+							<Text text="{modelTreeTable>CodiceArticoloIntEnt}" visible="{= ${modelTreeTable>HierarchyLevel} === '0' ? true : false }" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					<t:Column visible="{checkModel>/visibleColonna}" width="20rem">
